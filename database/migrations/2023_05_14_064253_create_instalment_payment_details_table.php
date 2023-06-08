@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('instalment_payment_details', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('instalment_payment_id')->comment('foreign key instalment payment');
+            $table->bigInteger('invoice')->comment('tagihan');
+            $table->bigInteger('remain')->comment('sisa bayar');
+            $table->text('description')->nullable()->comment('keterangan');
             $table->timestamps();
         });
     }

@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('instalment_payments', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id')->comment('foreign key user');
+            $table->string('va_number')->comment('nomor VA');
+            $table->string('status')->nullable()->comment('status pembayaran');
+            $table->text('description')->nullable()->comment('keterangan');
             $table->timestamps();
         });
     }

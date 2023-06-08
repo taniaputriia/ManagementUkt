@@ -1,145 +1,123 @@
-<aside class="sidebar sidebar-default sidebar-white sidebar-base navs-rounded-all ">
-    <div class="sidebar-header d-flex align-items-center justify-content-start">
-        <a href="" class="navbar-brand">
-            <!--Logo start-->
-            <!--logo End-->
-
-            <!--Logo start-->
-            <div class="logo-main">
-                <div class="logo-normal">
-
+<div id="sidebar" class="active">
+    <div class="sidebar-wrapper active">
+        <div class="sidebar-header position-relative">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="logo">
+                    <a href="index.html"><img src="assets/images/logo/logo.svg" alt="Logo" srcset=""></a>
                 </div>
-                <div class="logo-mini">
-
+                <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20"
+                        height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
+                        <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path
+                                d="M10.5 14.5c2.219 0 4-1.763 4-3.982a4.003 4.003 0 0 0-4-4.018c-2.219 0-4 1.781-4 4c0 2.219 1.781 4 4 4zM4.136 4.136L5.55 5.55m9.9 9.9l1.414 1.414M1.5 10.5h2m14 0h2M4.135 16.863L5.55 15.45m9.899-9.9l1.414-1.415M10.5 19.5v-2m0-14v-2"
+                                opacity=".3"></path>
+                            <g transform="translate(-210 -1)">
+                                <path d="M220.5 2.5v2m6.5.5l-1.5 1.5"></path>
+                                <circle cx="220.5" cy="11.5" r="4"></circle>
+                                <path d="m214 5l1.5 1.5m5 14v-2m6.5-.5l-1.5-1.5M214 18l1.5-1.5m-4-5h2m14 0h2">
+                                </path>
+                            </g>
+                        </g>
+                    </svg>
+                    <div class="form-check form-switch fs-6">
+                        <input class="form-check-input  me-0" type="checkbox" id="toggle-dark">
+                        <label class="form-check-label"></label>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        aria-hidden="true" role="img" class="iconify iconify--mdi" width="20" height="20"
+                        preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="m17.75 4.09l-2.53 1.94l.91 3.06l-2.63-1.81l-2.63 1.81l.91-3.06l-2.53-1.94L12.44 4l1.06-3l1.06 3l3.19.09m3.5 6.91l-1.64 1.25l.59 1.98l-1.7-1.17l-1.7 1.17l.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95l2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85c-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14c.4-.4.82-.76 1.27-1.08c.75-.53 1.93.36 1.85 1.19c-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82c-2.81 3.14-2.7 7.96.31 10.98c3.02 3.01 7.84 3.12 10.98.31Z">
+                        </path>
+                    </svg>
+                </div>
+                <div class="sidebar-toggler  x">
+                    <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
                 </div>
             </div>
-            <!--logo End-->
-
-            <h4 class="logo-title">Admin</h4>
-        </a>
-        <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
-            <i class="icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4.25 12.2744L19.25 12.2744" stroke="currentColor" stroke-width="1.5"
-                        stroke-linecap="round" stroke-linejoin="round"></path>
-                    <path d="M10.2998 18.2988L4.2498 12.2748L10.2998 6.24976" stroke="currentColor" stroke-width="1.5"
-                        stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>
-            </i>
         </div>
-    </div>
-    <div class="sidebar-body pt-0 data-scrollbar">
-        <div class="sidebar-list">
-            <!-- Sidebar Menu Start -->
-            <ul class="navbar-nav iq-main-menu" id="sidebar-menu">
-                <li class="nav-item static-item">
-                    <a class="nav-link static-item disabled" href="#" tabindex="-1">
-                        <span class="default-icon">Home</span>
-                        <span class="mini-icon">-</span>
+        <div class="sidebar-menu">
+            <ul class="menu">
+                <li class="sidebar-title">Menu</li>
+
+                <li class="sidebar-item active ">
+                    <a href="{{ route('home') }}" class='sidebar-link'>
+                        <i class="bi bi-grid-fill"></i>
+                        <span>Dashboard</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" aria-current="page"
-                        href="{{ url('/') }}">
-                        <i class="icon">
-                            <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                                class="icon-20">
-                                <path opacity="0.4"
-                                    d="M16.0756 2H19.4616C20.8639 2 22.0001 3.14585 22.0001 4.55996V7.97452C22.0001 9.38864 20.8639 10.5345 19.4616 10.5345H16.0756C14.6734 10.5345 13.5371 9.38864 13.5371 7.97452V4.55996C13.5371 3.14585 14.6734 2 16.0756 2Z"
-                                    fill="currentColor"></path>
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M4.53852 2H7.92449C9.32676 2 10.463 3.14585 10.463 4.55996V7.97452C10.463 9.38864 9.32676 10.5345 7.92449 10.5345H4.53852C3.13626 10.5345 2 9.38864 2 7.97452V4.55996C2 3.14585 3.13626 2 4.53852 2ZM4.53852 13.4655H7.92449C9.32676 13.4655 10.463 14.6114 10.463 16.0255V19.44C10.463 20.8532 9.32676 22 7.92449 22H4.53852C3.13626 22 2 20.8532 2 19.44V16.0255C2 14.6114 3.13626 13.4655 4.53852 13.4655ZM19.4615 13.4655H16.0755C14.6732 13.4655 13.537 14.6114 13.537 16.0255V19.44C13.537 20.8532 14.6732 22 16.0755 22H19.4615C20.8637 22 22 20.8532 22 19.44V16.0255C22 14.6114 20.8637 13.4655 19.4615 13.4655Z"
-                                    fill="currentColor"></path>
-                            </svg>
-                        </i>
-                        <span class="item-name">Dashboard</span>
+
+                <li class="sidebar-item  has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-person-workspace"></i>
+                        <span>Manajemen Pengguna</span>
+                    </a>
+                    <ul class="submenu ">
+                        <li class="submenu-item ">
+                            <a href="{{ route('user.index') }}">Pengguna</a>
+                        </li>
+                        <li class="submenu-item ">
+                            <a href="{{ route('role.index') }}">Peran</a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li class="sidebar-item  ">
+                    <a href="{{ route('student.index') }}" class='sidebar-link'>
+                        <i class="bi bi-stack"></i>
+                        <span>Data Mahasiswa</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ Request::is('products') ? 'active' : '' }} {{ Request::is('suppliers') ? 'active' : '' }} {{ Request::is('users') ? 'active' : '' }}"
-                        data-bs-toggle="collapse" href="#horizontal-menu" role="button" aria-expanded="false"
-                        aria-controls="horizontal-menu">
-                        <i class="icon">
-                            <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                                class="icon-20">
-                                <path opacity="0.4"
-                                    d="M10.0833 15.958H3.50777C2.67555 15.958 2 16.6217 2 17.4393C2 18.2559 2.67555 18.9207 3.50777 18.9207H10.0833C10.9155 18.9207 11.5911 18.2559 11.5911 17.4393C11.5911 16.6217 10.9155 15.958 10.0833 15.958Z"
-                                    fill="currentColor"></path>
-                                <path opacity="0.4"
-                                    d="M22.0001 6.37867C22.0001 5.56214 21.3246 4.89844 20.4934 4.89844H13.9179C13.0857 4.89844 12.4102 5.56214 12.4102 6.37867C12.4102 7.1963 13.0857 7.86 13.9179 7.86H20.4934C21.3246 7.86 22.0001 7.1963 22.0001 6.37867Z"
-                                    fill="currentColor"></path>
-                                <path
-                                    d="M8.87774 6.37856C8.87774 8.24523 7.33886 9.75821 5.43887 9.75821C3.53999 9.75821 2 8.24523 2 6.37856C2 4.51298 3.53999 3 5.43887 3C7.33886 3 8.87774 4.51298 8.87774 6.37856Z"
-                                    fill="currentColor"></path>
-                                <path
-                                    d="M21.9998 17.3992C21.9998 19.2648 20.4609 20.7777 18.5609 20.7777C16.6621 20.7777 15.1221 19.2648 15.1221 17.3992C15.1221 15.5325 16.6621 14.0195 18.5609 14.0195C20.4609 14.0195 21.9998 15.5325 21.9998 17.3992Z"
-                                    fill="currentColor"></path>
-                            </svg>
-                        </i>
-                        <span class="item-name">Menu</span>
-                        <i class="right-icon">
-                            <svg class="icon-18" xmlns="http://www.w3.org/2000/svg" width="18" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5l7 7-7 7" />
-                            </svg>
-                        </i>
+
+                <li class="sidebar-item  has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-collection-fill"></i>
+                        <span>Data Pembayaran</span>
                     </a>
-                    <ul class="sub-nav collapse" id="horizontal-menu" data-bs-parent="#sidebar-menu">
-                        <li class="nav-item">
-                            <a class="nav-link {{ Request::is('products') ? 'active' : '' }}"
-                                href="{{ route('products.index') }}">
-                                <i class="icon">
-                                    <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10"
-                                        viewBox="0 0 24 24" fill="currentColor">
-                                        <g>
-                                            <circle cx="12" cy="12" r="8"
-                                                fill="currentColor"></circle>
-                                        </g>
-                                    </svg>
-                                </i>
-                                <i class="sidenav-mini-icon"> P </i>
-                                <span class="item-name"> Product </span>
-                            </a>
+                    <ul class="submenu ">
+                        <li class="submenu-item ">
+                            <a href="">Pembayaran Lunas</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ Request::is('suppliers') ? 'active' : '' }}"
-                                href="{{ route('suppliers.index') }}">
-                                <i class="icon svg-icon">
-                                    <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10"
-                                        viewBox="0 0 24 24" fill="currentColor">
-                                        <g>
-                                            <circle cx="12" cy="12" r="8"
-                                                fill="currentColor"></circle>
-                                        </g>
-                                    </svg>
-                                </i>
-                                <i class="sidenav-mini-icon"> S </i>
-                                <span class="item-name">Supplier</span>
-                            </a>
+                        <li class="submenu-item ">
+                            <a href="extra-component-sweetalert.html">Pembayaran Cicilan</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ Request::is('users') ? 'active' : '' }}"
-                                href="{{ route('users.index') }}">
-                                <i class="icon">
-                                    <svg class="icon-10" xmlns="http://www.w3.org/2000/svg" width="10"
-                                        viewBox="0 0 24 24" fill="currentColor">
-                                        <g>
-                                            <circle cx="12" cy="12" r="8"
-                                                fill="currentColor"></circle>
-                                        </g>
-                                    </svg>
-                                </i>
-                                <i class="sidenav-mini-icon"> U </i>
-                                <span class="item-name">User</span>
-                            </a>
+                        <li class="submenu-item ">
+                            <a href="extra-component-toastify.html">Pembayaran Belum Lunas</a>
                         </li>
                     </ul>
                 </li>
+
+                <li class="sidebar-item  ">
+                    <a href="form-layout.html" class='sidebar-link'>
+                        <i class="bi bi-file-earmark-medical-fill"></i>
+                        <span>Pengajuan Cicilan UKT</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item  ">
+                    <a href="form-layout.html" class='sidebar-link'>
+                        <i class="bi bi-file-earmark-medical-fill"></i>
+                        <span>Pengaturan Biaya UKT</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item  ">
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();" class='sidebar-link'>
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Log Out</span>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                    class="d-none">
+                    @csrf
+                </form>
+                </li>
+
             </ul>
-            <!-- Sidebar Menu End -->
         </div>
     </div>
-    <div class="sidebar-footer"></div>
-</aside>
+</div>

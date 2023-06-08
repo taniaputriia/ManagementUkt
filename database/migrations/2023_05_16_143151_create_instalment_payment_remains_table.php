@@ -1,0 +1,31 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('instalment_payment_remains', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('instalment_payment_id')->comment('foreign key instalment payment');
+            $table->bigInteger('instalment_payment_detail_id')->comment('foreign key instalment payment detail');
+            $table->bigInteger('remain')->comment('sisa bayar');
+            $table->text('description')->nullable()->comment('keterangan');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('instalment_payment_remains');
+    }
+};
