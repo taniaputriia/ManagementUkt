@@ -35,10 +35,20 @@
                         placeholder="masukkan nama anda" required>
                 </div>
                 <div class="form-group">
-                    <label for="text">Jenis Kelamin</label>
-                    <input type="text" name="gender" class="form-control" id="gender" value="{{ old('gender') }}"
-                        placeholder="masukkan jenis kelamin" required>
+                    <label for="gender">Jenis Kelamin</label>
+
+                        <select class="form-select" name="gender" id="gender" required>
+                            <option value="" selected>Pilih Salah Satu</option>
+                            @foreach (App\Models\Student::GENDER_CHOICE as $key => $value)
+                                <option value="{{ $key }}">{{ $value }}</option>
+                            @endforeach
+                            @error('gender')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </select>
                 </div>
+
+
                 <div class="form-group">
                     <label for="phone_number">No Hp </label>
                     <input type="text" name="phone_number" class="form-control" id="phone_number"
@@ -47,13 +57,21 @@
 
                 <div class="form-group">
                     <label for="address">Alamat</label>
-                    <input type="text" name="address" class="form-control" id="address" value="{{ old('address') }}"
-                        placeholder="masukkan alamat anda" required>
+                    <textarea name ="address" name="address" class="form-control" id="address" value="{{ old('address') }}"required>
+                    </textarea>
                 </div>
                 <div class="form-group">
-                    <label for="study_program">Program Studi</label>
-                    <input type="text" name="study_program" class="form-control" id="study_program" value="{{ old('study_program') }}"
-                        placeholder="masukkan program studi anda" required>
+                    <label for="gender">Program Studi</label>
+
+                        <select class="form-select" name="gender" id="gender" required>
+                            <option value="" selected>Pilih Salah Satu</option>
+                            @foreach (App\Models\Student::ProgramStudy_CHOICE as $key => $value)
+                                <option value="{{ $key }}">{{ $value }}</option>
+                            @endforeach
+                            @error('program_study')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </select>
                 </div>
                 <div class="form-group">
                     <label for="major">Jurusan</label>
@@ -78,7 +96,7 @@
                 </div>
                 <div class="form-group">
                     <label for="foto">Foto</label>
-                    <input type="text" name="photo" class="form-control" id="photo"
+                    <input type="file" name="photo" class="form-control" id="photo"
                         value="{{ old('photo') }}" placeholder="masukkan foto" required>
                 </div>
                 <hr>
