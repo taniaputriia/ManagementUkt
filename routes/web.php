@@ -31,6 +31,7 @@ Route::group(['controller' => StudentController::class, 'prefix' => 'student', '
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
     Route::get('/edit/{id}', 'edit')->name('edit');
+    Route::get('/show/{id}', 'show')->name('show');
     Route::get('/datatable', 'datatable')->name('datatable');
     Route::post('/store', 'store')->name('store');
     Route::put('/update/{id}', 'update')->name('update');

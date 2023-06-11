@@ -85,11 +85,14 @@ class StudentController extends Controller
                 'photo' => 'required',
             ]);
 
+
             // Create Data
             $input = $request->all();
 
             // Decrypt Meeting Room Id
             $input['user_id'] = Crypt::decrypt($request->user_id);
+
+            // file
 
             Student::create($input);
 

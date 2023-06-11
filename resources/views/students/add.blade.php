@@ -70,25 +70,25 @@
                     </textarea>
                 </div>
                 <div class="form-group">
-                    <label for="gender">Program Studi</label>
-                    <select class="form-select select_study_program" name="gender" id="gender" required>
+                    <label for="study_program">Program Studi</label>
+                    <select class="form-select select_study_program" name="study_program" id="study_program" required>
                         <option value="" selected>Pilih Salah Satu</option>
                         @foreach (App\Models\Student::STUDY_PROGRAM_CHOICE as $key => $value)
                             <option value="{{ $key }}">{{ $value }}</option>
                         @endforeach
-                        @error('program_study')
+                        @error('study_program')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="major">Jurusan</label>
-                    <select class="form-select select_department" name="gender" id="gender" required>
+                    <select class="form-select select_major" name="major" id="major" required>
                         <option value="" selected>Pilih Salah Satu</option>
-                        @foreach (App\Models\Student::STUDY_PROGRAM_CHOICE as $key => $value)
+                        @foreach (App\Models\Student::MAJOR_CHOICE as $key => $value)
                             <option value="{{ $key }}">{{ $value }}</option>
                         @endforeach
-                        @error('program_study')
+                        @error('major')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </select>

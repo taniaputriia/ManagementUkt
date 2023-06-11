@@ -28,4 +28,15 @@ class Student extends Model
         self::STUDY_PROGRAM_CIVIL2 => self::STUDY_PROGRAM_CIVIL2,
         self::STUDY_PROGRAM_CIVIL3 => self::STUDY_PROGRAM_CIVIL3,
     ];
+
+    // Program Studi
+    const MAJOR_CIVIL = "Teknik Sipil";
+    const MAJOR_ENGLISH = "Bahasa Inggris";
+    const MAJOR_INFORMATIC_MANAGEMENT = "Manajemen Informatika";
+
+    const MAJOR_CHOICE = [
+        self::MAJOR_CIVIL => self::MAJOR_CIVIL,
+        self::MAJOR_ENGLISH => self::MAJOR_ENGLISH,
+        self::MAJOR_INFORMATIC_MANAGEMENT => self::MAJOR_INFORMATIC_MANAGEMENT,
+    ];
 }
