@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Student;
+use App\Models\User;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
-Use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -46,8 +48,8 @@ class StudentController extends Controller
 
     public function create()
     {
-        $student= Student::all();
-        return view('students.add', compact('student'));
+        $users = User::where('name', '!=', 'admin')->get();
+        return view('students.add', compact('users'));
     }
 
     public function edit($id)
@@ -86,9 +88,8 @@ class StudentController extends Controller
             // Create Data
             $input = $request->all();
 
-            // Decrypt student Id (pecah kode)
+            // Decrypt Meeting Room Id
             $input['user_id'] = Crypt::decrypt($request->user_id);
-            // Create Status
 
             Student::create($input);
 
@@ -181,5 +182,4 @@ class StudentController extends Controller
             return redirect()->back()->with('error', 'Data Tidak Berhasil Dihapus' . $e->getMessage());
         }
     }
-
 }
