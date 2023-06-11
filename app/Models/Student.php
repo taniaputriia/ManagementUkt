@@ -26,6 +26,7 @@ class Student extends Model
     const ProgramStudy_CHOICE = [
         self::STUDYPROGRAM_CIVIL1=> self::STUDYPROGRAM_CIVIL1,
         self::STUDYPROGRAM_CIVIL2 => self::STUDYPROGRAM_CIVIL2,
+        self::STUDYPROGRAM_CIVIL3 => self::STUDYPROGRAM_CIVIL3,
     ];
 
 

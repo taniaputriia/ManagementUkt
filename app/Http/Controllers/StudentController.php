@@ -86,11 +86,9 @@ class StudentController extends Controller
             // Create Data
             $input = $request->all();
 
-            // Decrypt Meeting Room Id
+            // Decrypt student Id (pecah kode)
             $input['user_id'] = Crypt::decrypt($request->user_id);
             // Create Status
-
-
 
             Student::create($input);
 
