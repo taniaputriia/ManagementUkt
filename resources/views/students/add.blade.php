@@ -23,7 +23,18 @@
         <div class="card-body">
             <form action="{{ route('student.store') }}" method="post">
                 @csrf
-
+                <div class="form-group">
+                    <label for="user_id">Nama Akun </label>
+                    <select class="form-select select_user" name="user_id" id="user_id" required>
+                        <option value="" selected>Pilih Akun</option>
+                        @foreach ($users as $item)
+                            <option value="{{ Crypt::encrypt($item->id) }}">{{ $item->name }}</option>
+                        @endforeach
+                        @error('user_id')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </select>
+                </div>
                 <div class="form-group">
                     <label for="nim">NIM </label>
                     <input type="text" name="nim" class="form-control" id="nim" value="{{ old('nim') }}"
@@ -37,18 +48,16 @@
                 <div class="form-group">
                     <label for="gender">Jenis Kelamin</label>
 
-                        <select class="form-select" name="gender" id="gender" required>
-                            <option value="" selected>Pilih Salah Satu</option>
-                            @foreach (App\Models\Student::GENDER_CHOICE as $key => $value)
-                                <option value="{{ $key }}">{{ $value }}</option>
-                            @endforeach
-                            @error('gender')
+                    <select class="form-select" name="gender" id="gender" required>
+                        <option value="" selected>Pilih Salah Satu</option>
+                        @foreach (App\Models\Student::GENDER_CHOICE as $key => $value)
+                            <option value="{{ $key }}">{{ $value }}</option>
+                        @endforeach
+                        @error('gender')
                             <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </select>
+                        @enderror
+                    </select>
                 </div>
-
-
                 <div class="form-group">
                     <label for="phone_number">No Hp </label>
                     <input type="text" name="phone_number" class="form-control" id="phone_number"
@@ -57,42 +66,48 @@
 
                 <div class="form-group">
                     <label for="address">Alamat</label>
-                    <textarea name ="address" name="address" class="form-control" id="address" value="{{ old('address') }}"required>
+                    <textarea name="address" name="address" class="form-control" id="address" value="{{ old('address') }}"required>
                     </textarea>
                 </div>
                 <div class="form-group">
                     <label for="gender">Program Studi</label>
-
-                        <select class="form-select" name="gender" id="gender" required>
-                            <option value="" selected>Pilih Salah Satu</option>
-                            @foreach (App\Models\Student::ProgramStudy_CHOICE as $key => $value)
-                                <option value="{{ $key }}">{{ $value }}</option>
-                            @endforeach
-                            @error('program_study')
+                    <select class="form-select select_study_program" name="gender" id="gender" required>
+                        <option value="" selected>Pilih Salah Satu</option>
+                        @foreach (App\Models\Student::STUDY_PROGRAM_CHOICE as $key => $value)
+                            <option value="{{ $key }}">{{ $value }}</option>
+                        @endforeach
+                        @error('program_study')
                             <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </select>
+                        @enderror
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="major">Jurusan</label>
-                    <input type="text" name="major" class="form-control" id="major" value="{{ old('major') }}"
-                        placeholder="masukkan jurusan" required>
+                    <select class="form-select select_department" name="gender" id="gender" required>
+                        <option value="" selected>Pilih Salah Satu</option>
+                        @foreach (App\Models\Student::STUDY_PROGRAM_CHOICE as $key => $value)
+                            <option value="{{ $key }}">{{ $value }}</option>
+                        @endforeach
+                        @error('program_study')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="semester">Semester</label>
-                    <input type="text" name="semester" class="form-control" id="semester"
-                        value="{{ old('semester') }}" placeholder="masukkan semester" required>
+                    <input type="text" name="semester" class="form-control" id="semester" value="{{ old('semester') }}"
+                        placeholder="masukkan semester" required>
                 </div>
 
                 <div class="form-group">
                     <label for="academic_year">Tahun Akademik</label>
-                    <input type="text" name="academic_year" class="form-control" id="academic_year" value="{{ old('academic_year') }}"
-                        placeholder="masukkan tahun akademik anda" required>
+                    <input type="text" name="academic_year" class="form-control" id="academic_year"
+                        value="{{ old('academic_year') }}" placeholder="masukkan tahun akademik anda" required>
                 </div>
                 <div class="form-group">
                     <label for="tuition_fee">Uang Kuliah Tunggal</label>
-                    <input type="currency" name="tuition_fee" class="form-control" id="tuition_fee" value="{{ old('tuition_fee') }}"
-                        placeholder="masukkan ukt">
+                    <input type="currency" name="tuition_fee" class="form-control" id="tuition_fee"
+                        value="{{ old('tuition_fee') }}" placeholder="masukkan ukt">
                 </div>
                 <div class="form-group">
                     <label for="foto">Foto</label>
@@ -100,9 +115,8 @@
                         value="{{ old('photo') }}" placeholder="masukkan foto" required>
                 </div>
                 <hr>
-
                 <a href="{{ route('student.index') }}" class="btn btn-warning">Kembali</a>
-                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <button type="submit" class="btn btn-primary mr-2">Simpan</button>
             </form>
         </div>
     </div>
@@ -114,7 +128,9 @@
 
     <script>
         $(document).ready(function() {
-            $(".select_role").select2();
+            $(".select_user").select2();
+            $(".select_study_program").select2();
+            $(".select_study_department").select2();
         });
     </script>
 @endsection

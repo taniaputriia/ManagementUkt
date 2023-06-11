@@ -19,15 +19,13 @@ class Student extends Model
     ];
 
     // Program Studi
-    const STUDYPROGRAM_CIVIL1 = "D3 Teknik Sipil";
-    const STUDYPROGRAM_CIVIL2= "D4 Perancangan Jalan dan Jembatan";
-    const STUDYPROGRAM_CIVIL3= "D4 Teknologi Industri Tanaman Perkebunan";
+    const STUDY_PROGRAM_CIVIL1 = "D3 Teknik Sipil";
+    const STUDY_PROGRAM_CIVIL2 = "D4 Perancangan Jalan dan Jembatan";
+    const STUDY_PROGRAM_CIVIL3 = "D4 Teknologi Industri Tanaman Perkebunan";
 
-    const ProgramStudy_CHOICE = [
-        self::STUDYPROGRAM_CIVIL1=> self::STUDYPROGRAM_CIVIL1,
-        self::STUDYPROGRAM_CIVIL2 => self::STUDYPROGRAM_CIVIL2,
+    const STUDY_PROGRAM_CHOICE = [
+        self::STUDY_PROGRAM_CIVIL1 => self::STUDY_PROGRAM_CIVIL1,
+        self::STUDY_PROGRAM_CIVIL2 => self::STUDY_PROGRAM_CIVIL2,
+        self::STUDY_PROGRAM_CIVIL3 => self::STUDY_PROGRAM_CIVIL3,
     ];
-
-
-
 }
