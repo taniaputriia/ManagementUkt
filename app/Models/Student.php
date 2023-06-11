@@ -23,16 +23,9 @@ class Student extends Model
     const STUDY_PROGRAM_CIVIL2 = "D4 Perancangan Jalan dan Jembatan";
     const STUDY_PROGRAM_CIVIL3 = "D4 Teknologi Industri Tanaman Perkebunan";
 
-<<<<<<< HEAD
-    const ProgramStudy_CHOICE = [
-        self::STUDYPROGRAM_CIVIL1=> self::STUDYPROGRAM_CIVIL1,
-        self::STUDYPROGRAM_CIVIL2 => self::STUDYPROGRAM_CIVIL2,
-        self::STUDYPROGRAM_CIVIL3 => self::STUDYPROGRAM_CIVIL3,
-=======
     const STUDY_PROGRAM_CHOICE = [
         self::STUDY_PROGRAM_CIVIL1 => self::STUDY_PROGRAM_CIVIL1,
         self::STUDY_PROGRAM_CIVIL2 => self::STUDY_PROGRAM_CIVIL2,
         self::STUDY_PROGRAM_CIVIL3 => self::STUDY_PROGRAM_CIVIL3,
->>>>>>> 3ed100d3d7b8e98ea2af63c7329b944d2cdc13a8
     ];
 }
