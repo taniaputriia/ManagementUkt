@@ -2,8 +2,8 @@
     <div class="sidebar-wrapper active">
         <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
-                <div class="logo">
-                    <a href="index.html"><img src="assets/images/logo/logo.svg" alt="Logo" srcset=""></a>
+                <div class="logo d-flex gap-2  align-items-center mt-2">
+                    <a href="{{ route('home') }}"><img src="{{ asset('mazer-admin/assets/images/logo/logo-polsri.png')}}" alt="Logo" srcset="" ></a>
                 </div>
                 <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -53,7 +53,7 @@
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-person-workspace"></i>
-                        <span>Manajemen Pengguna</span>
+                        <span>Kelola Pengguna</span>
                     </a>
                     <ul class="submenu ">
                         <li class="submenu-item ">
@@ -83,7 +83,7 @@
                             <a href="">Pembayaran Lunas</a>
                         </li>
                         <li class="submenu-item ">
-                            <a href="extra-component-sweetalert.html">Pembayaran Cicilan</a>
+                            <a href="">Pembayaran Cicilan</a>
                         </li>
                         <li class="submenu-item ">
                             <a href="extra-component-toastify.html">Pembayaran Belum Lunas</a>
