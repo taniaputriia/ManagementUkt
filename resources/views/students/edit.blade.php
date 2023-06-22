@@ -1,79 +1,141 @@
 @extends('layouts.app')
 
 @section('css_after')
-@endsection
-
-@section('content-header')
-    <h3>Profile Statistics</h3>
+    {{-- Select 2 --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 
 @section('content')
-<div class="row">
-    <div class="col-12">
-        <div class="form-group has-icon-left">
-            <label for="first-name-icon">Nama Lengkap</label>
-            <div class="position-relative">
-                <input type="text" class="form-control"
-                    placeholder="Input with icon left" id="first-name-icon">
-                <div class="form-control-icon">
-                    <i class="bi bi-person"></i>
-                </div>
+    <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <div class="header-title">
+                <h4 class="card-title">Edit Data Mahasiswa</h4>
             </div>
         </div>
-    </div>
-    <div class="col-12">
 
-        <div class="form-group has-icon-left">
-            <label for="email-id-icon">Email</label>
-            <div class="position-relative">
-                <input type="text" class="form-control" placeholder="Email"
-                    id="email-id-icon">
-                <div class="form-control-icon">
-                    <i class="bi bi-envelope"></i>
+        {{-- Error Message --}}
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        <div class="card-body">
+            <form action="{{ route('student.update', Crypt::encrypt($data['id'])) }}" method="post">
+                @csrf
+                @method('put')
+                <div class="form-group">
+                    <label for="nim">User</label>
+                    <input type="text" name="user_id" class="form-control" id="user_id" value="{{ old('user_id', $data['user_id']) }}"
+                        required>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-12">
-        <div class="form-group has-icon-left">
-            <label for="mobile-id-icon">Mobile</label>
-            <div class="position-relative">
-                <input type="text" class="form-control" placeholder="Mobile"
-                    id="mobile-id-icon">
-                <div class="form-control-icon">
-                    <i class="bi bi-phone"></i>
+                <div class="form-group">
+                    <label for="nim">NIM </label>
+                    <input type="text" name="nim" class="form-control" id="nim" value="{{ old('nim', $data['nim']) }}"
+                        placeholder="masukkan nim anda" required>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-12">
-        <div class="form-group has-icon-left">
-            <label for="password-id-icon">Password</label>
-            <div class="position-relative">
-                <input type="password" class="form-control" placeholder="Password"
-                    id="password-id-icon">
-                <div class="form-control-icon">
-                    <i class="bi bi-lock"></i>
+
+                <div class="form-group">
+                    <label for="name">Nama Lengkap</label>
+                    <input type="text" name="name" class="form-control" id="name" value="{{ old('name', $data['name']) }}"
+                        placeholder="masukkan nama anda" required>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="gender">Jenis Kelamin</label>
+
+                    <select class="form-select" name="gender" id="gender" required>
+                        <option value="" selected>Pilih Salah Satu</option>
+                        @foreach (App\Models\Student::GENDER_CHOICE as $key => $value)
+                            <option value="{{ $key }}" {{ $key == old('gender', $data['gender']) ? 'selected' : '' }}>{{ $value }}</option>
+                        @endforeach
+                        @error('gender')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="phone_number">No Hp </label>
+                    <input type="text" name="phone_number" class="form-control" id="phone_number"
+                        value="{{ old('phone_number', $data['phone_number']) }}" placeholder="masukkan nomor hp" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Alamat</label>
+                    <textarea name="address" name="address" class="form-control" id="address" required>{{ old('address', $data['address']) }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="study_program">Program Studi</label>
+                    <select class="form-select select_study_program" name="study_program" id="study_program" required>
+                        <option value="" selected>Pilih Salah Satu</option>
+                        @foreach (App\Models\Student::STUDY_PROGRAM_CHOICE as $key => $value)
+                            <option value="{{ $key }}" {{ $key == old('study_program', $data['study_program']) ? 'selected' : '' }}>{{ $value }}</option>
+                        @endforeach
+                        @error('study_program')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="major">Jurusan</label>
+                    <select class="form-select select_major" name="major" id="major" required>
+                        <option value="" selected>Pilih Salah Satu</option>
+                        @foreach (App\Models\Student::MAJOR_CHOICE as $key => $value)
+                            <option value="{{ $key }}" {{ $key == old('major', $data['major']) ? 'selected' : '' }}>{{ $value }}</option>
+                        @endforeach
+                        @error('major')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="semester">Semester</label>
+                    <input type="text" name="semester" class="form-control" id="semester" value="{{ old('semester', $data['semester']) }}"
+                        placeholder="masukkan semester" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="academic_year">Tahun Akademik</label>
+                    <input type="text" name="academic_year" class="form-control" id="academic_year"
+                        value="{{ old('academic_year', $data['academic_year']) }}" placeholder="masukkan tahun akademik anda" required>
+                </div>
+                <div class="form-group">
+                    <label for="tuition_fee">Uang Kuliah Tunggal</label>
+                    <input type="currency" name="tuition_fee" class="form-control" id="tuition_fee"
+                        value="{{ old('tuition_fee', $data['tuition_fee']) }}" placeholder="masukkan ukt">
+                </div>
+                <div class="form-group">
+                    <label for="foto">Foto</label>
+                    <input type="file" name="photo" enctype="multipart/form-data" class="form-control" id="photo"
+                        value="{{ old('photo', $data['photo']) }}" placeholder="masukkan foto" required>
+                </div>
+                <hr>
+
+                <a href="{{ route('student.index') }}" class="btn btn-warning">Kembali</a>
+                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+            </form>
         </div>
     </div>
-    <div class="col-12">
-        <div class='form-check'>
-            <div class="checkbox mt-2">
-                <input type="checkbox" id="remember-me-v" class='form-check-input'
-                    checked>
-                <label for="remember-me-v">Remember Me</label>
-            </div>
-        </div>
-    </div>
-    <div class="col-12 d-flex justify-content-end">
-        <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-        <button type="reset"
-            class="btn btn-light-secondary me-1 mb-1">Reset</button>
-    </div>
-</div>
 @endsection
 
 @section('js_after')
+    {{-- Select 2 --}}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+            $(document).ready(function() {
+    // Menginisialisasi Select2
+    $(".select_study_program").select2();
+    $(".select_major").select2();
+
+    // Mendapatkan nilai yang tersimpan pada variabel $data
+    var genderValue = "{{ $data['gender'] }}";
+    var studyProgramValue = "{{ $data['study_program'] }}";
+    var majorValue = "{{ $data['major'] }}";
+
+    // Mengatur opsi yang dipilih berdasarkan nilai yang tersimpan
+    $("#gender").val(genderValue).trigger('change');
+    $("#study_program").val(studyProgramValue).trigger('change');
+    $("#major").val(majorValue).trigger('change');
+});
+    </script>
 @endsection

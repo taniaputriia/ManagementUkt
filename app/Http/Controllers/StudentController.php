@@ -52,6 +52,7 @@ class StudentController extends Controller
         return view('students.add', compact('users'));
     }
 
+
     public function edit($id)
     {
         $id = Crypt::decrypt($id);
@@ -63,6 +64,10 @@ class StudentController extends Controller
 
     public function show($id)
     {
+        $id = Crypt::decrypt($id);
+        $student = Student::find($id);
+
+        return view('students.show', compact('student'));
     }
 
     public function store(Request $request)
@@ -82,8 +87,15 @@ class StudentController extends Controller
                 'semester' => 'required',
                 'academic_year' => 'required',
                 'tuition_fee' => 'required',
-                'photo' => 'required',
+                'photo' => 'photo|mimes:jpeg, png, jpg | max:2048mb, required',
+
+
             ]);
+            $file = $request->file('photo');
+
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+
 
 
             // Create Data
@@ -114,6 +126,15 @@ class StudentController extends Controller
 
     public function update($id, Request $request)
     {
+        $student = Student::findOrFail($id);
+        if($file = $request->file('image')){
+            Student::delete('photo/'.$student->photo);
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('photo', $filename);
+        }else{
+            $filename = $student->photo;
+        }
         try {
             DB::beginTransaction();
 
@@ -140,6 +161,7 @@ class StudentController extends Controller
 
             // Decrypt Meeting Room Id
             $input['user_id'] = Crypt::decrypt($request->user_id);
+            // $input['user_id'] = Request::input('user_id');
 
             $student->update($input);
 
