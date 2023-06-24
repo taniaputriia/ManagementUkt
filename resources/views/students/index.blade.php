@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('css_after')
 
 @endsection
