@@ -21,7 +21,7 @@
         @endif
 
         <div class="card-body">
-            <form action="{{ route('student.store') }}" method="post">
+            <form action="{{ route('student.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="user_id">Nama Akun </label>

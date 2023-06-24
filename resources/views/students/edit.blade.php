@@ -21,24 +21,19 @@
         @endif
 
         <div class="card-body">
-            <form action="{{ route('student.update', Crypt::encrypt($data['id'])) }}" method="post">
+            <form action="{{ route('student.update', Crypt::encrypt($data['id'])) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('put')
                 <div class="form-group">
-                    <label for="nim">User</label>
-                    <input type="text" name="user_id" class="form-control" id="user_id" value="{{ old('user_id', $data['user_id']) }}"
-                        required>
-                </div>
-                <div class="form-group">
                     <label for="nim">NIM </label>
-                    <input type="text" name="nim" class="form-control" id="nim" value="{{ old('nim', $data['nim']) }}"
-                        placeholder="masukkan nim anda" required>
+                    <input type="text" name="nim" class="form-control" id="nim"
+                        value="{{ old('nim', $data['nim']) }}" placeholder="masukkan nim anda" required>
                 </div>
 
                 <div class="form-group">
                     <label for="name">Nama Lengkap</label>
-                    <input type="text" name="name" class="form-control" id="name" value="{{ old('name', $data['name']) }}"
-                        placeholder="masukkan nama anda" required>
+                    <input type="text" name="name" class="form-control" id="name"
+                        value="{{ old('name', $data['name']) }}" placeholder="masukkan nama anda" required>
                 </div>
                 <div class="form-group">
                     <label for="gender">Jenis Kelamin</label>
@@ -46,7 +41,8 @@
                     <select class="form-select" name="gender" id="gender" required>
                         <option value="" selected>Pilih Salah Satu</option>
                         @foreach (App\Models\Student::GENDER_CHOICE as $key => $value)
-                            <option value="{{ $key }}" {{ $key == old('gender', $data['gender']) ? 'selected' : '' }}>{{ $value }}</option>
+                            <option value="{{ $key }}"
+                                {{ $key == old('gender', $data['gender']) ? 'selected' : '' }}>{{ $value }}</option>
                         @endforeach
                         @error('gender')
                             <span class="text-danger">{{ $message }}</span>
@@ -68,7 +64,9 @@
                     <select class="form-select select_study_program" name="study_program" id="study_program" required>
                         <option value="" selected>Pilih Salah Satu</option>
                         @foreach (App\Models\Student::STUDY_PROGRAM_CHOICE as $key => $value)
-                            <option value="{{ $key }}" {{ $key == old('study_program', $data['study_program']) ? 'selected' : '' }}>{{ $value }}</option>
+                            <option value="{{ $key }}"
+                                {{ $key == old('study_program', $data['study_program']) ? 'selected' : '' }}>
+                                {{ $value }}</option>
                         @endforeach
                         @error('study_program')
                             <span class="text-danger">{{ $message }}</span>
@@ -80,7 +78,8 @@
                     <select class="form-select select_major" name="major" id="major" required>
                         <option value="" selected>Pilih Salah Satu</option>
                         @foreach (App\Models\Student::MAJOR_CHOICE as $key => $value)
-                            <option value="{{ $key }}" {{ $key == old('major', $data['major']) ? 'selected' : '' }}>{{ $value }}</option>
+                            <option value="{{ $key }}"
+                                {{ $key == old('major', $data['major']) ? 'selected' : '' }}>{{ $value }}</option>
                         @endforeach
                         @error('major')
                             <span class="text-danger">{{ $message }}</span>
@@ -89,14 +88,15 @@
                 </div>
                 <div class="form-group">
                     <label for="semester">Semester</label>
-                    <input type="text" name="semester" class="form-control" id="semester" value="{{ old('semester', $data['semester']) }}"
-                        placeholder="masukkan semester" required>
+                    <input type="text" name="semester" class="form-control" id="semester"
+                        value="{{ old('semester', $data['semester']) }}" placeholder="masukkan semester" required>
                 </div>
 
                 <div class="form-group">
                     <label for="academic_year">Tahun Akademik</label>
                     <input type="text" name="academic_year" class="form-control" id="academic_year"
-                        value="{{ old('academic_year', $data['academic_year']) }}" placeholder="masukkan tahun akademik anda" required>
+                        value="{{ old('academic_year', $data['academic_year']) }}"
+                        placeholder="masukkan tahun akademik anda" required>
                 </div>
                 <div class="form-group">
                     <label for="tuition_fee">Uang Kuliah Tunggal</label>
@@ -106,7 +106,7 @@
                 <div class="form-group">
                     <label for="foto">Foto</label>
                     <input type="file" name="photo" enctype="multipart/form-data" class="form-control" id="photo"
-                        value="{{ old('photo', $data['photo']) }}" placeholder="masukkan foto" required>
+                        value="{{ old('photo', $data['photo']) }}" placeholder="masukkan foto">
                 </div>
                 <hr>
 
@@ -122,20 +122,20 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script>
-            $(document).ready(function() {
-    // Menginisialisasi Select2
-    $(".select_study_program").select2();
-    $(".select_major").select2();
+        $(document).ready(function() {
+            // Menginisialisasi Select2
+            $(".select_study_program").select2();
+            $(".select_major").select2();
 
-    // Mendapatkan nilai yang tersimpan pada variabel $data
-    var genderValue = "{{ $data['gender'] }}";
-    var studyProgramValue = "{{ $data['study_program'] }}";
-    var majorValue = "{{ $data['major'] }}";
+            // Mendapatkan nilai yang tersimpan pada variabel $data
+            var genderValue = "{{ $data['gender'] }}";
+            var studyProgramValue = "{{ $data['study_program'] }}";
+            var majorValue = "{{ $data['major'] }}";
 
-    // Mengatur opsi yang dipilih berdasarkan nilai yang tersimpan
-    $("#gender").val(genderValue).trigger('change');
-    $("#study_program").val(studyProgramValue).trigger('change');
-    $("#major").val(majorValue).trigger('change');
-});
+            // Mengatur opsi yang dipilih berdasarkan nilai yang tersimpan
+            $("#gender").val(genderValue).trigger('change');
+            $("#study_program").val(studyProgramValue).trigger('change');
+            $("#major").val(majorValue).trigger('change');
+        });
     </script>
 @endsection
