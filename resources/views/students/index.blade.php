@@ -5,6 +5,7 @@
 
 @section('content')
     <div class="row">
+        @role('Bagian Keuangan')
         <div class="col-md-12 mb-4 mt-1">
             <div class="d-flex flex-wrap justify-content-between align-items-center">
                 <h4 class="font-weight-bold">Data Mahasiswa</h4>
@@ -46,6 +47,56 @@
                 </div>
             </div>
         </div>
+        @endrole
+    </div>
+
+    <div class="row">
+        @role('Mahasiswa')
+        <div class="col-md-12 mb-4 mt-1">
+            <div class="d-flex flex-wrap justify-content-between align-items-center">
+                <h4 class="font-weight-bold">Data Mahasiswa</h4>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between">
+                            <div class="header-title">
+                                <h4 class="card-title">Data Pembayaran Cicilan</h4>
+                            </div>
+                            <a class="text-end btn btn-sm btn-outline-info" href="{{ route('student.create') }}"><i
+                                    class="fa fa-plus"></i> Tambah Data</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="data-table" class="table table-striped table-bordered" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Aksi</th>
+                                            <th>Nim</th>
+                                            <th>Nama Lengkap</th>
+                                            <th>Program Studi</th>
+                                            <th>Jurusan</th>
+                                            <th>Semester</th>
+                                            <th>Tahun Akademik</th>
+                                            <th>Uang Kuliah Tunggal</th>
+                                            <th>Cicilan I</th>
+                                            <th>Cicilan II</th>
+                                            <th>Cicilan III</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endrole
     </div>
 @endsection
 

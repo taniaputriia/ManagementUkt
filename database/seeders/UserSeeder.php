@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('@adminpolsri.')
         ]);
 
-        $role = Role::create(['name' => 'Admin']);
+        $role = Role::create(['name' => 'Bagian Keuangan']);
 
         $permissions = Permission::pluck('id', 'id')->all();
 

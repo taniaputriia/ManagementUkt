@@ -94,7 +94,7 @@ class RoleController extends Controller
             // Validate Data
             $request->validate([
                 'name' => 'required|unique:roles,name',
-                'permission' => 'required'
+               
             ]);
 
             // Create Data
@@ -127,7 +127,7 @@ class RoleController extends Controller
             // Validate Data
             $request->validate([
                 'name' => 'required',
-                'permission' => 'required'
+
             ]);
 
             // Update Data

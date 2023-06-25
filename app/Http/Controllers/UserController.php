@@ -129,7 +129,7 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'Data Tidak Berhasil Disimpan' . $e->getMessage());
         }
     }
-
+ 
     public function update($id, Request $request)
     {
         try {

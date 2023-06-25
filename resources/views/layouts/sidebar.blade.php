@@ -1,5 +1,5 @@
 <div id="sidebar" class="active">
-    <div class="sidebar-wrapper active">
+       <div class="sidebar-wrapper active">
         <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="logo d-flex gap-2  align-items-center mt-2">
@@ -39,7 +39,9 @@
                 </div>
             </div>
         </div>
+
         <div class="sidebar-menu">
+            @role('Bagian Keuangan')
             <ul class="menu">
                 <li class="sidebar-title">Menu</li>
 
@@ -118,6 +120,45 @@
                 </li>
 
             </ul>
+             @endrole
         </div>
+
+
+        <div class="sidebar-menu">
+            @role('Mahasiswa')
+            <ul class="menu">
+                <li class="sidebar-title">Menu</li>
+
+                <li class="sidebar-item active ">
+                    <a href="{{ route('home') }}" class='sidebar-link'>
+                        <i class="bi bi-grid-fill"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item  ">
+                    <a href="{{ route('student.index') }}" class='sidebar-link'>
+                        <i class="bi bi-stack"></i>
+                        <span>Data Mahasiswa</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item  ">
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();" class='sidebar-link'>
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Log Out</span>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                    class="d-none">
+                    @csrf
+                </form>
+                </li>
+
+            </ul>
+            @endrole
+        </div>
+
     </div>
+
 </div>

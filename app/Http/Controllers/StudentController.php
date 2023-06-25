@@ -96,8 +96,6 @@ class StudentController extends Controller
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
 
-
-
             // Create Data
             $input = $request->all();
 
@@ -126,9 +124,9 @@ class StudentController extends Controller
 
     public function update($id, Request $request)
     {
-        $student = Student::findOrFail($id);
+        $student = Student::find($id);
         if($file = $request->file('image')){
-            Student::delete('photo/'.$student->photo);
+
             $extension = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extension;
             $file->move('photo', $filename);
@@ -156,7 +154,6 @@ class StudentController extends Controller
             // Update Data
             $id = Crypt::decrypt($id);
             $student = Student::find($id);
-
             $input = $request->all();
 
             // Decrypt Meeting Room Id

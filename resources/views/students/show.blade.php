@@ -5,6 +5,7 @@
 
 @section('content')
     <div class="card">
+        @role('Bagian Keuangan')
         <div class="card-header d-flex justify-content-between">
             <div class="header-title">
                 <h4 class="card-title">Lihat Data</h4>
@@ -58,6 +59,7 @@
             </div>
             <a href="{{ route('user.index') }}" class="btn btn-warning">Kembali</a>
         </div>
+        @endrole
     </div>
 @endsection
 
