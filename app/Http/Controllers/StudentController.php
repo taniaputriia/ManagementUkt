@@ -32,12 +32,12 @@ class StudentController extends Controller
                 return $formatedDate;
             })
             ->addColumn('action', function ($data) {
-                $url_show = route('student.show', Crypt::encrypt($data->id));
+                // $url_show = route('student.show', Crypt::encrypt($data->id));
                 $url_edit = route('student.edit', Crypt::encrypt($data->id));
                 $url_delete = route('student.destroy', Crypt::encrypt($data->id));
 
                 $btn = "<div class='btn-group'>";
-                $btn .= "<a href='$url_show' class = 'btn btn-outline-primary btn-sm text-nowrap'><i class='fas fa-info mr-2'></i> Lihat</a>";
+                // $btn .= "<a href='$url_show' class = 'btn btn-outline-primary btn-sm text-nowrap'><i class='fas fa-info mr-2'></i> Lihat</a>";
                 $btn .= "<a href='$url_edit' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-edit mr-2'></i> Edit</a>";
                 $btn .= "<a href='$url_delete' class = 'btn btn-outline-danger btn-sm text-nowrap' data-confirm-delete='true'><i class='fas fa-trash mr-2'></i> Hapus</a>";
                 $btn .= "</div>";
@@ -87,9 +87,7 @@ class StudentController extends Controller
                 'semester' => 'required',
                 'academic_year' => 'required',
                 'tuition_fee' => 'required',
-                'photo' => 'photo|mimes:jpeg, png, jpg | max:2048mb, required',
-
-
+                'photo' => 'mimes:jpeg,png,jpg|max:2048|required',
             ]);
             $file = $request->file('photo');
 
@@ -124,20 +122,10 @@ class StudentController extends Controller
 
     public function update($id, Request $request)
     {
-        $student = Student::find($id);
-        if($file = $request->file('image')){
-
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
-            $file->move('photo', $filename);
-        }else{
-            $filename = $student->photo;
-        }
         try {
             DB::beginTransaction();
 
             $request->validate([
-                'user_id' => 'required',
                 'nim' => 'required',
                 'name' => 'required',
                 'gender' => 'required',
@@ -148,17 +136,12 @@ class StudentController extends Controller
                 'semester' => 'required',
                 'academic_year' => 'required',
                 'tuition_fee' => 'required',
-                'photo' => 'required',
             ]);
 
             // Update Data
             $id = Crypt::decrypt($id);
             $student = Student::find($id);
             $input = $request->all();
-
-            // Decrypt Meeting Room Id
-            $input['user_id'] = Crypt::decrypt($request->user_id);
-            // $input['user_id'] = Request::input('user_id');
 
             $student->update($input);
 
