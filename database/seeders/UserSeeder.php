@@ -16,12 +16,15 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $user = User::create([
-            'name' => 'admin',
+            'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('@adminpolsri.')
         ]);
 
         $role = Role::create(['name' => 'Bagian Keuangan']);
+
+        Role::create(['name' => 'Mahasiswa']);
+        Role::create(['name' => 'Admin KPA']);
 
         $permissions = Permission::pluck('id', 'id')->all();
 

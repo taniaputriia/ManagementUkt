@@ -1,9 +1,10 @@
 <div id="sidebar" class="active">
-       <div class="sidebar-wrapper active">
+    <div class="sidebar-wrapper active">
         <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="logo d-flex gap-2  align-items-center mt-2">
-                    <a href="{{ route('home') }}"><img src="{{ asset('mazer-admin/assets/images/logo/logo-polsri.png')}}" alt="Logo" srcset="" ></a>
+                    <a href="{{ route('home') }}"><img src="{{ asset('mazer-admin/assets/images/logo/logo-polsri.png') }}"
+                            alt="Logo" srcset=""></a>
                 </div>
                 <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -42,120 +43,122 @@
 
         <div class="sidebar-menu">
             @role('Bagian Keuangan')
-            <ul class="menu">
-                <li class="sidebar-title">Menu</li>
+                <ul class="menu">
+                    <li class="sidebar-title">Menu</li>
 
-                <li class="sidebar-item active ">
-                    <a href="{{ route('home') }}" class='sidebar-link'>
-                        <i class="bi bi-grid-fill"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
+                    <li class="sidebar-item active ">
+                        <a href="{{ route('home') }}" class='sidebar-link'>
+                            <i class="bi bi-grid-fill"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
 
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-person-workspace"></i>
-                        <span>Kelola Pengguna</span>
-                    </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="{{ route('user.index') }}">Pengguna</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="{{ route('role.index') }}">Peran</a>
-                        </li>
+                    <li class="sidebar-item  has-sub">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-person-workspace"></i>
+                            <span>Kelola Pengguna</span>
+                        </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item ">
+                                <a href="{{ route('user.index') }}">Pengguna</a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="{{ route('role.index') }}">Peran</a>
+                            </li>
 
-                    </ul>
-                </li>
+                        </ul>
+                    </li>
 
-                <li class="sidebar-item  ">
-                    <a href="{{ route('student.index') }}" class='sidebar-link'>
-                        <i class="bi bi-stack"></i>
-                        <span>Data Mahasiswa</span>
-                    </a>
-                </li>
+                    <li class="sidebar-item  ">
+                        <a href="{{ route('student.index') }}" class='sidebar-link'>
+                            <i class="bi bi-stack"></i>
+                            <span>Data Mahasiswa</span>
+                        </a>
+                    </li>
 
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-collection-fill"></i>
-                        <span>Data Pembayaran</span>
-                    </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="">Pembayaran Lunas</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="">Pembayaran Cicilan</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="extra-component-toastify.html">Pembayaran Belum Lunas</a>
-                        </li>
-                    </ul>
-                </li>
+                    <li class="sidebar-item  has-sub">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-collection-fill"></i>
+                            <span>Data Pembayaran</span>
+                        </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item ">
+                                <a href="">Pembayaran Lunas</a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="">Pembayaran Cicilan</a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="extra-component-toastify.html">Pembayaran Belum Lunas</a>
+                            </li>
+                        </ul>
+                    </li>
 
-                <li class="sidebar-item  ">
-                    <a href="form-layout.html" class='sidebar-link'>
-                        <i class="bi bi-file-earmark-medical-fill"></i>
-                        <span>Pengajuan Cicilan UKT</span>
-                    </a>
-                </li>
+                    <li class="sidebar-item  has-sub">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-collection-fill"></i>
+                            <span>Verifikasi Pembayaran</span>
+                        </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item ">
+                                <a href="">Pembayaran Cicilan</a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="extra-component-toastify.html">Pembayaran Belum Lunas</a>
+                            </li>
+                        </ul>
+                    </li>
 
-                <li class="sidebar-item  ">
-                    <a href="form-layout.html" class='sidebar-link'>
-                        <i class="bi bi-file-earmark-medical-fill"></i>
-                        <span>Pengaturan Biaya UKT</span>
-                    </a>
-                </li>
+                    <li class="sidebar-item  ">
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();"
+                            class='sidebar-link'>
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Log Out</span>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </li>
 
-                <li class="sidebar-item  ">
-                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();" class='sidebar-link'>
-                        <i class="bi bi-box-arrow-right"></i>
-                        <span>Log Out</span>
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                    class="d-none">
-                    @csrf
-                </form>
-                </li>
-
-            </ul>
-             @endrole
+                </ul>
+            @endrole
         </div>
-
 
         <div class="sidebar-menu">
             @role('Mahasiswa')
-            <ul class="menu">
-                <li class="sidebar-title">Menu</li>
+                <ul class="menu">
+                    <li class="sidebar-title">Menu</li>
 
-                <li class="sidebar-item active ">
-                    <a href="{{ route('home') }}" class='sidebar-link'>
-                        <i class="bi bi-grid-fill"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
+                    <li class="sidebar-item active ">
+                        <a href="{{ route('home') }}" class='sidebar-link'>
+                            <i class="bi bi-grid-fill"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
 
-                <li class="sidebar-item  ">
-                    <a href="{{ route('student.index') }}" class='sidebar-link'>
-                        <i class="bi bi-stack"></i>
-                        <span>Data Mahasiswa</span>
-                    </a>
-                </li>
+                    <li class="sidebar-item  ">
+                        <a href="{{ route('student.index') }}" class='sidebar-link'>
+                            <i class="bi bi-stack"></i>
+                            <span>Data Mahasiswa</span>
+                        </a>
+                    </li>
 
-                <li class="sidebar-item  ">
-                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();" class='sidebar-link'>
-                        <i class="bi bi-box-arrow-right"></i>
-                        <span>Log Out</span>
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                    class="d-none">
-                    @csrf
-                </form>
-                </li>
+                    <li class="sidebar-item  ">
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();"
+                            class='sidebar-link'>
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Log Out</span>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </li>
 
-            </ul>
+                </ul>
             @endrole
         </div>
 
