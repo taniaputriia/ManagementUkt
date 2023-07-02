@@ -8,6 +8,7 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -20,7 +21,10 @@ class StudentController extends Controller
         $text = "Apakah yakin ingin menghapus data?";
         confirmDelete($title, $text);
 
-        return view('students.index');
+        $user_id = Auth::user()->id;
+        $student = Student::where('user_id', $user_id)->first();
+
+        return view('students.index', compact('student'));
     }
 
     public function datatable()
