@@ -11,6 +11,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
+use Laraindo\RupiahFormat;
 
 class StudentController extends Controller
 {
@@ -35,6 +36,10 @@ class StudentController extends Controller
                 $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->translatedFormat('d F Y - H:i');
                 return $formatedDate;
             })
+            ->editColumn('tuition_fee', function ($data) {
+                $formatCurrency = RupiahFormat::currency($data['tuition_fee']);
+                return $formatCurrency;
+            })
             ->addColumn('action', function ($data) {
                 $url_show = route('student.show', Crypt::encrypt($data->id));
                 $url_edit = route('student.edit', Crypt::encrypt($data->id));
@@ -52,28 +57,23 @@ class StudentController extends Controller
 
     public function create()
     {
-        $users = User::where('name', '!=', 'Admin')
-            ->where('has_account', 0)
-            ->get();
-        return view('students.add', compact('users'));
+        return view('students.add');
     }
-
 
     public function edit($id)
     {
         $id = Crypt::decrypt($id);
         $data = Student::find($id);
-        $student = Student::all();
 
-        return view('students.edit', compact('data', 'student'));
+        return view('students.edit', compact('data'));
     }
 
     public function show($id)
     {
         $id = Crypt::decrypt($id);
-        $student = Student::find($id);
+        $data = Student::find($id);
 
-        return view('students.show', compact('student'));
+        return view('students.show', compact('data'));
     }
 
     public function store(Request $request)
@@ -82,7 +82,9 @@ class StudentController extends Controller
             DB::beginTransaction();
 
             $request->validate([
-                'user_id' => 'required',
+                'user_name' => 'required',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|same:confirm-password',
                 'nim' => 'required',
                 'name' => 'required',
                 'gender' => 'required',
@@ -98,6 +100,10 @@ class StudentController extends Controller
 
             $input = $request->all();
 
+            // Create User
+            $user = User::create($input);
+            $user->assignRole([2]);
+
             // File
             if ($file = $request->file('photo')) {
                 $destinationPath = 'assets/mahasiswa/';
@@ -107,16 +113,11 @@ class StudentController extends Controller
                 $input['photo'] = $fileName;
             }
 
-            // Decrypt User Id
-            $input['user_id'] = Crypt::decrypt($request->user_id);
-
-            $user = User::find($input['user_id']);
-            $user->update([
-                'has_account' => 1
-            ]);
-
-            // Create Data
+            // Create Student
+            $input['user_id'] = $user->id;
+            $input['tuition_fee'] = str_replace(',', '', $input['tuition_fee']);
             Student::create($input);
+
 
             // Save Data
             DB::commit();
@@ -130,7 +131,7 @@ class StudentController extends Controller
 
             // Alert & Redirect
             Alert::toast('Data Tidak Tersimpan', 'error');
-            return redirect()->back()->with('error', 'Data Tidak Berhasil Disimpan' . $e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Data Tidak Berhasil Disimpan' . $e->getMessage());
         }
     }
 
@@ -150,14 +151,36 @@ class StudentController extends Controller
                 'semester' => 'required',
                 'academic_year' => 'required',
                 'tuition_fee' => 'required',
-                'photo' => 'mimes:jpeg,png,jpg|max:2048|required',
+                'photo' => 'mimes:jpeg,png,jpg|max:2048',
             ]);
 
             // Update Data
             $id = Crypt::decrypt($id);
             $student = Student::find($id);
+
             $input = $request->all();
 
+            // Image
+            if ($file = $request->file('photo')) {
+                // Remove Old File
+                if (!empty($user['photo'])) {
+                    $file_exist = 'assets/images/' . $user['photo'];
+
+                    if (file_exists($file_exist)) {
+                        unlink($file_exist);
+                    }
+                }
+
+                // Store New File
+                $destinationPath = 'assets/mahasiswa/';
+                $fileName = "Mahasiswa" . "_" . date('YmdHis') . "." . $file->getClientOriginalExtension();
+                $file->move($destinationPath, $fileName);
+                $input['photo'] = $fileName;
+            } else {
+                unset($input['photo']);
+            }
+
+            $input['tuition_fee'] = str_replace(',', '', $input['tuition_fee']);
             $student->update($input);
 
             // Save Data
@@ -172,7 +195,7 @@ class StudentController extends Controller
 
             // Alert & Redirect
             Alert::toast('Data Tidak Tersimpan', 'error');
-            return redirect()->back()->with('error', 'Data Tidak Berhasil Diperbarui' . $e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Data Tidak Berhasil Diperbarui' . $e->getMessage());
         }
     }
 

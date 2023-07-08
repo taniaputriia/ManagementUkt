@@ -1,6 +1,4 @@
 @extends('layouts.app')
-@section('css_after')
-@endsection
 
 @section('content')
     {{-- Admin --}}
@@ -24,7 +22,8 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="data-table" class="table table-striped table-bordered" width="100%">
+                                    <table id="data-table" class="table table-striped table-bordered text-nowrap"
+                                        width="100%">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -85,49 +84,57 @@
                                                 <input type="text" class="form-control" value="{{ $student['name'] }}"
                                                     readonly>
                                             </div>
-                                        </div><div class="col-md-6">
+                                        </div>
+                                        <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label>Jenis Kelamin</label>
                                                 <input type="text" class="form-control" value="{{ $student['gender'] }}"
                                                     readonly>
                                             </div>
-                                        </div><div class="col-md-6">
+                                        </div>
+                                        <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label>No HP</label>
-                                                <input type="text" class="form-control" value="{{ $student['phone_number'] }}"
-                                                    readonly>
+                                                <input type="text" class="form-control"
+                                                    value="{{ $student['phone_number'] }}" readonly>
                                             </div>
-                                        </div><div class="col-md-6">
+                                        </div>
+                                        <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label>Alamat</label>
                                                 <input type="text" class="form-control" value="{{ $student['address'] }}"
                                                     readonly>
                                             </div>
-                                        </div><div class="col-md-6">
+                                        </div>
+                                        <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label>Program Studi</label>
-                                                <input type="text" class="form-control" value="{{ $student['study_program'] }}"
-                                                    readonly>
+                                                <input type="text" class="form-control"
+                                                    value="{{ $student['study_program'] }}" readonly>
                                             </div>
-                                        </div><div class="col-md-6">
+                                        </div>
+                                        <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label>Semester</label>
                                                 <input type="text" class="form-control" value="{{ $student['semester'] }}"
                                                     readonly>
                                             </div>
-                                        </div><div class="col-md-6">
+                                        </div>
+                                        <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label>Tahun Akademik</label>
-                                                <input type="text" class="form-control" value="{{ $student['academic_year'] }}"
-                                                    readonly>
+                                                <input type="text" class="form-control"
+                                                    value="{{ $student['academic_year'] }}" readonly>
                                             </div>
-                                        </div><div class="col-md-6">
+                                        </div>
+                                        <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label>Uang Kuliah Tunggal</label>
-                                                <input type="text" class="form-control" value="Rp.{{ number_format($student['tuition_fee']) }}"
-                                                    readonly>
+                                                <input type="text" class="form-control"
+                                                    value="Rp.{{ number_format($student['tuition_fee']) }}" readonly>
                                             </div>
-                                        </div><div class="col-md-6">
+                                        </div>
+                                        <div class="col-md-6">
                                         </div>
                                     </div>
                                 </div>
@@ -141,13 +148,9 @@
 @endsection
 
 @section('js_after')
-    {{-- Select 2 --}}
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
     <script>
         $(document).ready(function() {
             getDatatable();
-            $(".select_meeting_room").select2();
         });
 
         let data_table = "";
@@ -159,17 +162,19 @@
                 processing: true,
                 destroy: true,
                 order: [
-                    [5, 'desc']
+                    [3, 'asc']
                 ],
                 columns: [{
-                        "data": null,
-                        "sortable": false,
+                        data: null,
+                        sortable: false,
                         searchable: false,
                         render: function(data, type, row, meta) {
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }
                     },
                     {
+                        data: null,
+                        sortable: false,
                         name: 'action',
                         data: 'action'
                     },

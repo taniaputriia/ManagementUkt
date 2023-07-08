@@ -94,6 +94,10 @@ class Student extends Model
         self::MAJOR_COMPUTER => self::MAJOR_COMPUTER,
         self::MAJOR_INFORMATICS_MANAGEMENT => self::MAJOR_INFORMATICS_MANAGEMENT,
         self::MAJOR_ENGLISH => self::MAJOR_ENGLISH,
-
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }
