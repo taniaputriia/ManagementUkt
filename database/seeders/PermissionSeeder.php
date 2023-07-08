@@ -22,14 +22,6 @@ class PermissionSeeder extends Seeder
             'user-create',
             'user-edit',
             'user-delete',
-            'warkah_request-list',
-            'warkah_request-create',
-            'warkah_request-edit',
-            'warkah_request-delete',
-            'warkah_request-delete_all',
-            'warkah_request-status_available',
-            'warkah_request-status_not_available',
-            'warkah_request-status_pending',
         ];
 
         foreach ($permissions as $permission) {

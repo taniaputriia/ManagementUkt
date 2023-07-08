@@ -1,4 +1,5 @@
 <?php
+
 namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -21,16 +22,27 @@ class UserSeeder extends Seeder
             'password' => Hash::make('@adminpolsri.')
         ]);
 
-        $role = Role::create(['name' => 'Bagian Keuangan']);
+        $data = [
+            [
+                'name' => 'Bagian Keuangan',
+            ],
+            [
+                'name' => 'Mahasiswa',
+            ],
+            [
+                'name' => 'Admin KPA',
+            ],
+            [
+                'name' => 'Wakil Direktur II',
+            ],
+        ];
 
-        Role::create(['name' => 'Mahasiswa']);
-        Role::create(['name' => 'Admin KPA']);
+        foreach ($data as $item) {
+            $role =  Role::create($item);
+            $permissions = Permission::pluck('id', 'id')->all();
 
-        $permissions = Permission::pluck('id', 'id')->all();
-
-        $role->syncPermissions($permissions);
-
-        $user->assignRole([$role->id]);
-
+            $role->syncPermissions($permissions);
+        }
+        $user->assignRole([1]);
     }
 }
