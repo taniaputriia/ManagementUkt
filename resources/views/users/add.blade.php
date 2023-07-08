@@ -46,7 +46,7 @@
                 <hr>
                 <div class="form-group">
                     <label>Role </label>
-                    <select name="roles[]" class="form-control mb-3 select_role" multiple required>
+                    <select name="role" class="form-control mb-3 select_role" required>
                         @foreach ($roles as $role)
                             <option value="{{ $role }}">{{ $role }}</option>
                         @endforeach
@@ -66,7 +66,9 @@
 
     <script>
         $(document).ready(function() {
-            $(".select_role").select2();
+            $(".select_role").select2({
+                width: '100%'
+            });
         });
     </script>
 @endsection

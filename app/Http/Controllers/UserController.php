@@ -72,7 +72,7 @@ class UserController extends Controller
 
     public function create()
     {
-        $roles = Role::pluck('name', 'name')->all();
+        $roles = Role::where('name', '!=', 'Mahasiswa')->pluck('name');
         return view('users.add', compact('roles'));
     }
 
@@ -89,7 +89,7 @@ class UserController extends Controller
         $id = Crypt::decrypt($id);
         $user = User::find($id);
 
-        $roles = Role::pluck('name', 'name')->all();
+        $roles = Role::where('name', '!=', 'Mahasiswa')->pluck('name');
         $userRole = $user->roles->pluck('name', 'name')->all();
 
         return view('users.edit', compact('user', 'roles', 'userRole'));
@@ -112,7 +112,7 @@ class UserController extends Controller
             $input = $request->all();
             $input['password'] = Hash::make($input['password']);
             $user = User::create($input);
-            $user->assignRole($request->input('roles'));
+            $user->assignRole($request->roles);
 
             // Save Data
             DB::commit();
@@ -129,7 +129,7 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'Data Tidak Berhasil Disimpan' . $e->getMessage());
         }
     }
- 
+
     public function update($id, Request $request)
     {
         try {

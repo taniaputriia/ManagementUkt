@@ -64,10 +64,6 @@
                             <li class="submenu-item ">
                                 <a href="{{ route('user.index') }}">Pengguna</a>
                             </li>
-                            <li class="submenu-item ">
-                                <a href="{{ route('role.index') }}">Peran</a>
-                            </li>
-
                         </ul>
                     </li>
 

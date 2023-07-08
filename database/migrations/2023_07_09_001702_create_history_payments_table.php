@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('full_payments', function (Blueprint $table) {
+        Schema::create('history_payments', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->comment('foreign key user');
-            $table->string('va_number')->comment('nomor VA');
-            $table->string('status')->nullable()->comment('status pembayaran');
+            $table->bigInteger('payment_id')->comment('foreign key payment');
             $table->text('description')->nullable()->comment('keterangan');
             $table->timestamps();
         });
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('full_payments');
+        Schema::dropIfExists('history_payments');
     }
 };
