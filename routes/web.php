@@ -44,23 +44,87 @@ Route::group(['controller' => StudentController::class, 'prefix' => 'student', '
 
 // InstalmentPayment
 Route::group(['controller' => InstalmentPaymentController::class, 'prefix' => 'instalment_payment', 'as' => 'instalment_payment.'], function () {
-    Route::get('/', 'index')->name('index');
-    Route::get('/create', 'create')->name('create');
-    Route::get('/edit/{id}', 'edit')->name('edit');
+    /* Data Table */
     Route::get('/datatable', 'datatable')->name('datatable');
-    Route::post('/store', 'store')->name('store');
-    Route::put('/update/{id}', 'update')->name('update');
-    Route::delete('/destroy/{id}', 'destroy')->name('destroy');
+
+     /* Store & Update */
+     Route::post('/store', 'store')->name('store');
+     Route::put('/update/{id}', 'update')->name('update');
+     Route::delete('/destroy/{id}', 'destroy')->name('destroy');
+
+     /* View */
+     Route::get('/', 'index')->name('index');
+     Route::get('/create', 'create')->name('create');
+     Route::get('/edit/{id}', 'edit')->name('edit');
+     Route::get('/show/{id}', 'show')->name('show');
+
 });
 
 // User
 Route::group(['controller' => UserController::class, 'prefix' => 'user', 'as' => 'user.'], function () {
-    Route::get('/', 'index')->name('index');
+    /* Data Table */
     Route::get('/datatable', 'datatable')->name('datatable');
-    Route::get('/create', 'create')->name('create');
-    Route::get('/edit/{id}', 'edit')->name('edit');
-    Route::get('/show/{id}', 'show')->name('show');
-    Route::post('/store', 'store')->name('store');
-    Route::put('/update/{id}', 'update')->name('update');
-    Route::delete('/destroy/{id}', 'destroy')->name('destroy');
+
+     /* Store & Update */
+     Route::post('/store', 'store')->name('store');
+     Route::put('/update/{id}', 'update')->name('update');
+     Route::delete('/destroy/{id}', 'destroy')->name('destroy');
+
+     /* View */
+     Route::get('/', 'index')->name('index');
+     Route::get('/create', 'create')->name('create');
+     Route::get('/edit/{id}', 'edit')->name('edit');
+     Route::get('/show/{id}', 'show')->name('show');
+
+});
+
+Route::group(['controller' => InstalmentPaymentDetailController::class, 'prefix' => 'instalment_payment_detail', 'as' => 'instalment_payment_detail.'], function () {
+    /* Data Table */
+    Route::get('/datatable', 'datatable')->name('datatable');
+
+     /* Store & Update */
+     Route::post('/store', 'store')->name('store');
+     Route::put('/update/{id}', 'update')->name('update');
+     Route::delete('/destroy/{id}', 'destroy')->name('destroy');
+
+     /* View */
+     Route::get('/', 'index')->name('index');
+     Route::get('/create', 'create')->name('create');
+     Route::get('/edit/{id}', 'edit')->name('edit');
+     Route::get('/show/{id}', 'show')->name('show');
+
+});
+
+Route::group(['controller' => InstalmentPaymentRemainController::class, 'prefix' => 'instalment_payment_remain', 'as' => 'instalment_payment_remain.'], function () {
+    /* Data Table */
+    Route::get('/datatable', 'datatable')->name('datatable');
+
+     /* Store & Update */
+     Route::post('/store', 'store')->name('store');
+     Route::put('/update/{id}', 'update')->name('update');
+     Route::delete('/destroy/{id}', 'destroy')->name('destroy');
+
+     /* View */
+     Route::get('/', 'index')->name('index');
+     Route::get('/create', 'create')->name('create');
+     Route::get('/edit/{id}', 'edit')->name('edit');
+     Route::get('/show/{id}', 'show')->name('show');
+
+});
+
+Route::group(['controller' => FullPaymentController::class, 'prefix' => 'full_payment', 'as' => 'full_payment.'], function () {
+    /* Data Table */
+    Route::get('/datatable', 'datatable')->name('datatable');
+
+     /* Store & Update */
+     Route::post('/store', 'store')->name('store');
+     Route::put('/update/{id}', 'update')->name('update');
+     Route::delete('/destroy/{id}', 'destroy')->name('destroy');
+
+     /* View */
+     Route::get('/', 'index')->name('index');
+     Route::get('/create', 'create')->name('create');
+     Route::get('/edit/{id}', 'edit')->name('edit');
+     Route::get('/show/{id}', 'show')->name('show');
+
 });
