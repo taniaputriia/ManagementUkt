@@ -41,8 +41,10 @@
             </div>
         </div>
 
-        <div class="sidebar-menu">
-            @role('Bagian Keuangan')
+        {{-- Bagian Keuangan --}}
+        @role('Bagian Keuangan')
+            <div class="sidebar-menu">
+
                 <ul class="menu">
                     <li class="sidebar-title">Menu</li>
 
@@ -123,11 +125,15 @@
                     </li>
 
                 </ul>
-            @endrole
-        </div>
 
-        <div class="sidebar-menu">
-            @role('Mahasiswa')
+            </div>
+        @endrole
+        {{-- End Bagian Keuangan --}}
+
+        {{-- Mahasiswa --}}
+        @role('Mahasiswa')
+            <div class="sidebar-menu">
+
                 <ul class="menu">
                     <li class="sidebar-title">Menu</li>
 
@@ -159,9 +165,9 @@
                     </li>
 
                 </ul>
-            @endrole
-        </div>
 
+            </div>
+        @endrole
+        {{-- End Mahasiswa --}}
     </div>
-
 </div>
