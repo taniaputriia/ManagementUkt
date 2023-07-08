@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('instalment_payments', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->comment('foreign key user');
+            $table->bigInteger('student_id')->comment('foreign key student');
             $table->string('va_number')->comment('nomor VA');
+            $table->bigInteger('tuition_fee')->nullable()->comment('bayaran kuliah');
+            $table->bigInteger('total_payment')->nullable()->comment('total pembayaran');
+            $table->bigInteger('remain_payment')->nullable()->comment('sisa pembayaran');
+            $table->string('verified')->nullable()->comment('Diverifikasi');
             $table->string('status')->nullable()->comment('status pembayaran');
             $table->text('description')->nullable()->comment('keterangan');
             $table->timestamps();
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('instalment_payments');
+        Schema::dropIfExists('payments');
     }
 };

@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\InstalmentPaymentController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PaymentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,8 +43,8 @@ Route::group(['controller' => StudentController::class, 'prefix' => 'student', '
     Route::get('/show/{id}', 'show')->name('show');
 });
 
-// InstalmentPayment
-Route::group(['controller' => InstalmentPaymentController::class, 'prefix' => 'instalment_payment', 'as' => 'instalment_payment.'], function () {
+// Payment
+Route::group(['controller' => PaymentController::class, 'prefix' => 'payment', 'as' => 'payment.'], function () {
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
     Route::get('/edit/{id}', 'edit')->name('edit');
