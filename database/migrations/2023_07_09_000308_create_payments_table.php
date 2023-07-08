@@ -18,6 +18,9 @@ return new class extends Migration
             $table->bigInteger('tuition_fee')->nullable()->comment('bayaran kuliah');
             $table->bigInteger('total_payment')->nullable()->comment('total pembayaran');
             $table->bigInteger('remain_payment')->nullable()->comment('sisa pembayaran');
+            $table->bigInteger('first_payment')->nullable()->comment('pembayaran 1');
+            $table->bigInteger('second_payment')->nullable()->comment('pembayaran 2');
+            $table->bigInteger('third_payment')->nullable()->comment('pembayaran 3');
             $table->string('verified')->nullable()->comment('Diverifikasi');
             $table->string('status')->nullable()->comment('status pembayaran');
             $table->text('description')->nullable()->comment('keterangan');
