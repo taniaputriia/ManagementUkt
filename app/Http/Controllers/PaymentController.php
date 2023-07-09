@@ -24,7 +24,68 @@ class PaymentController extends Controller
         $user_id = Auth::user()->id;
         $student = Student::where('user_id', $user_id)->first();
 
+
+        return view('payments.not-paid.index', compact('student'));
+
+    }
+
+    public function index_full_payment()
+    {
+        // Confirm Delete Alert
+        $title = 'Hapus Data!';
+        $text = "Apakah yakin ingin menghapus data?";
+        confirmDelete($title, $text);
+
+        $user_id = Auth::user()->id;
+        $student = Student::where('user_id', $user_id)->first();
+
+
         return view('payments.full-payment.index', compact('student'));
+
+    }
+
+    public function index_credit()
+    {
+        // Confirm Delete Alert
+        $title = 'Hapus Data!';
+        $text = "Apakah yakin ingin menghapus data?";
+        confirmDelete($title, $text);
+
+        $user_id = Auth::user()->id;
+        $student = Student::where('user_id', $user_id)->first();
+
+
+        return view('payments.credit.index', compact('student'));
+
+    }
+
+    public function index_verification_credit()
+    {
+        // Confirm Delete Alert
+        $title = 'Hapus Data!';
+        $text = "Apakah yakin ingin menghapus data?";
+        confirmDelete($title, $text);
+
+        $user_id = Auth::user()->id;
+        $student = Student::where('user_id', $user_id)->first();
+
+
+        return view('payments.credit.index', compact('student'));
+
+    }
+
+    public function index_verification_full_payment()
+    {
+        // Confirm Delete Alert
+        $title = 'Hapus Data!';
+        $text = "Apakah yakin ingin menghapus data?";
+        confirmDelete($title, $text);
+
+        $user_id = Auth::user()->id;
+        $student = Student::where('user_id', $user_id)->first();
+
+
+        return view('payments.not-paid.index', compact('student'));
 
     }
 

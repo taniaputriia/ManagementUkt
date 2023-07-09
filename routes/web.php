@@ -59,6 +59,17 @@ Route::group(['controller' => PaymentController::class, 'prefix' => 'payment', '
      Route::get('/edit/{id}', 'edit')->name('edit');
      Route::get('/show/{id}', 'show')->name('show');
 
+     /* Full Payment */
+     Route::get('/full_payment', 'index_full_payment')->name('index_full_payment');
+
+     /* credit */
+     Route::get('/credit', 'index_credit')->name('index_credit');
+
+     /* Verification */
+     Route::get('/verification_full_payment', 'index_verification_full_payment')->name('verification_full_payment');
+     Route::get('/verification_credit', 'index_verification_credit')->name('verification_credit');
+
+
 });
 
 // User

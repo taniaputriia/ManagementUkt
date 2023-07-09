@@ -17,8 +17,8 @@
                                 <div class="header-title">
                                     <h4 class="card-title">Manajemen Data Pembayaran Lunas</h4>
                                 </div>
-                                <a class="text-end btn btn-sm btn-outline-info" href="{{ route('student.create') }}"><i
-                                        class="fa fa-plus"></i> Tambah Data</a>
+                                {{-- <a class="text-end btn btn-sm btn-outline-info" href="{{ route('student.create') }}"><i
+                                        class="fa fa-plus"></i> Tambah Data</a> --}}
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">

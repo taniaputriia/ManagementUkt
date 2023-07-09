@@ -81,10 +81,10 @@
                         </a>
                         <ul class="submenu ">
                             <li class="submenu-item ">
-                                <a href="{{ route('payment.index') }}">Pembayaran Lunas</a>
+                                <a href="{{ route('payment.index_full_payment') }}">Pembayaran Lunas</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="{{ route('payment.index') }}">Pembayaran Cicilan</a>
+                                <a href="{{ route('payment.index_credit') }}">Pembayaran Cicilan</a>
                             </li>
                             <li class="submenu-item ">
                                 <a href="{{ route('payment.index') }}">Pembayaran Belum Lunas</a>
