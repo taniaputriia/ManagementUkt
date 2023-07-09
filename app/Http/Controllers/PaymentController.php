@@ -58,20 +58,6 @@ class PaymentController extends Controller
         return view('payments.credit.index', compact('student'));
     }
 
-    public function index_verification_credit()
-    {
-        // Confirm Delete Alert
-        $title = 'Hapus Data!';
-        $text = "Apakah yakin ingin menghapus data?";
-        confirmDelete($title, $text);
-
-        $user_id = Auth::user()->id;
-        $student = Student::where('user_id', $user_id)->first();
-
-
-        return view('payments.credit.index', compact('student'));
-    }
-
     public function index_verification_full_payment()
     {
         // Confirm Delete Alert
@@ -84,6 +70,20 @@ class PaymentController extends Controller
 
 
         return view('payments.not-paid.index', compact('student'));
+    }
+
+    public function index_verification_credit()
+    {
+        // Confirm Delete Alert
+        $title = 'Hapus Data!';
+        $text = "Apakah yakin ingin menghapus data?";
+        confirmDelete($title, $text);
+
+        $user_id = Auth::user()->id;
+        $student = Student::where('user_id', $user_id)->first();
+
+
+        return view('payments.credit.index', compact('student'));
     }
 
     public function datatable()
@@ -113,7 +113,7 @@ class PaymentController extends Controller
             ->toJson();
     }
 
-    public function datatable_full_payment()
+    public function datatable_index_full_payment()
     {
         $model = Payment::where('status', Payment::STATUS_PAID);
         return DataTables::of($model)
@@ -126,9 +126,9 @@ class PaymentController extends Controller
                 return $formatCurrency;
             })
             ->addColumn('action', function ($data) {
-                $url_show = route('student.show', Crypt::encrypt($data->id));
-                $url_edit = route('student.edit', Crypt::encrypt($data->id));
-                $url_delete = route('student.destroy', Crypt::encrypt($data->id));
+                $url_show = route('payment.full_payment.show', Crypt::encrypt($data->id));
+                $url_edit = route('student.full_payment.edit', Crypt::encrypt($data->id));
+                $url_delete = route('student.full_payment.destroy', Crypt::encrypt($data->id));
 
                 $btn = "<div class='btn-group'>";
                 $btn .= "<a href='$url_show' class = 'btn btn-outline-primary btn-sm text-nowrap'><i class='fas fa-info mr-2'></i> Lihat</a>";
@@ -140,6 +140,167 @@ class PaymentController extends Controller
             ->toJson();
     }
 
+    public function datatable_index_credit()
+    {
+        $model = Payment::where('status', Payment::STATUS_INSTALMENT);
+        return DataTables::of($model)
+            ->editColumn('created_at', function ($data) {
+                $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->translatedFormat('d F Y - H:i');
+                return $formatedDate;
+            })
+            ->editColumn('tuition_fee', function ($data) {
+                $formatCurrency = RupiahFormat::currency($data['tuition_fee']);
+                return $formatCurrency;
+            })
+            ->addColumn('action', function ($data) {
+                $url_show = route('payment.credit.show', Crypt::encrypt($data->id));
+                $url_edit = route('payment.credit.edit', Crypt::encrypt($data->id));
+                $url_delete = route('payment.credit.destroy', Crypt::encrypt($data->id));
+
+                $btn = "<div class='btn-group'>";
+                $btn .= "<a href='$url_show' class = 'btn btn-outline-primary btn-sm text-nowrap'><i class='fas fa-info mr-2'></i> Lihat</a>";
+                $btn .= "<a href='$url_edit' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-edit mr-2'></i> Edit</a>";
+                $btn .= "<a href='$url_delete' class = 'btn btn-outline-danger btn-sm text-nowrap' data-confirm-delete='true'><i class='fas fa-trash mr-2'></i> Hapus</a>";
+                $btn .= "</div>";
+                return $btn;
+            })
+            ->toJson();
+    }
+
+    public function datatable_index_verification()
+    {
+        $model = Payment::where('status', Payment::STATUS_NOT_PAID);
+        return DataTables::of($model)
+            ->editColumn('created_at', function ($data) {
+                $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->translatedFormat('d F Y - H:i');
+                return $formatedDate;
+            })
+            ->editColumn('tuition_fee', function ($data) {
+                $formatCurrency = RupiahFormat::currency($data['tuition_fee']);
+                return $formatCurrency;
+            })
+            ->addColumn('action', function ($data) {
+                $url_show = route('payment.credit.show', Crypt::encrypt($data->id));
+                $url_edit = route('payment.credit.edit', Crypt::encrypt($data->id));
+                $url_delete = route('payment.credit.destroy', Crypt::encrypt($data->id));
+
+                $btn = "<div class='btn-group'>";
+                $btn .= "<a href='$url_show' class = 'btn btn-outline-primary btn-sm text-nowrap'><i class='fas fa-info mr-2'></i> Lihat</a>";
+                $btn .= "<a href='$url_edit' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-edit mr-2'></i> Edit</a>";
+                $btn .= "<a href='$url_delete' class = 'btn btn-outline-danger btn-sm text-nowrap' data-confirm-delete='true'><i class='fas fa-trash mr-2'></i> Hapus</a>";
+                $btn .= "</div>";
+                return $btn;
+            })
+            ->toJson();
+    }
+
+    public function datatable_index_verification_full_payment()
+    {
+        $model = Payment::where('status', Payment::STATUS_PAID);
+        return DataTables::of($model)
+            ->editColumn('created_at', function ($data) {
+                $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->translatedFormat('d F Y - H:i');
+                return $formatedDate;
+            })
+            ->editColumn('tuition_fee', function ($data) {
+                $formatCurrency = RupiahFormat::currency($data['tuition_fee']);
+                return $formatCurrency;
+            })
+            ->addColumn('action', function ($data) {
+                $url_show = route('payment.credit.show', Crypt::encrypt($data->id));
+                $url_edit = route('payment.credit.edit', Crypt::encrypt($data->id));
+                $url_delete = route('payment.credit.destroy', Crypt::encrypt($data->id));
+
+                $btn = "<div class='btn-group'>";
+                $btn .= "<a href='$url_show' class = 'btn btn-outline-primary btn-sm text-nowrap'><i class='fas fa-info mr-2'></i> Lihat</a>";
+                $btn .= "<a href='$url_edit' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-edit mr-2'></i> Edit</a>";
+                $btn .= "<a href='$url_delete' class = 'btn btn-outline-danger btn-sm text-nowrap' data-confirm-delete='true'><i class='fas fa-trash mr-2'></i> Hapus</a>";
+                $btn .= "</div>";
+                return $btn;
+            })
+            ->toJson();
+    }
+
+    public function datatable_index_verification_credit()
+    {
+        $model = Payment::where('status', Payment::STATUS_INSTALMENT);
+        return DataTables::of($model)
+            ->editColumn('created_at', function ($data) {
+                $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->translatedFormat('d F Y - H:i');
+                return $formatedDate;
+            })
+            ->editColumn('tuition_fee', function ($data) {
+                $formatCurrency = RupiahFormat::currency($data['tuition_fee']);
+                return $formatCurrency;
+            })
+            ->addColumn('action', function ($data) {
+                $url_show = route('payment.credit.show', Crypt::encrypt($data->id));
+                $url_edit = route('payment.credit.edit', Crypt::encrypt($data->id));
+                $url_delete = route('payment.credit.destroy', Crypt::encrypt($data->id));
+
+                $btn = "<div class='btn-group'>";
+                $btn .= "<a href='$url_show' class = 'btn btn-outline-primary btn-sm text-nowrap'><i class='fas fa-info mr-2'></i> Lihat</a>";
+                $btn .= "<a href='$url_edit' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-edit mr-2'></i> Edit</a>";
+                $btn .= "<a href='$url_delete' class = 'btn btn-outline-danger btn-sm text-nowrap' data-confirm-delete='true'><i class='fas fa-trash mr-2'></i> Hapus</a>";
+                $btn .= "</div>";
+                return $btn;
+            })
+            ->toJson();
+    }
+
+    public function datatable_index_report_full_payment()
+    {
+        $model = Payment::where('status', Payment::STATUS_PAID);
+        return DataTables::of($model)
+            ->editColumn('created_at', function ($data) {
+                $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->translatedFormat('d F Y - H:i');
+                return $formatedDate;
+            })
+            ->editColumn('tuition_fee', function ($data) {
+                $formatCurrency = RupiahFormat::currency($data['tuition_fee']);
+                return $formatCurrency;
+            })
+            ->addColumn('action', function ($data) {
+                $url_show = route('payment.credit.show', Crypt::encrypt($data->id));
+                $url_edit = route('payment.credit.edit', Crypt::encrypt($data->id));
+                $url_delete = route('payment.credit.destroy', Crypt::encrypt($data->id));
+
+                $btn = "<div class='btn-group'>";
+                $btn .= "<a href='$url_show' class = 'btn btn-outline-primary btn-sm text-nowrap'><i class='fas fa-info mr-2'></i> Lihat</a>";
+                $btn .= "<a href='$url_edit' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-edit mr-2'></i> Edit</a>";
+                $btn .= "<a href='$url_delete' class = 'btn btn-outline-danger btn-sm text-nowrap' data-confirm-delete='true'><i class='fas fa-trash mr-2'></i> Hapus</a>";
+                $btn .= "</div>";
+                return $btn;
+            })
+            ->toJson();
+    }
+
+    public function datatable_index_report_credit()
+    {
+        $model = Payment::where('status', Payment::STATUS_INSTALMENT);
+        return DataTables::of($model)
+            ->editColumn('created_at', function ($data) {
+                $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->translatedFormat('d F Y - H:i');
+                return $formatedDate;
+            })
+            ->editColumn('tuition_fee', function ($data) {
+                $formatCurrency = RupiahFormat::currency($data['tuition_fee']);
+                return $formatCurrency;
+            })
+            ->addColumn('action', function ($data) {
+                $url_show = route('payment.credit.show', Crypt::encrypt($data->id));
+                $url_edit = route('payment.credit.edit', Crypt::encrypt($data->id));
+                $url_delete = route('payment.credit.destroy', Crypt::encrypt($data->id));
+
+                $btn = "<div class='btn-group'>";
+                $btn .= "<a href='$url_show' class = 'btn btn-outline-primary btn-sm text-nowrap'><i class='fas fa-info mr-2'></i> Lihat</a>";
+                $btn .= "<a href='$url_edit' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-edit mr-2'></i> Edit</a>";
+                $btn .= "<a href='$url_delete' class = 'btn btn-outline-danger btn-sm text-nowrap' data-confirm-delete='true'><i class='fas fa-trash mr-2'></i> Hapus</a>";
+                $btn .= "</div>";
+                return $btn;
+            })
+            ->toJson();
+    }
 
     public function create()
     {
