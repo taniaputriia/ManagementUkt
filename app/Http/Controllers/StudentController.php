@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use App\Models\User;
+use App\Models\Payment;
+use App\Models\HistoryPayment;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -118,8 +120,18 @@ class StudentController extends Controller
             // Create Student
             $input['user_id'] = $user->id;
             $input['tuition_fee'] = str_replace(',', '', $input['tuition_fee']);
-            Student::create($input);
+            $student = Student::create($input);
 
+            $payment = Payment::create([
+                'student_id' => $student->id,
+                'tuition_fee' => $student->tuition_fee,
+                'status' => Payment::STATUS_NOT_PAID
+            ]);
+
+            HistoryPayment::create([
+                'payment_id' => $payment->id,
+                'description' => "Pembayaran Belum Lunas"
+            ]);
 
             // Save Data
             DB::commit();
@@ -209,7 +221,22 @@ class StudentController extends Controller
             $id = Crypt::decrypt($id);
             $student = Student::find($id);
 
+            $user_id = $student['user_id'];
+            $user = User::find($user_id);
+
+            $payments = Payment::where('student_id', $student->id)->get();
+            if (!empty($payments)) {
+                foreach ($payments as $item) {
+                    $history_payments = HistoryPayment::where('payment_id', $item->id)->get();
+                    foreach ($history_payments as $item2) {
+                        $item2->delete();
+                    }
+                    $item->delete();
+                }
+            }
+
             // Delete Data
+            $user->delete();
             $student->delete();
 
             // Save Data

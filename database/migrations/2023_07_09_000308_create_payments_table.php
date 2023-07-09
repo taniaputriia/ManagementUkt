@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('student_id')->comment('foreign key student');
-            $table->string('va_number')->comment('nomor VA');
+            $table->string('va_number')->nullable()->comment('nomor VA');
             $table->bigInteger('tuition_fee')->nullable()->comment('bayaran kuliah');
             $table->bigInteger('total_payment')->nullable()->comment('total pembayaran');
             $table->bigInteger('remain_payment')->nullable()->comment('sisa pembayaran');

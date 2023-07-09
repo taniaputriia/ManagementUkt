@@ -47,29 +47,23 @@ Route::group(['controller' => StudentController::class, 'prefix' => 'student', '
 Route::group(['controller' => PaymentController::class, 'prefix' => 'payment', 'as' => 'payment.'], function () {
     /* Data Table */
     Route::get('/datatable', 'datatable')->name('datatable');
+    Route::get('/datatable_full_payment', 'datatable_full_payment')->name('datatable_full_payment');
+    Route::get('/datatable_credit', 'datatable_credit')->name('datatable_credit');
 
-     /* Store & Update */
-     Route::post('/store', 'store')->name('store');
-     Route::put('/update/{id}', 'update')->name('update');
-     Route::delete('/destroy/{id}', 'destroy')->name('destroy');
+    /* Store & Update */
+    Route::post('/store', 'store')->name('store');
+    Route::put('/update/{id}', 'update')->name('update');
+    Route::delete('/destroy/{id}', 'destroy')->name('destroy');
 
-     /* View */
-     Route::get('/', 'index')->name('index');
-     Route::get('/create', 'create')->name('create');
-     Route::get('/edit/{id}', 'edit')->name('edit');
-     Route::get('/show/{id}', 'show')->name('show');
-
-     /* Full Payment */
-     Route::get('/full_payment', 'index_full_payment')->name('index_full_payment');
-
-     /* credit */
-     Route::get('/credit', 'index_credit')->name('index_credit');
-
-     /* Verification */
-     Route::get('/verification_full_payment', 'index_verification_full_payment')->name('verification_full_payment');
-     Route::get('/verification_credit', 'index_verification_credit')->name('verification_credit');
-
-
+    /* View */
+    Route::get('/', 'index')->name('index');
+    Route::get('/full_payment', 'index_full_payment')->name('index_full_payment');
+    Route::get('/credit', 'index_credit')->name('index_credit');
+    Route::get('/verification_full_payment', 'index_verification_full_payment')->name('verification_full_payment');
+    Route::get('/verification_credit', 'index_verification_credit')->name('verification_credit');
+    Route::get('/create', 'create')->name('create');
+    Route::get('/edit/{id}', 'edit')->name('edit');
+    Route::get('/show/{id}', 'show')->name('show');
 });
 
 // User
@@ -77,69 +71,14 @@ Route::group(['controller' => UserController::class, 'prefix' => 'user', 'as' =>
     /* Data Table */
     Route::get('/datatable', 'datatable')->name('datatable');
 
-     /* Store & Update */
-     Route::post('/store', 'store')->name('store');
-     Route::put('/update/{id}', 'update')->name('update');
-     Route::delete('/destroy/{id}', 'destroy')->name('destroy');
+    /* Store & Update */
+    Route::post('/store', 'store')->name('store');
+    Route::put('/update/{id}', 'update')->name('update');
+    Route::delete('/destroy/{id}', 'destroy')->name('destroy');
 
-     /* View */
-     Route::get('/', 'index')->name('index');
-     Route::get('/create', 'create')->name('create');
-     Route::get('/edit/{id}', 'edit')->name('edit');
-     Route::get('/show/{id}', 'show')->name('show');
-
-});
-
-//InstalmentPaymentDetail
-Route::group(['controller' => InstalmentPaymentDetailController::class, 'prefix' => 'instalment_payment_detail', 'as' => 'instalment_payment_detail.'], function () {
-    /* Data Table */
-    Route::get('/datatable', 'datatable')->name('datatable');
-
-     /* Store & Update */
-     Route::post('/store', 'store')->name('store');
-     Route::put('/update/{id}', 'update')->name('update');
-     Route::delete('/destroy/{id}', 'destroy')->name('destroy');
-
-     /* View */
-     Route::get('/', 'index')->name('index');
-     Route::get('/create', 'create')->name('create');
-     Route::get('/edit/{id}', 'edit')->name('edit');
-     Route::get('/show/{id}', 'show')->name('show');
-
-});
-
-//InstalmentPaymentRemain
-Route::group(['controller' => InstalmentPaymentRemainController::class, 'prefix' => 'instalment_payment_remain', 'as' => 'instalment_payment_remain.'], function () {
-    /* Data Table */
-    Route::get('/datatable', 'datatable')->name('datatable');
-
-     /* Store & Update */
-     Route::post('/store', 'store')->name('store');
-     Route::put('/update/{id}', 'update')->name('update');
-     Route::delete('/destroy/{id}', 'destroy')->name('destroy');
-
-     /* View */
-     Route::get('/', 'index')->name('index');
-     Route::get('/create', 'create')->name('create');
-     Route::get('/edit/{id}', 'edit')->name('edit');
-     Route::get('/show/{id}', 'show')->name('show');
-
-});
-
-//FullPayment
-Route::group(['controller' => FullPaymentController::class, 'prefix' => 'full_payment', 'as' => 'full_payment.'], function () {
-    /* Data Table */
-    Route::get('/datatable', 'datatable')->name('datatable');
-
-     /* Store & Update */
-     Route::post('/store', 'store')->name('store');
-     Route::put('/update/{id}', 'update')->name('update');
-     Route::delete('/destroy/{id}', 'destroy')->name('destroy');
-
-     /* View */
-     Route::get('/', 'index')->name('index');
-     Route::get('/create', 'create')->name('create');
-     Route::get('/edit/{id}', 'edit')->name('edit');
-     Route::get('/show/{id}', 'show')->name('show');
-
+    /* View */
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::get('/edit/{id}', 'edit')->name('edit');
+    Route::get('/show/{id}', 'show')->name('show');
 });

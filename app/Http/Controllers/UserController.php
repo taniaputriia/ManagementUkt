@@ -89,7 +89,7 @@ class UserController extends Controller
         $id = Crypt::decrypt($id);
         $user = User::find($id);
 
-        $roles = Role::where('name', '!=', 'Mahasiswa')->pluck('name');
+        $roles = Role::pluck('name');
         $userRole = $user->roles->pluck('name', 'name')->all();
 
         return view('users.edit', compact('user', 'roles', 'userRole'));
