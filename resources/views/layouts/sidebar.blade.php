@@ -81,28 +81,28 @@
                         </a>
                         <ul class="submenu ">
                             <li class="submenu-item ">
-                                <a href="">Pembayaran Lunas</a>
+                                <a href="{{ route('payment.index') }}">Pembayaran Lunas</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="">Pembayaran Cicilan</a>
+                                <a href="{{ route('payment.index') }}">Pembayaran Cicilan</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="extra-component-toastify.html">Pembayaran Belum Lunas</a>
+                                <a href="{{ route('payment.index') }}">Pembayaran Belum Lunas</a>
                             </li>
                         </ul>
                     </li>
 
                     <li class="sidebar-item  has-sub">
-                        <a href="#" class='sidebar-link'>
+                        <a href="" class='sidebar-link'>
                             <i class="bi bi-collection-fill"></i>
                             <span>Verifikasi Pembayaran</span>
                         </a>
                         <ul class="submenu ">
                             <li class="submenu-item ">
-                                <a href="">Pembayaran Cicilan</a>
+                                <a href="{{ route('payment.index') }}">Pembayaran Cicilan</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="extra-component-toastify.html">Pembayaran Belum Lunas</a>
+                                <a href="{{ route('payment.index') }}">Pembayaran Belum Lunas</a>
                             </li>
                         </ul>
                     </li>
@@ -168,7 +168,7 @@
                     </li>
 
                     <li class="sidebar-item  ">
-                        <a href="{{ route('student.index') }}" class='sidebar-link'>
+                        <a href="{{ route('payment.index') }}" class='sidebar-link'>
                             <i class="bi bi-stack"></i>
                             <span>Data Pembayaran</span>
                         </a>

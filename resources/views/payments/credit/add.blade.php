@@ -21,7 +21,7 @@
         @endif
 
         <div class="card-body">
-            <form action="{{ route('student.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('payment.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <h5>Akun Mahasiswa</h5>
                 <div class="form-group">
@@ -45,7 +45,7 @@
                         value="{{ old('confirm-password') }}" placeholder="Konfirmasi Password..." required>
                 </div>
                 <hr>
-                <h5>Data Mahasiswa</h5>
+                <h5>Data Pembayaran Cicilan</h5>
                 <div class="form-group">
                     <label for="nim">NIM </label>
                     <input type="text" name="nim" class="form-control" id="nim" value="{{ old('nim') }}"
@@ -125,7 +125,7 @@
                         value="{{ old('photo') }}" placeholder="masukkan foto" required>
                 </div>
                 <hr>
-                <a href="{{ route('student.index') }}" class="btn btn-warning">Kembali</a>
+                <a href="{{ route('payment.index') }}" class="btn btn-warning">Kembali</a>
                 <button type="submit" class="btn btn-primary mr-2">Simpan</button>
             </form>
         </div>

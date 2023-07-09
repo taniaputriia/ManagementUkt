@@ -22,7 +22,7 @@
             @endif
 
             <div class="card-body">
-                <form action="{{ route('student.update', Crypt::encrypt($data['id'])) }}" method="post"
+                <form action="{{ route('payment.update', Crypt::encrypt($data['id'])) }}" method="post"
                     enctype="multipart/form-data">
                     @csrf
                     @method('put')
@@ -115,7 +115,7 @@
 
                     </div>
                     <hr>
-                    <a href="{{ route('student.index') }}" class="btn btn-warning">Kembali</a>
+                    <a href="{{ route('payment.index') }}" class="btn btn-warning">Kembali</a>
                     <button type="submit" class="btn btn-primary mr-2">Submit</button>
                 </form>
             </div>

@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12 mb-4 mt-1">
                 <div class="d-flex flex-wrap justify-content-between align-items-center">
-                    <h4 class="font-weight-bold">Data Mahasiswa</h4>
+                    <h4 class="font-weight-bold">Data Cicilan</h4>
                 </div>
             </div>
             <div class="col-lg-12 col-md-12">
@@ -15,7 +15,7 @@
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">
                                 <div class="header-title">
-                                    <h4 class="card-title">Manajemen Data Mahasiswa</h4>
+                                    <h4 class="card-title">Manajemen Data Pembayaran Cicilan</h4>
                                 </div>
                                 <a class="text-end btn btn-sm btn-outline-info" href="{{ route('student.create') }}"><i
                                         class="fa fa-plus"></i> Tambah Data</a>
@@ -49,102 +49,7 @@
         </div>
     @endrole
 
-    {{-- Mahasiswa --}}
-    @role('Mahasiswa')
-        <div class="card">
-            <div class="card-header d-flex justify-content-between">
-                <div class="header-title">
-                    <h4 class="card-title">Data Mahasiswa</h4>
-                </div>
-            </div>
 
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card card-block p-card">
-                            <div class="profile-box">
-                                <div class="profile-card rounded">
-                                    <img src="{{ asset('assets/mahasiswa/' . $student['photo']) }}" alt="Mahasiswa"
-                                        class="avatar-100 rounded d-block mx-auto img-fluid mb-3" width="250px">
-                                    <h3 class="font-600 text-white text-center mb-4">Mahasiswa</h3>
-                                </div>
-                                <hr>
-                                <div class="pro-content rounded">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label>NIM</label>
-                                                <input type="text" class="form-control" value="{{ $student['nim'] }}"
-                                                    readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label>Nama</label>
-                                                <input type="text" class="form-control" value="{{ $student['name'] }}"
-                                                    readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label>Jenis Kelamin</label>
-                                                <input type="text" class="form-control" value="{{ $student['gender'] }}"
-                                                    readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label>No HP</label>
-                                                <input type="text" class="form-control"
-                                                    value="{{ $student['phone_number'] }}" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label>Alamat</label>
-                                                <input type="text" class="form-control" value="{{ $student['address'] }}"
-                                                    readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label>Program Studi</label>
-                                                <input type="text" class="form-control"
-                                                    value="{{ $student['study_program'] }}" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label>Semester</label>
-                                                <input type="text" class="form-control" value="{{ $student['semester'] }}"
-                                                    readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label>Tahun Akademik</label>
-                                                <input type="text" class="form-control"
-                                                    value="{{ $student['academic_year'] }}" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group mb-3">
-                                                <label>Uang Kuliah Tunggal</label>
-                                                <input type="text" class="form-control"
-                                                    value="Rp.{{ number_format($student['tuition_fee']) }}" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endrole
 @endsection
 
 @section('js_after')
@@ -157,7 +62,7 @@
 
         function getDatatable() {
             data_table = $("#data-table").DataTable({
-                ajax: "{{ route('student.datatable') }}",
+                ajax: "{{ route('payment.datatable') }}",
                 serverSide: true,
                 processing: true,
                 destroy: true,

@@ -4,12 +4,12 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <div class="header-title">
-                <h4 class="card-title">Data Mahasiswa</h4>
+                <h4 class="card-title">Data Pembayaran Cicilan</h4>
             </div>
         </div>
 
         <div class="card-body">
-            <h5>Akun Mahasiswa</h5>
+            {{-- <h5>Akun Mahasiswa</h5>
             <div class="row">
                 <div class="col-lg-6">
                     <label>Nama User</label>
@@ -20,7 +20,7 @@
                     <input type="text" class="form-control" value="{{ $data['user']['email'] }}" disabled>
                 </div>
             </div>
-            <hr>
+            <hr> --}}
             <h5>Data Mahasiswa</h5>
             <div class="row">
                 <div class="text-center">
@@ -69,7 +69,7 @@
                 </div>
             </div>
             <hr>
-            <a href="{{ route('student.index') }}" class="btn btn-warning">Kembali</a>
+            <a href="{{ route('payment.index') }}" class="btn btn-warning">Kembali</a>
         </div>
     </div>
 @endsection

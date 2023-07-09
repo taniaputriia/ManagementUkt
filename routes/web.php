@@ -45,9 +45,7 @@ Route::group(['controller' => StudentController::class, 'prefix' => 'student', '
 
 // Payment
 Route::group(['controller' => PaymentController::class, 'prefix' => 'payment', 'as' => 'payment.'], function () {
-    Route::get('/', 'index')->name('index');
-    Route::get('/create', 'create')->name('create');
-    Route::get('/edit/{id}', 'edit')->name('edit');
+    /* Data Table */
     Route::get('/datatable', 'datatable')->name('datatable');
 
      /* Store & Update */
@@ -81,6 +79,7 @@ Route::group(['controller' => UserController::class, 'prefix' => 'user', 'as' =>
 
 });
 
+//InstalmentPaymentDetail
 Route::group(['controller' => InstalmentPaymentDetailController::class, 'prefix' => 'instalment_payment_detail', 'as' => 'instalment_payment_detail.'], function () {
     /* Data Table */
     Route::get('/datatable', 'datatable')->name('datatable');
@@ -98,6 +97,7 @@ Route::group(['controller' => InstalmentPaymentDetailController::class, 'prefix'
 
 });
 
+//InstalmentPaymentRemain
 Route::group(['controller' => InstalmentPaymentRemainController::class, 'prefix' => 'instalment_payment_remain', 'as' => 'instalment_payment_remain.'], function () {
     /* Data Table */
     Route::get('/datatable', 'datatable')->name('datatable');
@@ -115,6 +115,7 @@ Route::group(['controller' => InstalmentPaymentRemainController::class, 'prefix'
 
 });
 
+//FullPayment
 Route::group(['controller' => FullPaymentController::class, 'prefix' => 'full_payment', 'as' => 'full_payment.'], function () {
     /* Data Table */
     Route::get('/datatable', 'datatable')->name('datatable');
