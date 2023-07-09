@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use Laraindo\RupiahFormat;
+use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
@@ -99,6 +100,7 @@ class StudentController extends Controller
             ]);
 
             $input = $request->all();
+            $input['password'] = Hash::make($input['password']);
 
             // Create User
             $user = User::create($input);
