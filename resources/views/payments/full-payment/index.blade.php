@@ -17,7 +17,7 @@
                                 <div class="header-title">
                                     <h4 class="card-title">Manajemen Data Pembayaran Lunas</h4>
                                 </div>
-                                {{-- <a class="text-end btn btn-sm btn-outline-info" href="{{ route('student.create') }}"><i
+                                {{-- <a class="text-end btn btn-sm btn-outline-info" href="{{ route('payment.create') }}"><i
                                         class="fa fa-plus"></i> Tambah Data</a> --}}
                             </div>
                             <div class="card-body">
@@ -30,11 +30,10 @@
                                                 <th>Aksi</th>
                                                 <th>Nim</th>
                                                 <th>Nama Lengkap</th>
-                                                <th>Program Studi</th>
-                                                <th>Jurusan</th>
-                                                <th>Semester</th>
-                                                <th>Tahun Akademik</th>
-                                                <th>Uang Kuliah Tunggal</th>
+                                                <th>Nomor Rekening</th>
+                                                <th>UKT</th>
+                                                <th>Total</th>
+                                               
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -74,21 +73,21 @@
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label>NIM</label>
-                                                <input type="text" class="form-control" value="{{ $student['nim'] }}"
+                                                <input type="text" class="form-control" value="{{ $payment['nim'] }}"
                                                     readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label>Nama</label>
-                                                <input type="text" class="form-control" value="{{ $student['name'] }}"
+                                                <input type="text" class="form-control" value="{{ $payment['name'] }}"
                                                     readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
-                                                <label>Jenis Kelamin</label>
-                                                <input type="text" class="form-control" value="{{ $student['gender'] }}"
+                                                <label>Nomor Rekening</label>
+                                                <input type="text" class="form-control" value="{{ $payment['gender'] }}"
                                                     readonly>
                                             </div>
                                         </div>
@@ -96,13 +95,13 @@
                                             <div class="form-group mb-3">
                                                 <label>No HP</label>
                                                 <input type="text" class="form-control"
-                                                    value="{{ $student['phone_number'] }}" readonly>
+                                                    value="{{ $payment['phone_number'] }}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label>Alamat</label>
-                                                <input type="text" class="form-control" value="{{ $student['address'] }}"
+                                                <input type="text" class="form-control" value="{{ $payment['address'] }}"
                                                     readonly>
                                             </div>
                                         </div>
@@ -110,13 +109,13 @@
                                             <div class="form-group mb-3">
                                                 <label>Program Studi</label>
                                                 <input type="text" class="form-control"
-                                                    value="{{ $student['study_program'] }}" readonly>
+                                                    value="{{ $payment['study_program'] }}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label>Semester</label>
-                                                <input type="text" class="form-control" value="{{ $student['semester'] }}"
+                                                <input type="text" class="form-control" value="{{ $payment['semester'] }}"
                                                     readonly>
                                             </div>
                                         </div>
@@ -124,14 +123,14 @@
                                             <div class="form-group mb-3">
                                                 <label>Tahun Akademik</label>
                                                 <input type="text" class="form-control"
-                                                    value="{{ $student['academic_year'] }}" readonly>
+                                                    value="{{ $payment['academic_year'] }}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label>Uang Kuliah Tunggal</label>
                                                 <input type="text" class="form-control"
-                                                    value="Rp.{{ number_format($student['tuition_fee']) }}" readonly>
+                                                    value="Rp.{{ number_format($payment['tuition_fee']) }}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -188,24 +187,44 @@
                         data: 'name'
                     },
                     {
-                        name: 'study_program',
-                        data: 'study_program'
-                    },
-                    {
-                        name: 'major',
-                        data: 'major'
-                    },
-                    {
-                        name: 'semester',
-                        data: 'semester'
-                    },
-                    {
-                        name: 'academic_year',
-                        data: 'academic_year'
+                        name: 'va_number'
+                        data: 'va_number'
                     },
                     {
                         name: 'tuition_fee',
                         data: 'tuition_fee'
+                    },
+                    {
+                        name: 'total_payment',
+                        data: 'total_payment'
+                    },
+                    {
+                        name: 'remain_payment',
+                        data: 'remain_payment'
+                    },
+                    {
+                        name: 'first_payment',
+                        data: 'first_payment'
+                    },
+                    {
+                        name: 'second_payment',
+                        data: 'second_payment'
+                    },
+                    {
+                        name: 'third_payment',
+                        data: 'third_payment'
+                    },
+                    {
+                        name: 'verified',
+                        data: 'verified'
+                    },
+                    {
+                        name: 'status',
+                        data: 'status'
+                    },
+                    {
+                        name: 'description',
+                        data: 'description'
                     },
                 ],
             });
