@@ -17,8 +17,8 @@
                                 <div class="header-title">
                                     <h4 class="card-title">Manajemen Data Mahasiswa yang belum bayar</h4>
                                 </div>
-                                <a class="text-end btn btn-sm btn-outline-info" href="{{ route('student.create') }}"><i
-                                        class="fa fa-plus"></i> Tambah Data</a>
+                                {{-- <a class="text-end btn btn-sm btn-outline-info" href="{{ route('student.create') }}"><i
+                                        class="fa fa-plus"></i> Tambah Data</a> --}}
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -30,8 +30,11 @@
                                                 <th>Aksi</th>
                                                 <th>Nim</th>
                                                 <th>Nama Lengkap</th>
-                                                <th>UKT</th>
-                                                <th>Status</th>
+                                                <th>Program Studi</th>
+                                                <th>Jurusan</th>
+                                                <th>Semester</th>
+                                                <th>Tahun Akademik</th>
+                                                <th>Uang Kuliah Tunggal</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -154,10 +157,13 @@
 
         function getDatatable() {
             data_table = $("#data-table").DataTable({
-                ajax: "{{ route('payment.datatable') }}",
+                ajax: "{{ route('student.datatable') }}",
                 serverSide: true,
                 processing: true,
                 destroy: true,
+                order: [
+                    [3, 'asc']
+                ],
                 columns: [{
                         data: null,
                         sortable: false,
@@ -172,6 +178,7 @@
                         name: 'action',
                         data: 'action'
                     },
+
                     {
                         name: 'nim',
                         data: 'nim'
@@ -181,12 +188,24 @@
                         data: 'name'
                     },
                     {
-                        name: 'tuition_fee',
-                        data: 'tuition_fee'
+                        name: 'study_program',
+                        data: 'study_program'
                     },
                     {
-                        name: 'status',
-                        data: 'status'
+                        name: 'major',
+                        data: 'major'
+                    },
+                    {
+                        name: 'semester',
+                        data: 'semester'
+                    },
+                    {
+                        name: 'academic_year',
+                        data: 'academic_year'
+                    },
+                    {
+                        name: 'tuition_fee',
+                        data: 'tuition_fee'
                     },
                 ],
             });

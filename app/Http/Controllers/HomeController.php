@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Student;
+use App\Models\Payment;
+use PHPUnit\Framework\MockObject\Builder\Stub;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $totalStudent = Student::all()->count();
+        $totalCreditPayment = Payment::where('status', Payment::STATUS_INSTALMENT)
+            ->get()
+            ->count();
+        $totalFullPayment = Payment::where('status', Payment::STATUS_PAID)
+            ->get()
+            ->count();
+        $totalNotPaidPayment = Payment::where('status', Payment::STATUS_NOT_PAID)
+            ->get()
+            ->count();
+
+        return view('home', compact('totalStudent', 'totalCreditPayment', 'totalFullPayment', 'totalNotPaidPayment'));
     }
 }

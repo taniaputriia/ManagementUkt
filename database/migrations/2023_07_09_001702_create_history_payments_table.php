@@ -14,6 +14,12 @@ return new class extends Migration
         Schema::create('history_payments', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('payment_id')->comment('foreign key payment');
+            $table->bigInteger('tuition_fee')->nullable()->comment('bayaran kuliah');
+            $table->bigInteger('total_payment')->nullable()->comment('total pembayaran');
+            $table->bigInteger('remain_payment')->nullable()->comment('sisa pembayaran');
+            $table->bigInteger('first_payment')->nullable()->comment('pembayaran 1');
+            $table->bigInteger('second_payment')->nullable()->comment('pembayaran 2');
+            $table->bigInteger('third_payment')->nullable()->comment('pembayaran 3');
             $table->text('description')->nullable()->comment('keterangan');
             $table->timestamps();
         });

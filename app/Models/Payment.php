@@ -13,4 +13,9 @@ class Payment extends Model
     const STATUS_PAID = "Lunas";
     const STATUS_NOT_PAID = "Belum Lunas";
     const STATUS_INSTALMENT = "Cicilan";
+
+    public function student()
+    {
+        return $this->belongsTo(Student::class, 'student_id', 'id');
+    }
 }

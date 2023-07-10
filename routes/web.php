@@ -45,10 +45,13 @@ Route::group(['controller' => StudentController::class, 'prefix' => 'student', '
 
 // Payment
 Route::group(['controller' => PaymentController::class, 'prefix' => 'payment', 'as' => 'payment.'], function () {
+    /* --------------------------------------------- */
+    /* Payment Not Paid */
+    /* --------------------------------------------- */
+
     /* Data Table */
     Route::get('/datatable', 'datatable')->name('datatable');
-    Route::get('/datatable_full_payment', 'datatable_full_payment')->name('datatable_full_payment');
-    Route::get('/datatable_credit', 'datatable_credit')->name('datatable_credit');
+    Route::get('/datatable_student', 'datatable_student')->name('datatable_student');
 
     /* Store & Update */
     Route::post('/store', 'store')->name('store');
@@ -57,36 +60,58 @@ Route::group(['controller' => PaymentController::class, 'prefix' => 'payment', '
 
     /* View */
     Route::get('/', 'index')->name('index');
-    Route::get('/full_payment', 'index_full_payment')->name('index_full_payment');
-    Route::get('/credit', 'index_credit')->name('index_credit');
-    Route::get('/verification_full_payment', 'index_verification_full_payment')->name('index_verification_full_payment');
-    Route::get('/verification_credit', 'index_verification_credit')->name('index_verification_credit');
-    Route::get('/report_full_payment', 'index_report_full_payment')->name('index_report_full_payment');
-    Route::get('/report_credit', 'index_report_credit')->name('index_report_credit');
-
     Route::get('/create', 'create')->name('create');
-    Route::get('/full_payment', 'create_full_payment')->name('create_full_payment');
-    Route::get('/credit', 'create_credit')->name('create_credit');
-    Route::get('/verification_full_payment', 'create_verification_full_payment')->name('create_verification_full_payment');
-    Route::get('/verification_credit', 'create_verification_credit')->name('create_verification_credit');
-    Route::get('/report_full_payment', 'create_report_full_payment')->name('create_report_full_payment');
-    Route::get('/report_credit', 'create_report_credit')->name('create_report_credit');
-
     Route::get('/edit/{id}', 'edit')->name('edit');
-    Route::get('/full_payment', 'edit_full_payment')->name('edit_full_payment');
-    Route::get('/credit', 'edit_credit')->name('edit_credit');
-    Route::get('/verification_full_payment', 'edit_verification_full_payment')->name('edit_verification_full_payment');
-    Route::get('/verification_credit', 'edit_verification_credit')->name('edit_verification_credit');
-    Route::get('/report_full_payment', 'edit_report_full_payment')->name('edit_report_full_payment');
-    Route::get('/report_credit', 'edit_report_credit')->name('edit_report_credit');
-
     Route::get('/show/{id}', 'show')->name('show');
-    Route::get('/full_payment', 'show_full_payment')->name('show_full_payment');
-    Route::get('/credit', 'show_credit')->name('show_credit');
-    Route::get('/verification_full_payment', 'show_verification_full_payment')->name('show_verification_full_payment');
-    Route::get('/verification_credit', 'show_verification_credit')->name('show_verification_credit');
-    Route::get('/report_full_payment', 'show_report_full_payment')->name('show_report_full_payment');
-    Route::get('/report_credit', 'show_report_credit')->name('show_report_credit');
+
+
+    /* --------------------------------------------- */
+    /* Full Payment */
+    /* --------------------------------------------- */
+
+    /* Data Table */
+    Route::get('/datatable_full_payment', 'datatable_full_payment')->name('datatable_full_payment');
+
+    /* Store & Update */
+    Route::put('/verification_full_payment', 'verification_full_payment')->name('verification_full_payment');
+
+    /* View */
+    Route::get('/full_payment', 'index_full_payment')->name('index_full_payment');
+    Route::get('/create/full_payment', 'create_full_payment')->name('create_full_payment');
+    Route::get('/edit/full_payment/{id}', 'edit_full_payment')->name('edit_full_payment');
+    Route::get('/show/full_payment/{id}', 'show_full_payment')->name('show_full_payment');
+    Route::get('/create/verification_full_payment/{id}', 'create_verification_full_payment')->name('create_verification_full_payment');
+    Route::get('/report_full_payment', 'report_full_payment')->name('report_full_payment');
+
+    /* --------------------------------------------- */
+    /* Credit Payment */
+    /* --------------------------------------------- */
+
+    /* Data Table */
+    Route::get('/datatable_credit', 'datatable_credit')->name('datatable_credit');
+
+    /* Store & Update */
+
+    Route::put('/verification_credit', 'verification_credit')->name('verification_credit');
+    Route::get('/create/verification_credit', 'create_verification_credit')->name('create_verification_credit');
+
+    /* View */
+    Route::get('/credit', 'index_credit')->name('index_credit');
+    Route::get('/create/credit', 'create_credit')->name('create_credit');
+    Route::get('/edit/credit/{id}', 'edit_credit')->name('edit_credit');
+    Route::get('/show/credit/{id}', 'show_credit')->name('show_credit');
+    Route::get('/report_credit', 'report_credit')->name('report_credit');
+
+
+    /* --------------------------------------------- */
+    /* History Payment */
+    /* --------------------------------------------- */
+
+    /* Data Table */
+    Route::get('/datatable_history', 'datatable_history')->name('datatable_history');
+
+    /* View */
+    Route::get('/history_payment', 'index_history_payment')->name('index_history_payment');
 });
 
 // User

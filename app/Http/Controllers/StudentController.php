@@ -130,7 +130,7 @@ class StudentController extends Controller
 
             HistoryPayment::create([
                 'payment_id' => $payment->id,
-                'description' => "Pembayaran Belum Lunas"
+                'description' => HistoryPayment::NOTE_STATUS_NOT_PAID
             ]);
 
             // Save Data
