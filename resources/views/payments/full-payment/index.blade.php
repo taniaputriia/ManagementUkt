@@ -33,7 +33,7 @@
                                                 <th>Nomor Rekening</th>
                                                 <th>UKT</th>
                                                 <th>Total</th>
-                                               
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -73,21 +73,21 @@
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label>NIM</label>
-                                                <input type="text" class="form-control" value="{{ $payment['nim'] }}"
+                                                <input type="text" class="form-control" value="{{ $student['nim'] }}"
                                                     readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label>Nama</label>
-                                                <input type="text" class="form-control" value="{{ $payment['name'] }}"
+                                                <input type="text" class="form-control" value="{{ $student['name'] }}"
                                                     readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label>Nomor Rekening</label>
-                                                <input type="text" class="form-control" value="{{ $payment['gender'] }}"
+                                                <input type="text" class="form-control" value="{{ $student['gender'] }}"
                                                     readonly>
                                             </div>
                                         </div>
@@ -95,13 +95,13 @@
                                             <div class="form-group mb-3">
                                                 <label>No HP</label>
                                                 <input type="text" class="form-control"
-                                                    value="{{ $payment['phone_number'] }}" readonly>
+                                                    value="{{ $student['phone_number'] }}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label>Alamat</label>
-                                                <input type="text" class="form-control" value="{{ $payment['address'] }}"
+                                                <input type="text" class="form-control" value="{{ $student['address'] }}"
                                                     readonly>
                                             </div>
                                         </div>
@@ -109,13 +109,13 @@
                                             <div class="form-group mb-3">
                                                 <label>Program Studi</label>
                                                 <input type="text" class="form-control"
-                                                    value="{{ $payment['study_program'] }}" readonly>
+                                                    value="{{ $student['study_program'] }}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label>Semester</label>
-                                                <input type="text" class="form-control" value="{{ $payment['semester'] }}"
+                                                <input type="text" class="form-control" value="{{ $student['semester'] }}"
                                                     readonly>
                                             </div>
                                         </div>
@@ -123,14 +123,14 @@
                                             <div class="form-group mb-3">
                                                 <label>Tahun Akademik</label>
                                                 <input type="text" class="form-control"
-                                                    value="{{ $payment['academic_year'] }}" readonly>
+                                                    value="{{ $student['academic_year'] }}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group mb-3">
                                                 <label>Uang Kuliah Tunggal</label>
                                                 <input type="text" class="form-control"
-                                                    value="Rp.{{ number_format($payment['tuition_fee']) }}" readonly>
+                                                    value="Rp.{{ number_format($student['tuition_fee']) }}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">

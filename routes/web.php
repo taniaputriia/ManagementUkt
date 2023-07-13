@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\StudentController;
-use App\Http\Controllers\InstalmentPaymentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PaymentController;
 
@@ -57,13 +56,13 @@ Route::group(['controller' => PaymentController::class, 'prefix' => 'payment', '
     Route::post('/store', 'store')->name('store');
     Route::put('/update/{id}', 'update')->name('update');
     Route::delete('/destroy/{id}', 'destroy')->name('destroy');
-
+        Route::put('/accept/{id}', 'accept')->name('accept');
+        Route::put('/reject/{id}', 'reject')->name('reject');
     /* View */
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
     Route::get('/edit/{id}', 'edit')->name('edit');
     Route::get('/show/{id}', 'show')->name('show');
-
 
     /* --------------------------------------------- */
     /* Full Payment */

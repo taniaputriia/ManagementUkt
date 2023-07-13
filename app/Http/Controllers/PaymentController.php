@@ -25,9 +25,9 @@ class PaymentController extends Controller
         confirmDelete($title, $text);
 
         $user_id = Auth::user()->id;
-        $payment = Payment::where('user_id', $user_id)->first();
+        $student = Student::where('user_id', $user_id)->first();
 
-        return view('payments.full-payment.index', compact('payment'));
+        return view('payments.not-paid.index', compact('student'));
     }
 
     public function datatable()
@@ -94,21 +94,22 @@ class PaymentController extends Controller
                     return $data->student->name;
                 }
             })
-            ->addColumn('action', function ($data) {
-                $url_show = route('payment.show', Crypt::encrypt($data->id));
 
-                $btn = "<div class='btn-group'>";
-                $btn .= "<a href='$url_show' class = 'btn btn-outline-primary btn-sm text-nowrap'><i class='fas fa-info mr-2'></i> Detail</a>";
+            // ->addColumn('action', function ($data) {
+            //     $url_show = route('payment.show', Crypt::encrypt($data->id));
 
-                $btn .= "</div>";
-                return $btn;
-            })
+            //     $btn = "<div class='btn-group'>";
+            //     // $btn .= "<a href='$url_show' class = 'btn btn-outline-primary btn-sm text-nowrap'><i class='fas fa-info mr-2'></i> Detail</a>";
+
+            //     // $btn .= "</div>";
+            //     return $btn;
+            // })
             ->toJson();
     }
 
     public function create()
     {
-        return view('payments.full-payment.add');
+        return view('payments.not-paid.add');
     }
 
     public function edit($id)
@@ -116,7 +117,7 @@ class PaymentController extends Controller
         $id = Crypt::decrypt($id);
         $data = Payment::find($id);
 
-        return view('payments.full-payment.edit', compact('data'));
+        return view('payments.not-paid.edit', compact('data'));
     }
 
     public function show($id)
@@ -124,7 +125,7 @@ class PaymentController extends Controller
         $id = Crypt::decrypt($id);
         $data = Payment::find($id);
 
-        return view('payments.full-payment.show', compact('data'));
+        return view('payments.not-paid.show', compact('data'));
     }
 
     public function store(Request $request)
@@ -289,8 +290,8 @@ class PaymentController extends Controller
         confirmDelete($title, $text);
 
         $user_id = Auth::user()->id;
-        $payment = Payment::where('user_id', $user_id)->first();
-        return view('payments.full-payment.index', compact('payment'));
+        $student = Student::where('user_id', $user_id)->first();
+        return view('payments.full-payment.index', compact('student'));
     }
 
     public function datatable_full_payment()
@@ -307,7 +308,7 @@ class PaymentController extends Controller
             })
             ->addColumn('action', function ($data) {
                 $url_show = route('payment.full_payment.show', Crypt::encrypt($data->id));
-                $url_edit = route('student.full_payment.edit', Crypt::encrypt($data->id));
+                $url_edit = route('payment.full_payment.edit', Crypt::encrypt($data->id));
 
 
                 $btn = "<div class='btn-group'>";
