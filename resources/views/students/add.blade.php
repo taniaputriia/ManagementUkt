@@ -105,8 +105,15 @@
                 </div>
                 <div class="form-group">
                     <label for="semester">Semester</label>
-                    <input type="text" name="semester" class="form-control" id="semester"
-                        value="{{ old('semester') }}" placeholder="masukkan semester" required>
+                    <select class="form-select select_semester" name="semester" id="study_program" required>
+                        <option value="" selected>Pilih Salah Satu</option>
+                        @foreach (App\Models\Student::STUDY_PROGRAM_CHOICE as $key => $value)
+                            <option value="{{ $key }}">{{ $value }}</option>
+                        @endforeach
+                        @error('semester')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </select>
                 </div>
 
                 <div class="form-group">

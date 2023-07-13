@@ -96,6 +96,16 @@ class Student extends Model
         self::MAJOR_ENGLISH => self::MAJOR_ENGLISH,
     ];
 
+    const SEMESTER1 = "1";
+    const SEMESTER2 = "2";
+    const SEMESTER3 = "3";
+    const SEMESTER4 = "4";
+    const SEMESTER5 = "5";
+    const SEMESTER6 = "6";
+    const SEMESTER7 = "7";
+    const SEMESTER8 = "8";
+    
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
