@@ -12,11 +12,10 @@ class Payment extends Model
 
     const STATUS_PAID = "Lunas";
     const STATUS_NOT_PAID = "Belum Lunas";
-    const STATUS_INSTALMENT = "Cicilan";
-
-    const STATUS = "Lunas";
-    const STATUS_CREDIT = "Cicilan";
-
+    const STATUS_FIRST_CREDIT = "Cicilan Pertama";
+    const STATUS_SECOND_CREDIT = "Cicilan Kedua";
+    const STATUS_THIRD_CREDIT = "Cicilan Ketiga";
+    const STATUS_NOT_CONFIRMED = "Menunggu Konfirmasi";
 
     public function student()
     {

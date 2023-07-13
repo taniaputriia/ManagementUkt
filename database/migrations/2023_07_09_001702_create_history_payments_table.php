@@ -21,6 +21,7 @@ return new class extends Migration
             $table->bigInteger('second_payment')->nullable()->comment('pembayaran 2');
             $table->bigInteger('third_payment')->nullable()->comment('pembayaran 3');
             $table->text('description')->nullable()->comment('keterangan');
+            $table->string('file')->nullable()->comment('file');
             $table->timestamps();
         });
     }
