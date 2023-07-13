@@ -124,12 +124,14 @@ class StudentController extends Controller
 
             $payment = Payment::create([
                 'student_id' => $student->id,
+                'semester' => $student->semester,
                 'tuition_fee' => $student->tuition_fee,
                 'status' => Payment::STATUS_NOT_PAID
             ]);
 
             HistoryPayment::create([
                 'payment_id' => $payment->id,
+                'tuition_fee' => $student->tuition_fee,
                 'description' => HistoryPayment::NOTE_STATUS_NOT_PAID
             ]);
 

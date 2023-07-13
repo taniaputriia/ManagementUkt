@@ -53,15 +53,11 @@ Route::group(['controller' => PaymentController::class, 'prefix' => 'payment', '
     Route::get('/datatable_student', 'datatable_student')->name('datatable_student');
 
     /* Store & Update */
-    Route::post('/store', 'store')->name('store');
-    Route::put('/update/{id}', 'update')->name('update');
-    Route::delete('/destroy/{id}', 'destroy')->name('destroy');
-        Route::put('/accept/{id}', 'accept')->name('accept');
-        Route::put('/reject/{id}', 'reject')->name('reject');
+    Route::put('/update_payment', 'update_payment')->name('update_payment');
+
     /* View */
     Route::get('/', 'index')->name('index');
-    Route::get('/create', 'create')->name('create');
-    Route::get('/edit/{id}', 'edit')->name('edit');
+    Route::get('/add_payment/{id}', 'add_payment')->name('add_payment');
     Route::get('/show/{id}', 'show')->name('show');
 
     /* --------------------------------------------- */
@@ -74,10 +70,7 @@ Route::group(['controller' => PaymentController::class, 'prefix' => 'payment', '
     Route::get('/datatable_report_full_payment', 'datatable_report_full_payment')->name('datatable_report_full_payment');
 
     /* Store & Update */
-    Route::post('/store/full_payment', 'store_full_payment')->name('store_full_payment');
-    Route::put('/update/full_payment{id}', 'update_full_payment')->name('update_full_payment');
-    Route::delete('/destroy/full_payment{id}', 'destroy_full_payment')->name('destroy_full_payment');
-    Route::put('/verification_full_payment', 'verification_full_payment')->name('verification_full_payment');
+    Route::put('/verification_full_payment/{id}', 'verification_full_payment')->name('verification_full_payment');
 
     /* View */
     Route::get('/full_payment', 'index_full_payment')->name('index_full_payment');
