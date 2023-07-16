@@ -33,7 +33,6 @@
                                                 <th>Nomor Rekening</th>
                                                 <th>UKT</th>
                                                 <th>Total</th>
-
                                             </tr>
                                         </thead>
                                         <tbody>

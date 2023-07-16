@@ -53,7 +53,7 @@ Route::group(['controller' => PaymentController::class, 'prefix' => 'payment', '
     Route::get('/datatable_student', 'datatable_student')->name('datatable_student');
 
     /* Store & Update */
-    Route::put('/update_payment', 'update_payment')->name('update_payment');
+    Route::put('/update_payment/{id}', 'update_payment')->name('update_payment');
 
     /* View */
     Route::get('/', 'index')->name('index');
@@ -74,7 +74,7 @@ Route::group(['controller' => PaymentController::class, 'prefix' => 'payment', '
 
     /* View */
     Route::get('/full_payment', 'index_full_payment')->name('index_full_payment');
-    Route::get('/create/full_payment', 'create_full_payment')->name('create_full_payment');
+    Route::get('/add_payment/full_payment/{id}', 'add_payment_full_payment')->name('add_payment_full_payment');
     Route::get('/edit/full_payment/{id}', 'edit_full_payment')->name('edit_full_payment');
     Route::get('/show/full_payment/{id}', 'show_full_payment')->name('show_full_payment');
     Route::get('/create/verification_full_payment/{id}', 'create_verification_full_payment')->name('create_verification_full_payment');
@@ -93,11 +93,11 @@ Route::group(['controller' => PaymentController::class, 'prefix' => 'payment', '
     Route::post('/store/credit', 'store/credit')->name('store/credit');
     Route::put('/update/credit{id}', 'update/credit')->name('update/credit');
     Route::delete('/destroy/credit{id}', 'destroy/credit')->name('destroy/credit');
-    Route::put('/verification_credit', 'verification_credit')->name('verification_credit');
+    Route::put('/verification_credit/{id}', 'verification_credit')->name('verification_credit');
 
     /* View */
     Route::get('/credit', 'index_credit')->name('index_credit');
-    Route::get('/create/credit', 'create_credit')->name('create_credit');
+    Route::get('/add_payment/credit/{id}', 'add_payment_credit')->name('add_payment_credit');
     Route::get('/edit/credit/{id}', 'edit_credit')->name('edit_credit');
     Route::get('/show/credit/{id}', 'show_credit')->name('show_credit');
     Route::get('/create/verification_credit{id}', 'create_verification_credit')->name('create_verification_credit');

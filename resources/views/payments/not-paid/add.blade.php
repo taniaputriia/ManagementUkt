@@ -40,7 +40,7 @@
                         <div class="form-group">
                             <label for="tuition_fee">Semester</label>
                             <input type="text" class="form-control number-separator" id="tuition_fee"
-                                value="{{ $data['semester'] }}" disabled>
+                                value="{{ $data['student']['semester'] }}" disabled>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -60,7 +60,6 @@
                 </div>
                 <div class="row">
 
-
                     <div class="col-md-12">
                         <label>Pilih Jenis Pembayaran : </label>
                         <div class="form-check form-check-inline">
@@ -78,7 +77,6 @@
                 <hr>
                 <div class="row">
                     <div class="detail_payment">
-
                     </div>
                 </div>
 
@@ -114,7 +112,6 @@
                              required>
                         </div>
                     </div>
-
                             </div>
 
                 `)
@@ -127,21 +124,21 @@
                         <div class="col-md-4">
                         <div class="form-group">
                             <label for="first_payment">Cicilan Pertama</label>
-                            <input type="text" name="first_payment" class="form-control number-separator"
+                            <input type="text" name="first_payment" class="form-control"
                             placeholder="masukkan cicilan pertama" required>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="second_payment">Cicilan Kedua</label>
-                            <input type="text" name="second_payment" class="form-control number-separator"
+                            <input type="text" name="second_payment" class="form-control"
                             placeholder="masukkan cicilan kedua" required>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="third_payment">Cicilan Ketiga</label>
-                            <input type="text" name="third_payment" class="form-control number-separator"
+                            <input type="text" name="third_payment" class="form-control"
                             placeholder="masukkan cicilan ketiga" required>
                         </div>
                     </div>

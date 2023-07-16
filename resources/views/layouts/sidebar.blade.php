@@ -99,15 +99,15 @@
                         </a>
                         <ul class="submenu ">
                             <li class="submenu-item ">
-                                <a href="{{ route('payment.index') }}">Pembayaran Lunas</a>
+                                <a href="{{ route('payment.index_full_payment') }}">Pembayaran Lunas</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="{{ route('payment.index') }}">Pembayaran Cicilan</a>
+                                <a href="{{ route('payment.index_credit') }}">Pembayaran Cicilan</a>
                             </li>
                         </ul>
                     </li>
 
-                    <li class="sidebar-item  has-sub">
+                    <li class="sidebar-item has-sub">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-collection-fill"></i>
                             <span>Laporan Pembayaran</span>
@@ -125,7 +125,12 @@
                         </ul>
                     </li>
 
-
+                    <li class="sidebar-item  ">
+                        <a href="{{ route('payment.index_history_payment') }}" class='sidebar-link'>
+                            <i class="bi bi-stack"></i>
+                            <span>Riwayat Pembayaran</span>
+                        </a>
+                    </li>
 
                     <li class="sidebar-item  ">
                         <a href="{{ route('logout') }}"
@@ -167,11 +172,22 @@
                         </a>
                     </li>
 
-                    <li class="sidebar-item  ">
-                        <a href="{{ route('payment.index') }}" class='sidebar-link'>
-                            <i class="bi bi-stack"></i>
+                    <li class="sidebar-item  has-sub">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-collection-fill"></i>
                             <span>Data Pembayaran</span>
                         </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item ">
+                                <a href="{{ route('payment.index_full_payment') }}">Pembayaran Lunas</a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="{{ route('payment.index_credit') }}">Pembayaran Cicilan</a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="{{ route('payment.index') }}">Pembayaran Belum Lunas</a>
+                            </li>
+                        </ul>
                     </li>
 
                     <li class="sidebar-item  ">

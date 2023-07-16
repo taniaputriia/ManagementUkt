@@ -89,8 +89,16 @@
                     </div>
                     <div class="form-group">
                         <label for="semester">Semester</label>
-                        <input type="text" name="semester" class="form-control" id="semester"
-                            value="{{ old('semester', $data['semester']) }}" placeholder="masukkan semester" required>
+                        <select class="form-select select_semester" name="semester" id="semester" required>
+                            <option value="" selected>Pilih Salah Satu</option>
+                            @foreach (App\Models\Student::SEMESTER_CHOICE as $key => $value)
+                                <option value="{{ $key }}"
+                                    {{ $key == old('semester', $data['semester']) ? 'selected' : '' }}>{{ $value }}</option>
+                            @endforeach
+                            @error('semester')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </select>
                     </div>
 
                     <div class="form-group">
@@ -132,6 +140,7 @@
             // Menginisialisasi Select2
             $(".select_study_program").select2();
             $(".select_major").select2();
+            $(".select_semester").select2();
         });
     </script>
 @endsection

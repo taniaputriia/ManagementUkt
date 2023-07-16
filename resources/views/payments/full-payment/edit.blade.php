@@ -27,7 +27,7 @@
                     @csrf
                     @method('put')
                     <div class="form-group">
-                        <label for="nim">NIM </label>
+                        <label for="nim">NIM</label>
                         <input type="text" name="nim" class="form-control" id="nim"
                             value="{{ old('nim', $data['nim']) }}" placeholder="masukkan nim anda" required>
                     </div>
@@ -38,14 +38,14 @@
                             value="{{ old('name', $data['name']) }}" placeholder="masukkan nama anda" required>
                     </div>
                     <div class="form-group">
-                        <label for="gender">Jenis Kelamin</label>
-                        <select class="form-select" name="gender" id="gender" required>
+                        <label for="status">Jenis Pembayaran</label>
+                        <select class="form-select" name="status" id="status" required>
                             <option value="" selected>Pilih Salah Satu</option>
-                            @foreach (App\Models\Student::GENDER_CHOICE as $key => $value)
+                            @foreach (App\Models\Student::STATUS_CHOICE as $key => $value)
                                 <option value="{{ $key }}"
-                                    {{ $key == old('gender', $data['gender']) ? 'selected' : '' }}>{{ $value }}</option>
+                                    {{ $key == old('status', $data['status']) ? 'selected' : '' }}>{{ $value }}</option>
                             @endforeach
-                            @error('gender')
+                            @error('status')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </select>
@@ -54,50 +54,6 @@
                         <label for="phone_number">No Hp </label>
                         <input type="text" name="phone_number" class="form-control" id="phone_number"
                             value="{{ old('phone_number', $data['phone_number']) }}" placeholder="masukkan nomor hp" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="address">Alamat</label>
-                        <textarea name="address" name="address" class="form-control" id="address" required>{{ old('address', $data['address']) }}</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="study_program">Program Studi</label>
-                        <select class="form-select select_study_program" name="study_program" id="study_program" required>
-                            <option value="" selected>Pilih Salah Satu</option>
-                            @foreach (App\Models\Student::STUDY_PROGRAM_CHOICE as $key => $value)
-                                <option value="{{ $key }}"
-                                    {{ $key == old('study_program', $data['study_program']) ? 'selected' : '' }}>
-                                    {{ $value }}</option>
-                            @endforeach
-                            @error('study_program')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="major">Jurusan</label>
-                        <select class="form-select select_major" name="major" id="major" required>
-                            <option value="" selected>Pilih Salah Satu</option>
-                            @foreach (App\Models\Student::MAJOR_CHOICE as $key => $value)
-                                <option value="{{ $key }}"
-                                    {{ $key == old('major', $data['major']) ? 'selected' : '' }}>{{ $value }}</option>
-                            @endforeach
-                            @error('major')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="semester">Semester</label>
-                        <input type="text" name="semester" class="form-control" id="semester"
-                            value="{{ old('semester', $data['semester']) }}" placeholder="masukkan semester" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="academic_year">Tahun Akademik</label>
-                        <input type="text" name="academic_year" class="form-control" id="academic_year"
-                            value="{{ old('academic_year', $data['academic_year']) }}"
-                            placeholder="masukkan tahun akademik anda" required>
                     </div>
                     <div class="form-group">
                         <label for="tuition_fee">Uang Kuliah Tunggal</label>
@@ -132,6 +88,7 @@
             // Menginisialisasi Select2
             $(".select_study_program").select2();
             $(".select_major").select2();
+            $(".select_status").select2();
         });
     </script>
 @endsection

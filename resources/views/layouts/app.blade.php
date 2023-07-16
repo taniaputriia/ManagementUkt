@@ -60,7 +60,7 @@
                         <p>2023 &copy; Politeknik Negeri Sriwijaya</p>
                     </div>
                     <div class="float-end">
-                        <p>Crafted with <span class="text-danger"></span> by <a href="https://saugi.me">IT polsri</a>
+                        <p>Crafted <span class="text-danger"></span> by <a href="https://saugi.me">IT polsri</a>
                         </p>
                     </div>
                 </div>

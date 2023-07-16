@@ -105,6 +105,16 @@ class Student extends Model
     const SEMESTER7 = "7";
     const SEMESTER8 = "8";
     
+    const SEMESTER_CHOICE = [
+        self::SEMESTER1 => self::SEMESTER1,
+        self::SEMESTER2 => self::SEMESTER2,
+        self::SEMESTER3 => self::SEMESTER3,
+        self::SEMESTER4 => self::SEMESTER4,
+        self::SEMESTER5 => self::SEMESTER5,
+        self::SEMESTER6 => self::SEMESTER6,
+        self::SEMESTER7 => self::SEMESTER7,
+        self::SEMESTER8 => self::SEMESTER8,
+    ];
 
     public function user()
     {

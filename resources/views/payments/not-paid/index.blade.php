@@ -32,6 +32,7 @@
                                                 <th>Nama Lengkap</th>
                                                 <th>UKT</th>
                                                 <th>Status</th>
+                                                <th>Diinput pada</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -76,6 +77,7 @@
                                                 <th>Semester</th>
                                                 <th>UKT</th>
                                                 <th>Status</th>
+                                                <th>Diinput pada</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -115,8 +117,6 @@
                             }
                         },
                         {
-                            data: null,
-                            sortable: false,
                             name: 'action',
                             data: 'action'
                         },
@@ -135,6 +135,10 @@
                         {
                             name: 'status',
                             data: 'status'
+                        },
+                        {
+                            name: 'created_at',
+                            data: 'created_at'
                         },
                     ],
                 });
@@ -165,8 +169,6 @@
                             }
                         },
                         {
-                            data: null,
-                            sortable: false,
                             name: 'action',
                             data: 'action'
                         },
@@ -189,6 +191,10 @@
                         {
                             name: 'status',
                             data: 'status'
+                        },
+                        {
+                            name: 'created_at',
+                            data: 'created_at'
                         },
                     ],
                 });

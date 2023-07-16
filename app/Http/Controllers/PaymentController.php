@@ -30,8 +30,9 @@ class PaymentController extends Controller
 
     public function datatable()
     {
-        $model = Payment::where('status', Payment::STATUS_NOT_PAID)
-            ->orderBy('id', 'desc');
+        $model = Payment::where('status', '!=', Payment::STATUS_NOT_CONFIRMED)
+            ->orderBy('id', 'desc')
+            ->where('status', '!=', Payment::STATUS_PAID);
 
         return DataTables::of($model)
             ->editColumn('created_at', function ($data) {
@@ -165,21 +166,25 @@ class PaymentController extends Controller
                 unset($input['file']);
             }
 
-            $input['first_payment'] = str_replace(',', '', $input['first_payment']);
-            $input['second_payment'] = str_replace(',', '', $input['second_payment']);
-            $input['third_payment'] = str_replace(',', '', $input['third_payment']);
-
             if (!empty($input['first_payment'])) {
+
                 $totalTuitionFee =  $input['first_payment'] +  $input['second_payment'] + $input['third_payment'];
                 if ($totalTuitionFee == $payment['tuition_fee']) {
-                    $input['status'] == Payment::STATUS_FIRST_CREDIT;
+                    $input['status'] == Payment::STATUS_NOT_CONFIRMED;
                     $payment->update($input);
 
                     // Create History
                     HistoryPayment::create([
                         'payment_id' => $payment->id,
                         'tuition_fee' => $payment->tuition_fee,
-                        'total_payment' => $payment->total_payment
+                        'total_payment' => $payment->total_payment,
+                        'remain_payment' => $payment->remain_payment,
+                        'first_payment' => $payment->first_payment,
+                        'second_payment' => $payment->second_payment,
+                        'third_payment' => $payment->third_payment,
+                        'description' => $payment->description,
+                        'file' => $payment->file,
+
                     ]);
                 } else {
                     DB::rollBack();
@@ -189,11 +194,9 @@ class PaymentController extends Controller
                     return redirect()->back()->withInput();
                 }
             } else {
-                $input['status'] == Payment::STATUS_PAID;
+                $input['status'] == Payment::STATUS_NOT_CONFIRMED;
                 $payment->update($input);
             }
-
-
 
             // Save Data
             DB::commit();
@@ -307,12 +310,8 @@ class PaymentController extends Controller
             })
             ->addColumn('action', function ($data) {
                 $url_show = route('payment.full_payment.show', Crypt::encrypt($data->id));
-                $url_edit = route('payment.full_payment.edit', Crypt::encrypt($data->id));
-
-
                 $btn = "<div class='btn-group'>";
                 $btn .= "<a href='$url_show' class = 'btn btn-outline-primary btn-sm text-nowrap'><i class='fas fa-info mr-2'></i> Lihat</a>";
-                $btn .= "<a href='$url_edit' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-edit mr-2'></i> Edit</a>";
 
                 $btn .= "</div>";
                 return $btn;
@@ -388,7 +387,7 @@ class PaymentController extends Controller
             ->toJson();
     }
 
-    public function create_full_payment()
+    public function add_payment_full_payment()
     {
         return view('payments.full-payment.add');
     }
@@ -409,11 +408,47 @@ class PaymentController extends Controller
         return view('payments.full-payment.show', compact('data'));
     }
 
-    public function create_verification_full_payment($id)
+    /* Baru ditambahkan */
+    public function datatable_verification_full_payment()
     {
-        return view('payments.full-payment.add');
+        $model = Payment::where('status', Payment::STATUS_NOT_CONFIRMED);
+
+        return DataTables::of($model)
+        ->editColumn('created_at', function ($data) {
+            $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->translatedFormat('d F Y - H:i');
+            return $formatedDate;
+        })
+        ->editColumn('tuition_fee', function ($data) {
+            $formatCurrency = RupiahFormat::currency($data['tuition_fee']);
+            return $formatCurrency;
+        })
+        ->addColumn('nim', function ($data) {
+            if (!empty($data->student->nim)) {
+                return $data->student->nim;
+            }
+        })
+        ->addColumn('name', function ($data) {
+            if (!empty($data->student->name)) {
+                return $data->student->name;
+            }
+        })
+        ->addColumn('action', function ($data) {
+            $url_verification = route('payment.create_verification_full_payment', Crypt::encrypt($data->id));
+            $btn = "<div class='btn-group'>";
+            $btn.= "<a href='$url_verification' class = 'btn btn-outline-success btn-sm text-nowrap'><i class='fas fa-check mr-2'></i> Diterima</a>";
+            $btn .= "</div>";
+                return $btn;
+            })
+        ->toJson();
     }
 
+    public function create_verification_full_payment($id)
+    {
+        $id = Crypt::decrypt($id);
+        $data = Payment::find($id);
+        $payment = Payment::all();
+        return view('payments.full-payment.index', compact('data', 'payments'));
+    }
 
     public function report_full_payment()
     {
@@ -571,21 +606,53 @@ class PaymentController extends Controller
         }
     }
 
-    public function verification_full_payment()
+    public function verification_full_payment(Request $request, $id)
     {
-        // Confirm Delete Alert
-        $title = 'Hapus Data!';
-        $text = "Apakah yakin ingin menghapus data?";
-        confirmDelete($title, $text);
+        try {
+            DB::beginTransaction();
 
-        $user_id = Auth::user()->id;
-        $payment = Payment::where('user_id', $user_id)->first();
+            $id = Crypt::decrypt($id);
+            $payment = Payment::find($id);
 
+            $user_id = $payment->user_id;
+            $user = User::find($user_id);
 
-        return view('payments.full-payment.index', compact('payment'));
+            $input = $request->all();
+
+            // Save file
+            if ($file = $request->file('file')) {
+                $destinationPath = 'assets/bukti_bayar/';
+                $fileName = "BuktiBayaran" . "_" . date('YmdHis') . "." . $file->getClientOriginalExtension();
+                $file->move($destinationPath, $fileName);
+                $input['file'] = $fileName;
+            }
+
+            $payment->update([
+                'file' => $input['file'],
+                'status' => Payment::STATUS_PAID
+            ]);
+
+            DB::table('model_has_roles')
+                ->where('model_id', $user_id)
+                ->delete();
+
+            $user->assignRole([3]);
+
+            // Save Data
+            DB::commit();
+
+            // Alert & Redirect
+            Alert::toast('Data Berhasil Disimpan', 'success');
+            return redirect()->route('payment.index_verification');
+        } catch (\Exception $e) {
+            // If Data Error
+            DB::rollBack();
+
+            // Alert & Redirect
+            Alert::toast('Data Gagal Disimpan', 'error');
+            return redirect()->back()->withInput()->with('error', 'Data Tidak Berhasil Diperbarui' . $e->getMessage());
+        }
     }
-
-
 
     /* --------------------------------------------------------------------------------------------- */
 
@@ -607,7 +674,7 @@ class PaymentController extends Controller
 
     public function datatable_credit()
     {
-        $model = Payment::where('status', Payment::STATUS_CREDIT);
+        $model = Payment::where('status', Payment::STATUS_FIRST_CREDIT);
         return DataTables::of($model)
             ->editColumn('created_at', function ($data) {
                 $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->translatedFormat('d F Y - H:i');
@@ -638,7 +705,7 @@ class PaymentController extends Controller
         $student = Student::where('user_id', $user_id)->first();
         $student_id = $student->id;
 
-        $model = Payment::where('status', Payment::STATUS_CREDIT)
+        $model = Payment::where('status', Payment::STATUS_FIRST_CREDIT)
             ->where('student_id', $student_id)
             ->orderBy('id', 'desc');
 
@@ -675,7 +742,7 @@ class PaymentController extends Controller
 
     public function datatable_report_credit()
     {
-        $model = Payment::where('status', Payment::STATUS_CREDIT);
+        $model = Payment::where('status', Payment::STATUS_FIRST_CREDIT);
         return DataTables::of($model)
             ->editColumn('created_at', function ($data) {
                 $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->translatedFormat('d F Y - H:i');
@@ -701,7 +768,7 @@ class PaymentController extends Controller
     }
 
 
-    public function create_credit()
+    public function add_payment_credit()
     {
         return view('payments.create.add');
     }
@@ -761,7 +828,7 @@ class PaymentController extends Controller
     /* History */
     public function datatable_history()
     {
-        $model = Payment::where('status', Payment::STATUS_CREDIT);
+        $model = Payment::where('status', Payment::STATUS_NOT_PAID);
         return DataTables::of($model)
             ->editColumn('created_at', function ($data) {
                 $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->translatedFormat('d F Y - H:i');
@@ -773,13 +840,13 @@ class PaymentController extends Controller
             })
             ->addColumn('action', function ($data) {
                 $url_show = route('payment.history.show', Crypt::encrypt($data->id));
-                $url_edit = route('payment.history.edit', Crypt::encrypt($data->id));
-                $url_delete = route('payment.history.destroy', Crypt::encrypt($data->id));
+                // $url_edit = route('payment.history.edit', Crypt::encrypt($data->id));
+                // $url_delete = route('payment.history.destroy', Crypt::encrypt($data->id));
 
                 $btn = "<div class='btn-group'>";
                 $btn .= "<a href='$url_show' class = 'btn btn-outline-primary btn-sm text-nowrap'><i class='fas fa-info mr-2'></i> Lihat</a>";
-                $btn .= "<a href='$url_edit' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-edit mr-2'></i> Edit</a>";
-                $btn .= "<a href='$url_delete' class = 'btn btn-outline-danger btn-sm text-nowrap' data-confirm-delete='true'><i class='fas fa-trash mr-2'></i> Hapus</a>";
+                // $btn .= "<a href='$url_edit' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-edit mr-2'></i> Edit</a>";
+                // $btn .= "<a href='$url_delete' class = 'btn btn-outline-danger btn-sm text-nowrap' data-confirm-delete='true'><i class='fas fa-trash mr-2'></i> Hapus</a>";
                 $btn .= "</div>";
                 return $btn;
             })
@@ -829,7 +896,7 @@ class PaymentController extends Controller
 
     public function index_history_payment()
     {
-        $model = Payment::where('status', Payment::STATUS_CREDIT);
+        $model = Payment::where('status', Payment::STATUS_FIRST_CREDIT);
         return DataTables::of($model)
             ->editColumn('created_at', function ($data) {
                 $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->translatedFormat('d F Y - H:i');
@@ -842,7 +909,6 @@ class PaymentController extends Controller
             ->addColumn('action', function ($data) {
                 $url_show = route('payment.history.show', Crypt::encrypt($data->id));
                 $url_edit = route('payment.history.edit', Crypt::encrypt($data->id));
-
 
                 $btn = "<div class='btn-group'>";
                 $btn .= "<a href='$url_show' class = 'btn btn-outline-primary btn-sm text-nowrap'><i class='fas fa-info mr-2'></i> Lihat</a>";

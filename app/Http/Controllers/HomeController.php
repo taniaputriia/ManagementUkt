@@ -27,9 +27,9 @@ class HomeController extends Controller
     public function index()
     {
         $totalStudent = Student::all()->count();
-        $totalCreditPayment = Payment::where('status', Payment::STATUS_INSTALMENT)
-            ->get()
-            ->count();
+        // $totalCreditPayment = Payment::where('status', Payment::STATUS_FIRST_CREDIT)
+        //     ->get()
+        //     ->count();
         $totalFullPayment = Payment::where('status', Payment::STATUS_PAID)
             ->get()
             ->count();
@@ -37,6 +37,6 @@ class HomeController extends Controller
             ->get()
             ->count();
 
-        return view('home', compact('totalStudent', 'totalCreditPayment', 'totalFullPayment', 'totalNotPaidPayment'));
+        return view('home', compact('totalStudent', 'totalFullPayment', 'totalNotPaidPayment'));
     }
 }

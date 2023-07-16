@@ -23,11 +23,15 @@
                     <input type="text" class="form-control" value="{{ $data['student']['name'] }}" disabled>
                 </div>
                 <div class="col-lg-6">
-                    <label>Jenis Kelamin</label>
+                    <label>Semester</label>
                     <input type="text" class="form-control" value="{{ $data['student']['gender'] }}" disabled>
                 </div>
                 <div class="col-lg-6">
-                    <label>No. Handphone</label>
+                    <label>Uang Kuliah Tunggal (UKT)</label>
+                    <input type="text" class="form-control" value="@currency($data['tuition_fee'])" disabled>
+                </div>
+                <div class="col-lg-6">
+                    <label>No. Rekening</label>
                     <input type="text" class="form-control" value="{{ $data['student']['phone_number'] }}" disabled>
                 </div>
                 <div class="col-lg-6">
@@ -50,10 +54,7 @@
                     <label>Tahun Akademik</label>
                     <input type="text" class="form-control" value="{{ $data['student']['academic_year'] }}" disabled>
                 </div>
-                <div class="col-lg-6">
-                    <label>Uang Kuliah Tunggal (UKT)</label>
-                    <input type="text" class="form-control" value="@currency($data['tuition_fee'])" disabled>
-                </div>
+
             </div>
             <hr>
             <a href="{{ route('payment.index') }}" class="btn btn-warning">Kembali</a>

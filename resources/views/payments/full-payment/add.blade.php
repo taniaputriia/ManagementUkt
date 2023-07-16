@@ -23,48 +23,28 @@
         <div class="card-body">
             <form action="{{ route('payment.store_full_payment') }}" method="post" enctype="multipart/form-data">
                 @csrf
-                {{-- <h5>Akun Mahasiswa</h5>
-                <div class="form-group">
-                    <label for="user_name">Nama User </label>
-                    <input type="text" name="user_name" class="form-control" id="user_name"
-                        value="{{ old('user_name') }}" placeholder="Nama User..." required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email </label>
-                    <input type="email" name="email" class="form-control" id="email" value="{{ old('email') }}"
-                        placeholder="Email..." required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password </label>
-                    <input type="password" name="password" class="form-control" id="password" value="{{ old('password') }}"
-                        placeholder="Password..." required>
-                </div>
-                <div class="form-group">
-                    <label for="confirm-password">Konfirmasi Password </label>
-                    <input type="password" name="confirm-password" class="form-control" id="confirm-password"
-                        value="{{ old('confirm-password') }}" placeholder="Konfirmasi Password..." required>
-                </div>
-                <hr> --}}
+
                 <h5>Data Pembayaran Lunas</h5>
                 <div class="form-group">
                     <label for="nim">NIM </label>
                     <input type="text" name="nim" class="form-control" id="nim" value="{{ old('nim') }}"
                         placeholder="masukkan nim anda" required>
                 </div>
-                <div class="form-group">
-                    <label for="name">Nama Lengkap</label>
-                    <input type="text" name="name" class="form-control" id="name" value="{{ old('name') }}"
-                        placeholder="masukkan nama anda" required>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="va_number">Nomor Rekening</label>
+                        <input type="number" min="0" name="va_number" class="form-control" id="va_number"
+                            value="{{ old('va_number') }}" placeholder="masukkan nomor rekening" required>
+                    </div>
                 </div>
-
                 <div class="form-group">
-                    <label for="major">Jenis Bayaran</label>
+                    <label for="status">Jenis Bayaran</label>
                     <select class="form-select select_major" name="major" id="major" required>
                         <option value="" selected>Pilih Salah Satu</option>
-                        @foreach (App\Models\Student::MAJOR_CHOICE as $key => $value)
+                        @foreach (App\Models\Student::STATUS_CHOICE as $key => $value)
                             <option value="{{ $key }}">{{ $value }}</option>
                         @endforeach
-                        @error('major')
+                        @error('status')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </select>
@@ -97,6 +77,7 @@
             $(".select_user").select2();
             $(".select_study_program").select2();
             $(".select_study_department").select2();
+            $(".select_status").select2();
         });
     </script>
 @endsection
