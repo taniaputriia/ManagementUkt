@@ -4,40 +4,47 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <div class="header-title">
-                <h4 class="card-title">Data Mahasiswa yang belum bayar</h4>
+                <h4 class="card-title">Data Mahasiswa Pembayaran Lunas</h4>
             </div>
         </div>
 
         <div class="card-body">
             <div class="row">
-                <div class="text-center mb-3">
-                    <img src="{{ asset('assets/mahasiswa/' . $data['student']['photo']) }}" class="rounded-circle"
-                        alt="{{ $data['student']['photo'] }}" width="200px">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="nim">NIM </label>
+                        <input type="text" class="form-control" id="nim" value="{{ $data['student']['nim'] }}"
+                            disabled>
+                    </div>
                 </div>
-                <div class="col-lg-6">
-                    <label>NIM</label>
-                    <input type="text" class="form-control" value="{{ $data['student']['nim'] }}" disabled>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap</label>
+                        <input type="text" class="form-control" id="name" value="{{ $data['student']['name'] }}"
+                            disabled>
+                    </div>
                 </div>
-                <div class="col-lg-6">
-                    <label>Nama Lengkap</label>
-                    <input type="text" class="form-control" value="{{ $data['student']['name'] }}" disabled>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="tuition_fee">Semester (Pembayaran Semester)</label>
+                        <input type="text" class="form-control" id="name" value="{{ $data['semester'] }}" disabled>
+                    </div>
                 </div>
-                <div class="col-lg-6">
-                    <label>Semester</label>
-                    <input type="text" class="form-control" value="{{ $data['student']['semester'] }}" disabled>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="tuition_fee">Uang Kuliah Tunggal</label>
+                        <input type="text" class="form-control number-separator" id="tuition_fee"
+                            value="@currency($data['tuition_fee'])" disabled>
+                    </div>
                 </div>
-                <div class="col-lg-6">
-                    <label>Uang Kuliah Tunggal (UKT)</label>
-                    <input type="text" class="form-control" value="@currency($data['tuition_fee'])" disabled>
-                </div>
-                <div class="col-lg-6">
-                    <label>No. Rekening</label>
-                    <input type="text" class="form-control" value="{{ $data['va_number'] }}" disabled>
-                </div>
-
-                
             </div>
-            <hr>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="va_number">Nomor Rekening</label>
+                    <input type="number" name="va_number" class="form-control" id="va_number"
+                        value="{{ $data['va_number'] }}" placeholder="masukkan nomor rekening" disabled>
+                </div>
+            </div>
             <a href="{{ route('payment.index_full_payment') }}" class="btn btn-warning">Kembali</a>
         </div>
     </div>

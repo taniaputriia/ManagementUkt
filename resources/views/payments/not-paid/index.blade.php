@@ -30,9 +30,9 @@
                                                 <th>Aksi</th>
                                                 <th>Nim</th>
                                                 <th>Nama Lengkap</th>
+                                                <th>Semester</th>
                                                 <th>UKT</th>
                                                 <th>Status</th>
-                                                <th>Diinput pada</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -71,7 +71,6 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Aksi</th>
                                                 <th>Nim</th>
                                                 <th>Nama Lengkap</th>
                                                 <th>Semester</th>
@@ -129,16 +128,16 @@
                             data: 'name'
                         },
                         {
+                            name: 'semester',
+                            data: 'semester'
+                        },
+                        {
                             name: 'tuition_fee',
                             data: 'tuition_fee'
                         },
                         {
                             name: 'status',
                             data: 'status'
-                        },
-                        {
-                            name: 'created_at',
-                            data: 'created_at'
                         },
                     ],
                 });
@@ -148,9 +147,9 @@
 
     @role('Mahasiswa')
         <script>
-                $(document).ready(function() {
-                    getDatatable();
-                });
+            $(document).ready(function() {
+                getDatatable();
+            });
 
             let data_table = "";
 
@@ -167,10 +166,6 @@
                             render: function(data, type, row, meta) {
                                 return meta.row + meta.settings._iDisplayStart + 1;
                             }
-                        },
-                        {
-                            name: 'action',
-                            data: 'action'
                         },
                         {
                             name: 'nim',

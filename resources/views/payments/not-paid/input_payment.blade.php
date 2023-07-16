@@ -16,24 +16,21 @@
         @endif
 
         <div class="card-body">
-            <form action="{{ route('payment.update_payment', Crypt::encrypt($data['id'])) }}" method="post"
-                enctype="multipart/form-data">
+            <form action="{{ route('payment.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
-                @method('put')
+                <input type="hidden" name="user_id" value="{{ Crypt::encrypt(Auth::user()->id) }}">
                 <h5>Data Mahasiswa yang belum bayar</h5>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="nim">NIM </label>
-                            <input type="text" class="form-control" id="nim" value="{{ $data['student']['nim'] }}"
-                                disabled>
+                            <input type="text" class="form-control" id="nim" value="{{ $data['nim'] }}" disabled>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="name">Nama Lengkap</label>
-                            <input type="text" class="form-control" id="name" value="{{ $data['student']['name'] }}"
-                                disabled>
+                            <input type="text" class="form-control" id="name" value="{{ $data['name'] }}" disabled>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -89,7 +86,8 @@
 
                 <hr>
                 <a href="{{ route('payment.index') }}" class="btn btn-warning">Kembali</a>
-                <button type="submit" class="btn btn-primary mr-2">Simpan</button>
+                <button type="submit" onclick="return confirm('Simpan Data? Data tidak dapat diedit kembali')"
+                    class="btn btn-primary mr-2">Simpan</button>
             </form>
         </div>
     </div>
@@ -113,11 +111,11 @@
                                 </div>
                             </div>
                     <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Bukti Bayaran (Ekstensi Jpg,Jpeg,Png | Maks 1 MB)</label>
-                                <input type="file" name="file" class="form-control" id="file"
-                                required>
-                            </div>
+                        <div class="form-group">
+                            <label>Bukti Bayaran (Ekstensi Jpg,Jpeg,Png | Maks 1 MB)</label>
+                            <input type="file" name="file" class="form-control" id="file"
+                             required>
+                        </div>
                     </div>
                             </div>
 

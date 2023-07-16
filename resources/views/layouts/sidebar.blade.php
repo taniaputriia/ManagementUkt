@@ -97,12 +97,12 @@
                             <i class="bi bi-collection-fill"></i>
                             <span>Verifikasi Pembayaran</span>
                         </a>
-                        <ul class="submenu ">
+                        <ul class="submenu">
                             <li class="submenu-item ">
-                                <a href="{{ route('payment.index_full_payment') }}">Pembayaran Lunas</a>
+                                <a href="{{ route('payment.index_verification_full_payment') }}">Pembayaran Lunas</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="{{ route('payment.index_credit') }}">Pembayaran Cicilan</a>
+                                <a href="{{ route('payment.index_verification_credit') }}">Pembayaran Cicilan</a>
                             </li>
                         </ul>
                     </li>
@@ -120,13 +120,13 @@
                                 <a href="">Laporan Pembayaran Cicilan</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="extra-component-toastify.html">Laporan Pembayaran Belum Lunas</a>
+                                <a href="">Laporan Pembayaran Belum Lunas</a>
                             </li>
                         </ul>
                     </li>
 
-                    <li class="sidebar-item  ">
-                        <a href="{{ route('payment.index_history_payment') }}" class='sidebar-link'>
+                    <li class="sidebar-item ">
+                        <a href="{{ route('payment.history') }}" class='sidebar-link'>
                             <i class="bi bi-stack"></i>
                             <span>Riwayat Pembayaran</span>
                         </a>
@@ -189,6 +189,14 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li class="sidebar-item  ">
+                        <a href="{{ route('payment.input_payment') }}" class='sidebar-link'>
+                            <i class="bi bi-stack"></i>
+                            <span>Input Pembayaran</span>
+                        </a>
+                    </li>
+
 
                     <li class="sidebar-item  ">
                         <a href="{{ route('logout') }}"

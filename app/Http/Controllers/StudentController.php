@@ -120,20 +120,7 @@ class StudentController extends Controller
             // Create Student
             $input['user_id'] = $user->id;
             $input['tuition_fee'] = str_replace(',', '', $input['tuition_fee']);
-            $student = Student::create($input);
-
-            $payment = Payment::create([
-                'student_id' => $student->id,
-                'semester' => $student->semester,
-                'tuition_fee' => $student->tuition_fee,
-                'status' => Payment::STATUS_NOT_PAID
-            ]);
-
-            HistoryPayment::create([
-                'payment_id' => $payment->id,
-                'tuition_fee' => $student->tuition_fee,
-                'description' => HistoryPayment::NOTE_STATUS_NOT_PAID
-            ]);
+            Student::create($input);
 
             // Save Data
             DB::commit();
@@ -147,7 +134,7 @@ class StudentController extends Controller
 
             // Alert & Redirect
             Alert::toast('Data Tidak Tersimpan', 'error');
-            return redirect()->back()->withInput()->with('error', 'Data Tidak Berhasil Disimpan' . $e->getMessage());
+            return redirect()->back()->withInput()->with('error', $e->getMessage());
         }
     }
 

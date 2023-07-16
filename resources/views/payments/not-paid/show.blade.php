@@ -31,7 +31,7 @@
                     <input type="text" class="form-control" value="@currency($data['tuition_fee'])" disabled>
                 </div>
                 <div class="col-lg-6">
-                    <label>No. Rekening</label>
+                    <label>No. Handphone</label>
                     <input type="text" class="form-control" value="{{ $data['student']['phone_number'] }}" disabled>
                 </div>
                 <div class="col-lg-6">
