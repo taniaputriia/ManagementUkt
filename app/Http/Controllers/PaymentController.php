@@ -527,6 +527,10 @@ class PaymentController extends Controller
                 $formatCurrency = RupiahFormat::currency($data['tuition_fee']);
                 return $formatCurrency;
             })
+            ->editColumn('remain_payment', function ($data) {
+                $formatCurrency = RupiahFormat::currency($data['remain_payment']);
+                return $formatCurrency;
+            })
             ->addColumn('nim', function ($data) {
                 if (!empty($data->student->nim)) {
                     return $data->student->nim;
@@ -555,14 +559,19 @@ class PaymentController extends Controller
         $student = Student::where('user_id', $user_id)->first();
         $student_id = $student->id;
 
-        $model = Payment::where('status', Payment::STATUS_CREDIT)
-            ->orWhere('status', Payment::STATUS_NOT_CONFIRMED_FIRST_CREDIT)
-            ->orWhere('status', Payment::STATUS_FIRST_CREDIT)
-            ->orWhere('status', Payment::STATUS_NOT_CONFIRMED_SECOND_CREDIT)
-            ->orWhere('status', Payment::STATUS_SECOND_CREDIT)
-            ->orWhere('status', Payment::STATUS_NOT_CONFIRMED_THIRD_CREDIT)
-            ->where('student_id', $student_id)
-            ->orderBy('id', 'desc');
+        $payment = Payment::where('student_id', $student_id)->latest()->first();
+
+        if (!empty($payment)) {
+            $model = Payment::where('status', $payment->status)
+                ->where('status', '!=', Payment::STATUS_PAID)
+                ->where('status', '!=', Payment::STATUS_NOT_PAID)
+                ->where('student_id', $student_id)
+                ->orderBy('id', 'desc');
+        } else {
+            $model = Payment::where('status', Payment::STATUS_CREDIT)
+                ->where('student_id', $student_id)
+                ->orderBy('id', 'desc');
+        }
 
         return DataTables::of($model)
             ->editColumn('created_at', function ($data) {
@@ -571,6 +580,10 @@ class PaymentController extends Controller
             })
             ->editColumn('tuition_fee', function ($data) {
                 $formatCurrency = RupiahFormat::currency($data['tuition_fee']);
+                return $formatCurrency;
+            })
+            ->editColumn('remain_payment', function ($data) {
+                $formatCurrency = RupiahFormat::currency($data['remain_payment']);
                 return $formatCurrency;
             })
             ->addColumn('nim', function ($data) {
@@ -815,10 +828,22 @@ class PaymentController extends Controller
             }
 
             if ($request->type == 1) {
+                $total_payment = $payment->first_payment;
+                $tuition_fee = $payment->tuition_fee;
+                $remain_payment = $tuition_fee - $total_payment;
+                $input['remain_payment'] = $remain_payment;
                 $input['status'] = Payment::STATUS_NOT_CONFIRMED_FIRST_CREDIT;
             } elseif ($request->type == 2) {
+                $total_payment = $payment->first_payment + $payment->second_payment;
+                $tuition_fee = $payment->tuition_fee;
+                $remain_payment = $tuition_fee - $total_payment;
+                $input['remain_payment'] = $remain_payment;
                 $input['status'] = Payment::STATUS_NOT_CONFIRMED_SECOND_CREDIT;
             } elseif ($request->type == 3) {
+                $total_payment = $payment->first_payment + $payment->second_payment + $payment->third_payment;
+                $tuition_fee = $payment->tuition_fee;
+                $remain_payment = $tuition_fee - $total_payment;
+                $input['remain_payment'] = $remain_payment;
                 $input['status'] = Payment::STATUS_NOT_CONFIRMED_THIRD_CREDIT;
             }
 
@@ -833,7 +858,7 @@ class PaymentController extends Controller
                 'first_payment' => $payment->first_payment,
                 'second_payment' => $payment->second_payment,
                 'third_payment' => $payment->third_payment,
-                'description' => $payment->description,
+                'description' => $payment->status,
                 'file' => $payment->file,
             ]);
 
@@ -902,7 +927,7 @@ class PaymentController extends Controller
         $data = HistoryPayment::query()
             ->orderBy('id', 'desc')
             ->simplePaginate(5);
-        
+
         return view('payments.history', compact('data'));
     }
 }
