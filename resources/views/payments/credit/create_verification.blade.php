@@ -128,7 +128,7 @@
                             <div class="form-group">
                                 <label for="third_payment">Cicilan Ketiga</label>
                                 <input type="text" name="third_payment" class="form-control" id="third_payment"
-                                    value="@currency($data['first_payment'])" disabled>
+                                    value="@currency($data['third_payment'])" disabled>
                             </div>
                         </div>
                         <div class="col-md-6">
