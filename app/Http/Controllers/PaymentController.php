@@ -81,6 +81,7 @@ class PaymentController extends Controller
                 ->where('status', '!=', Payment::STATUS_CREDIT)
                 ->where('status', '!=', Payment::STATUS_FIRST_CREDIT)
                 ->where('status', '!=', Payment::STATUS_SECOND_CREDIT)
+                ->where('status', '!=', Payment::STATUS_THIRD_CREDIT)
                 ->where('status', '!=', Payment::STATUS_NOT_CONFIRMED_CREDIT)
                 ->where('status', '!=', Payment::STATUS_NOT_CONFIRMED_FIRST_CREDIT)
                 ->where('status', '!=', Payment::STATUS_NOT_CONFIRMED_SECOND_CREDIT)
@@ -770,7 +771,7 @@ class PaymentController extends Controller
                 $payment->update([
                     'total_payment' => $total_payment,
                     'remain_payment' => $tuition_fee - $total_payment,
-                    'status' => Payment::STATUS_PAID
+                    'status' => Payment::STATUS_THIRD_CREDIT
                 ]);
 
                 // Create History
