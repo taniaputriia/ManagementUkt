@@ -72,11 +72,25 @@ class PaymentController extends Controller
         $student = Student::where('user_id', $user_id)->first();
         $student_id = $student->id;
 
-        $model = Payment::where('status', Payment::STATUS_NOT_PAID)
-            ->orWhere('status', Payment::STATUS_NOT_CONFIRMED)
-            ->orWhere('status', Payment::STATUS_NOT_CONFIRMED_CREDIT)
-            ->where('student_id', $student_id)
-            ->orderBy('id', 'desc');
+        $payment = Payment::where('student_id', $student_id)->latest()->first();
+
+        if (!empty($payment)) {
+            $model = Payment::where('student_id', $student_id)
+                ->where('status', $payment->status)
+                ->where('status', '!=', Payment::STATUS_PAID)
+                ->where('status', '!=', Payment::STATUS_CREDIT)
+                ->where('status', '!=', Payment::STATUS_FIRST_CREDIT)
+                ->where('status', '!=', Payment::STATUS_SECOND_CREDIT)
+                ->where('status', '!=', Payment::STATUS_NOT_CONFIRMED_CREDIT)
+                ->where('status', '!=', Payment::STATUS_NOT_CONFIRMED_FIRST_CREDIT)
+                ->where('status', '!=', Payment::STATUS_NOT_CONFIRMED_SECOND_CREDIT)
+                ->where('status', '!=', Payment::STATUS_NOT_CONFIRMED_THIRD_CREDIT)
+                ->orderBy('id', 'desc');
+        } else {
+            $model = Payment::where('status', Payment::STATUS_NOT_PAID)
+                ->where('student_id', $student_id)
+                ->orderBy('id', 'desc');
+        }
 
         return DataTables::of($model)
             ->editColumn('created_at', function ($data) {
@@ -564,6 +578,7 @@ class PaymentController extends Controller
         if (!empty($payment)) {
             $model = Payment::where('status', $payment->status)
                 ->where('status', '!=', Payment::STATUS_PAID)
+                ->where('status', '!=', Payment::STATUS_NOT_CONFIRMED)
                 ->where('status', '!=', Payment::STATUS_NOT_PAID)
                 ->where('student_id', $student_id)
                 ->orderBy('id', 'desc');
