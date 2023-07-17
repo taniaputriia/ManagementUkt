@@ -34,8 +34,12 @@
                     <label>No. Rekening</label>
                     <input type="text" class="form-control" value="{{ $data['va_number'] }}" disabled>
                 </div>
+                <div class="col-lg-6">
+                    <label>Sisa Pembayaran</label>
+                    <input type="text" class="form-control" value="@currency($data['remain_payment'])" disabled>
+                </div>
 
-            
+
             </div>
             <hr>
             <a href="{{ route('payment.index_credit') }}" class="btn btn-warning">Kembali</a>
