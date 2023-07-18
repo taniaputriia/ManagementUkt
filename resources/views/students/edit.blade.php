@@ -7,7 +7,7 @@
 
 @section('content')
     <div class="card">
-        @role('Bagian Keuangan')
+        @hasanyrole('Bagian Keuangan|Admin KPA')
             <div class="card-header d-flex justify-content-between">
                 <div class="header-title">
                     <h4 class="card-title">Edit Data Mahasiswa</h4>
@@ -127,7 +127,7 @@
                     <button type="submit" class="btn btn-primary mr-2">Submit</button>
                 </form>
             </div>
-        @endrole
+        @endhasanyrole
     </div>
 @endsection
 

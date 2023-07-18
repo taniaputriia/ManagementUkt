@@ -139,6 +139,10 @@
                             name: 'status',
                             data: 'status'
                         },
+                        {
+                            name: 'created_at',
+                            data: 'created_at'
+                        },
                     ],
                 });
             }

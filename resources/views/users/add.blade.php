@@ -46,7 +46,7 @@
                 <hr>
                 <div class="form-group">
                     <label>Role </label>
-                    <select name="role" class="form-control mb-3 select_role" required>
+                    <select name="role" class="form-control mb-3 select_role">
                         @foreach ($roles as $role)
                             <option value="{{ $role }}">{{ $role }}</option>
                         @endforeach

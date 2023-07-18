@@ -59,6 +59,7 @@ Route::group(['controller' => PaymentController::class, 'prefix' => 'payment', '
     Route::get('/', 'index')->name('index');
     Route::get('/input_payment', 'input_payment')->name('input_payment');
     Route::get('/show/{id}', 'show')->name('show');
+    Route::get('/report', 'report')->name('report');
 
     /* --------------------------------------------- */
     /* Full Payment */
@@ -88,7 +89,7 @@ Route::group(['controller' => PaymentController::class, 'prefix' => 'payment', '
     Route::get('/datatable_credit', 'datatable_credit')->name('datatable_credit');
     Route::get('/datatable_credit_student', 'datatable_credit_student')->name('datatable_credit_student');
     Route::get('/datatable_verification_credit', 'datatable_verification_credit')->name('datatable_verification_credit');
-    Route::get('/datatable_report_credit', 'datatable_report_credit')->name('datatable_report_credit');
+
 
     /* Store & Update */
     Route::put('/verification_credit/{id}', 'verification_credit')->name('verification_credit');
@@ -100,7 +101,7 @@ Route::group(['controller' => PaymentController::class, 'prefix' => 'payment', '
     Route::get('/create/{id}', 'create')->name('create');
     Route::get('/create/verification_credit/{id}', 'create_verification_credit')->name('create_verification_credit');
     Route::get('/show/credit/{id}', 'show_credit')->name('show_credit');
-    Route::get('/report_credit', 'report_credit')->name('report_credit');
+    // Route::get('/report_credit', 'report_credit')->name('report_credit');
 
     /* --------------------------------------------- */
     /* Report Payment */

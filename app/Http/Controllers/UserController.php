@@ -105,7 +105,7 @@ class UserController extends Controller
                 'name' => 'required',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|same:confirm-password',
-                'roles' => 'required',
+                'role' => 'required',
             ]);
 
             // Create Data
@@ -142,7 +142,7 @@ class UserController extends Controller
                 'name' => 'required',
                 'email' => 'required|email',
                 'password' => 'required|same:confirm-password',
-                'roles' => 'required',
+                'role' => 'required',
             ]);
 
             // Update Data

@@ -2,7 +2,7 @@
 
 @section('content')
     {{-- Admin --}}
-    @role('Bagian Keuangan')
+    @hasanyrole('Bagian Keuangan|Admin KPA|Wakil Direktur II')
         <div class="row">
             <div class="col-md-12 mb-4 mt-1">
                 <div class="d-flex flex-wrap justify-content-between align-items-center">
@@ -47,7 +47,7 @@
                 </div>
             </div>
         </div>
-    @endrole
+    @endhasanyrole
 
     {{-- Mahasiswa --}}
     @role('Mahasiswa')

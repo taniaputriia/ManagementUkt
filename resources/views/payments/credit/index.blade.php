@@ -2,7 +2,7 @@
 
 @section('content')
     {{-- Admin --}}
-    @role('Bagian Keuangan')
+    @hasanyrole('Bagian Keuangan|Admin KPA|Wakil Direktur II')
         <div class="row">
             <div class="col-md-12 mb-4 mt-1">
                 <div class="d-flex flex-wrap justify-content-between align-items-center">
@@ -45,7 +45,7 @@
                 </div>
             </div>
         </div>
-    @endrole
+    @endhasanyrole
 
     {{-- Mahasiswa --}}
     @role('Mahasiswa')
@@ -64,6 +64,7 @@
                                     <h4 class="card-title">Data Pembayaran Cicilan</h4>
                                 </div>
                             </div>
+                            <a class="text-end btn btn-sm btn-danger" target = "_blank" href="{{ route('payment.report_credit') }}"><i class="fa fa-plus"></i> Cetak PDF</a>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="data-table" class="table table-striped table-bordered text-nowrap"

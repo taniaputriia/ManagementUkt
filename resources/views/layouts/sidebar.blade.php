@@ -114,13 +114,13 @@
                         </a>
                         <ul class="submenu ">
                             <li class="submenu-item ">
-                                <a href="">Laporan Pembayaran Lunas</a>
+                                <a href="{{ route('payment.report_full_payment') }}">Laporan Pembayaran Lunas</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="">Laporan Pembayaran Cicilan</a>
+                                <a href="{{ route('payment.report_credit') }}">Laporan Pembayaran Cicilan</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="">Laporan Pembayaran Belum Lunas</a>
+                                <a href="{{ route('payment.report') }}">Laporan Pembayaran Belum Lunas</a>
                             </li>
                         </ul>
                     </li>

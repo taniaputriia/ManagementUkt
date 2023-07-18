@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use Laraindo\RupiahFormat;
 use Laravel\Ui\Presets\React;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class PaymentController extends Controller
 {
@@ -292,6 +294,19 @@ class PaymentController extends Controller
         }
     }
 
+    public function report()
+    {
+        $data = Payment::where('status', Payment::STATUS_NOT_PAID)
+        ->orWhere('status', Payment::STATUS_NOT_CONFIRMED)
+        ->orWhere('status', Payment::STATUS_NOT_CONFIRMED_CREDIT)
+        ->orderBy('id', 'desc')
+        ->get();
+
+        $pdf = PDF::loadView('payments.not-paid.report', compact('data'));
+
+        $fileName = "Laporan Pembayaran Belum lunas.pdf";
+        return $pdf->stream($fileName);
+    }
     /* --------------------------------------------------------------------------------------------- */
 
     /* Full Payment */
@@ -407,32 +422,32 @@ class PaymentController extends Controller
             ->toJson();
     }
 
-    public function datatable_report_full_payment()
-    {
-        $model = Payment::where('status', Payment::STATUS_PAID);
-        return DataTables::of($model)
-            ->editColumn('created_at', function ($data) {
-                $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->translatedFormat('d F Y - H:i');
-                return $formatedDate;
-            })
-            ->editColumn('tuition_fee', function ($data) {
-                $formatCurrency = RupiahFormat::currency($data['tuition_fee']);
-                return $formatCurrency;
-            })
-            ->addColumn('action', function ($data) {
-                $url_show = route('payment.full-payment.show', Crypt::encrypt($data->id));
-                $url_edit = route('payment.full-payment.edit', Crypt::encrypt($data->id));
-                $url_delete = route('payment.full-payment.destroy', Crypt::encrypt($data->id));
+    // public function datatable_report_full_payment()
+    // {
+    //     $model = Payment::where('status', Payment::STATUS_PAID);
+    //     return DataTables::of($model)
+    //         ->editColumn('created_at', function ($data) {
+    //             $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->translatedFormat('d F Y - H:i');
+    //             return $formatedDate;
+    //         })
+    //         ->editColumn('tuition_fee', function ($data) {
+    //             $formatCurrency = RupiahFormat::currency($data['tuition_fee']);
+    //             return $formatCurrency;
+    //         })
+    //         ->addColumn('action', function ($data) {
+    //             $url_show = route('payment.full-payment.show', Crypt::encrypt($data->id));
+    //             $url_edit = route('payment.full-payment.edit', Crypt::encrypt($data->id));
+    //             $url_delete = route('payment.full-payment.destroy', Crypt::encrypt($data->id));
 
-                $btn = "<div class='btn-group'>";
-                $btn .= "<a href='$url_show' class = 'btn btn-outline-primary btn-sm text-nowrap'><i class='fas fa-info mr-2'></i> Lihat</a>";
-                $btn .= "<a href='$url_edit' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-edit mr-2'></i> Edit</a>";
-                $btn .= "<a href='$url_delete' class = 'btn btn-outline-danger btn-sm text-nowrap' data-confirm-delete='true'><i class='fas fa-trash mr-2'></i> Hapus</a>";
-                $btn .= "</div>";
-                return $btn;
-            })
-            ->toJson();
-    }
+    //             $btn = "<div class='btn-group'>";
+    //             $btn .= "<a href='$url_show' class = 'btn btn-outline-primary btn-sm text-nowrap'><i class='fas fa-info mr-2'></i> Lihat</a>";
+    //             $btn .= "<a href='$url_edit' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-edit mr-2'></i> Edit</a>";
+    //             $btn .= "<a href='$url_delete' class = 'btn btn-outline-danger btn-sm text-nowrap' data-confirm-delete='true'><i class='fas fa-trash mr-2'></i> Hapus</a>";
+    //             $btn .= "</div>";
+    //             return $btn;
+    //         })
+    //         ->toJson();
+    // }
 
     public function show_full_payment($id)
     {
@@ -451,15 +466,15 @@ class PaymentController extends Controller
 
     public function report_full_payment()
     {
-        // Confirm Delete Alert
-        $title = 'Hapus Data!';
-        $text = "Apakah yakin ingin menghapus data?";
-        confirmDelete($title, $text);
+        $data = Payment::where('status', Payment::STATUS_PAID)
 
-        $user_id = Auth::user()->id;
-        $payment = Payment::where('user_id', $user_id)->first();
+            ->orderBy('id', 'desc')
+            ->get();
 
-        return view('payments.full-payment.index', compact('payment'));
+             $pdf = PDF::loadView('payments.full-payment.report', compact('data'));
+
+        $fileName = "Laporan Pembayaran Lunas.pdf";
+        return $pdf->stream($fileName);
     }
 
     public function verification_full_payment($id)
@@ -531,6 +546,7 @@ class PaymentController extends Controller
             ->orWhere('status', Payment::STATUS_NOT_CONFIRMED_SECOND_CREDIT)
             ->orWhere('status', Payment::STATUS_SECOND_CREDIT)
             ->orWhere('status', Payment::STATUS_NOT_CONFIRMED_THIRD_CREDIT)
+            ->orWhere('status', Payment::STATUS_THIRD_CREDIT)
             ->orderBy('id', 'desc');
         return DataTables::of($model)
             ->editColumn('created_at', function ($data) {
@@ -584,8 +600,8 @@ class PaymentController extends Controller
                 ->orderBy('id', 'desc');
         } else {
             $model = Payment::where('status', Payment::STATUS_CREDIT)
-                ->where('student_id', $student_id)
-                ->orderBy('id', 'desc');
+            ->where('student_id', $student_id)
+            ->orderBy('id', 'desc');
         }
 
         return DataTables::of($model)
@@ -701,7 +717,6 @@ class PaymentController extends Controller
             $payment = Payment::find($id);
 
             if ($request->type == 1) {
-
                 $payment->update([
                     'status' => Payment::STATUS_CREDIT
                 ]);
@@ -770,7 +785,7 @@ class PaymentController extends Controller
                 $payment->update([
                     'total_payment' => $total_payment,
                     'remain_payment' => $tuition_fee - $total_payment,
-                    'status' => Payment::STATUS_PAID
+                    'status' => Payment::STATUS_THIRD_CREDIT
                 ]);
 
                 // Create History
@@ -896,15 +911,20 @@ class PaymentController extends Controller
     public function report_credit()
     {
         // Confirm Delete Alert
-        $title = 'Hapus Data!';
-        $text = "Apakah yakin ingin menghapus data?";
-        confirmDelete($title, $text);
+        $data = Payment::where('status', Payment::STATUS_CREDIT)
+            ->orWhere('status', Payment::STATUS_NOT_CONFIRMED_FIRST_CREDIT)
+            ->orWhere('status', Payment::STATUS_FIRST_CREDIT)
+            ->orWhere('status', Payment::STATUS_NOT_CONFIRMED_SECOND_CREDIT)
+            ->orWhere('status', Payment::STATUS_SECOND_CREDIT)
+            ->orWhere('status', Payment::STATUS_NOT_CONFIRMED_THIRD_CREDIT)
+            ->orWhere('status', Payment::STATUS_THIRD_CREDIT)
+            ->orderBy('id', 'desc')
+            ->get();
 
-        $user_id = Auth::user()->id;
-        $payment = payment::where('user_id', $user_id)->first();
+             $pdf = PDF::loadView('payments.credit.report', compact('data'));
 
-
-        return view('payments.credit.index', compact('payment'));
+        $fileName = "Laporan Pembayaran Cicilan.pdf";
+        return $pdf->stream($fileName);
     }
 
     /* --------------------------------------------------------------------------------------------- */

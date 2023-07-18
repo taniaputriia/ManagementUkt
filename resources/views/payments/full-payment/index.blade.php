@@ -2,7 +2,7 @@
 
 @section('content')
     {{-- Admin --}}
-    @role('Bagian Keuangan')
+    @hasanyrole('Bagian Keuangan|Admin KPA|Wakil Direktur II')
         <div class="row">
             <div class="col-md-12 mb-4 mt-1">
                 <div class="d-flex flex-wrap justify-content-between align-items-center">
@@ -18,6 +18,7 @@
                                     <h4 class="card-title">Manajemen Data Pembayaran Lunas</h4>
                                 </div>
                             </div>
+                            <a class="text-end btn btn-sm btn-danger" target = "_blank" href="{{ route('payment.report_full_payment') }}"><i class="fa fa-plus"></i> Cetak PDF</a>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="data-table" class="table table-striped table-bordered text-nowrap"
@@ -32,7 +33,7 @@
                                                 <th>Nomor Rekening</th>
                                                 <th>UKT</th>
                                                 <th>Status</th>
-
+                                                <th>Diinput Pada</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -77,6 +78,7 @@
                                                 <th>Nomor Rekening</th>
                                                 <th>UKT</th>
                                                 <th>Status</th>
+                                                <th>Diinput Pada</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -146,6 +148,10 @@
                             name: 'status',
                             data: 'status'
                         },
+                        {
+                            name: 'created_at',
+                            data: 'created_at'
+                        },
                     ],
                 });
             }
@@ -199,6 +205,10 @@
                         {
                             name: 'status',
                             data: 'status'
+                        },
+                        {
+                            name: 'created_at',
+                            data: 'created_at'
                         },
                     ],
                 });
