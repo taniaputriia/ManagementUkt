@@ -112,7 +112,7 @@ class UserController extends Controller
             $input = $request->all();
             $input['password'] = Hash::make($input['password']);
             $user = User::create($input);
-            $user->assignRole($request->roles);
+            $user->assignRole($request->role);
 
             // Save Data
             DB::commit();
@@ -162,7 +162,7 @@ class UserController extends Controller
                 ->where('model_id', $id)
                 ->delete();
 
-            $user->assignRole($request->roles);
+            $user->assignRole($request->role);
 
             // Save Data
             DB::commit();
