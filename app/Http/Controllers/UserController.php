@@ -105,14 +105,14 @@ class UserController extends Controller
                 'name' => 'required',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|same:confirm-password',
-                'roles' => 'required',
+                'role' => 'required',
             ]);
 
             // Create Data
             $input = $request->all();
             $input['password'] = Hash::make($input['password']);
             $user = User::create($input);
-            $user->assignRole($request->roles);
+            $user->assignRole($request->role);
 
             // Save Data
             DB::commit();
@@ -142,7 +142,7 @@ class UserController extends Controller
                 'name' => 'required',
                 'email' => 'required|email',
                 'password' => 'required|same:confirm-password',
-                'roles' => 'required',
+                'role' => 'required',
             ]);
 
             // Update Data
@@ -162,7 +162,7 @@ class UserController extends Controller
                 ->where('model_id', $id)
                 ->delete();
 
-            $user->assignRole($request->roles);
+            $user->assignRole($request->role);
 
             // Save Data
             DB::commit();
