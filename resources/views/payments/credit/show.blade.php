@@ -4,7 +4,7 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <div class="header-title">
-                <h4 class="card-title">Data Mahasiswa yang belum bayar</h4>
+                <h4 class="card-title">Data Mahasiswa Cicilanr</h4>
             </div>
         </div>
 
@@ -38,6 +38,15 @@
                     <label>Sisa Pembayaran</label>
                     <input type="text" class="form-control" value="@currency($data['remain_payment'])" disabled>
                 </div>
+                <div class="col-lg-6">
+                    <label>Tanggal Pembayaran</label>
+                    <input type="text" class="form-control" value="{{ ($data['created_at']) }}" disabled>
+                </div>
+                <div class="col-lg-6">
+                    <label>Status</label>
+                    <input type="text" class="form-control" value="{{ ($data['status']) }}" disabled>
+                </div>
+
 
 
             </div>

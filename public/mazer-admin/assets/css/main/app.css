@@ -1322,6 +1322,16 @@ progress {
     flex: 0 0 auto;
     width: 33.33333333%;
   }
+  .col-md-6-login{
+    margin-top: 35px;
+
+    margin-left: 300px;
+    height: 500px;
+
+    width: max-content;
+    border-radius: 25px;
+    background-color:#fdfeff;
+  }
   .col-md-5 {
     flex: 0 0 auto;
     width: 41.66666667%;
@@ -4660,12 +4670,12 @@ fieldset:disabled .btn {
   --bs-pagination-hover-color: #000;
   --bs-pagination-hover-bg: #e9ecef;
   --bs-pagination-hover-border-color: #dee2e6;
-  --bs-pagination-focus-color: #364b98;
-  --bs-pagination-focus-bg: #e9ecef;
+  --bs-pagination-focus-color: #abb2ca;
+  --bs-pagination-focus-bg: #abb2ca;
   --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(67, 94, 190, 0.25);
   --bs-pagination-active-color: #fff;
-  --bs-pagination-active-bg: #435ebe;
-  --bs-pagination-active-border-color: #435ebe;
+  --bs-pagination-active-bg: #abb2ca;
+  --bs-pagination-active-border-color: #abb2ca;
   --bs-pagination-disabled-color: #6c757d;
   --bs-pagination-disabled-bg: #fff;
   --bs-pagination-disabled-border-color: #dee2e6;
@@ -16974,8 +16984,21 @@ body .bi:before {
   padding: 2rem 2rem 1rem;
 }
 .sidebar-wrapper .sidebar-header img {
-  height: 1.2rem;
+  height: 2.5rem;
 }
+
+.container-login {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.row-login{
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
 .sidebar-wrapper .sidebar-toggler.x {
   display: none;
   position: absolute;

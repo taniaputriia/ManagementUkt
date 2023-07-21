@@ -29,7 +29,6 @@
                                                 <th>Nim</th>
                                                 <th>Nama Lengkap</th>
                                                 <th>Semester</th>
-                                                <th>Nomor Rekening</th>
                                                 <th>UKT</th>
                                                 <th>Sisa Pembayaran</th>
                                                 <th>Status</th>
@@ -76,7 +75,6 @@
                                                 <th>Nim</th>
                                                 <th>Nama Lengkap</th>
                                                 <th>Semester</th>
-                                                <th>Nomor Rekening</th>
                                                 <th>UKT</th>
                                                 <th>Sisa Pembayaran</th>
                                                 <th>Status</th>
@@ -96,7 +94,7 @@
 @endsection
 
 @section('js_after')
-    @role('Bagian Keuangan')
+@hasanyrole('Bagian Keuangan|Admin KPA|Wakil Direktur II')
         <script>
             $(document).ready(function() {
                 getDatatable();
@@ -137,10 +135,7 @@
                             name: 'semester',
                             data: 'semester'
                         },
-                        {
-                            name: 'va_number',
-                            data: 'va_number'
-                        },
+                       
                         {
                             name: 'tuition_fee',
                             data: 'tuition_fee'
@@ -157,7 +152,7 @@
                 });
             }
         </script>
-    @endrole
+    @endhasanyrole
 
     @role('Mahasiswa')
         <script>

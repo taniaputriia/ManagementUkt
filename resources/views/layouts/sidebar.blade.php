@@ -5,10 +5,11 @@
                 <div class="logo d-flex gap-2  align-items-center mt-2">
                     <a href="{{ route('home') }}"><img src="{{ asset('mazer-admin/assets/images/logo/logo-polsri.png') }}"
                             alt="Logo" srcset=""></a>
+                    <h6>SIMBA</h6>
                 </div>
                 <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20"
+                    <svg xmlns="" xmlns:xlink=""
+                        aria-hidden="true" role="img" class="" width="20"
                         height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
                         <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round"
                             stroke-linejoin="round">
@@ -48,7 +49,7 @@
                 <ul class="menu">
                     <li class="sidebar-title">Menu</li>
 
-                    <li class="sidebar-item active ">
+                    <li class="sidebar-item">
                         <a href="{{ route('home') }}" class='sidebar-link'>
                             <i class="bi bi-grid-fill"></i>
                             <span>Dashboard</span>
@@ -158,7 +159,7 @@
                 <ul class="menu">
                     <li class="sidebar-title">Menu</li>
 
-                    <li class="sidebar-item active ">
+                    <li class="sidebar-item">
                         <a href="{{ route('home') }}" class='sidebar-link'>
                             <i class="bi bi-grid-fill"></i>
                             <span>Dashboard</span>
@@ -219,48 +220,89 @@
 
         {{-- Admin KPA --}}
         @role('Admin KPA')
-            <div class="sidebar-menu">
+        <div class="sidebar-menu">
 
-                <ul class="menu">
-                    <li class="sidebar-title">Menu</li>
+            <ul class="menu">
+                <li class="sidebar-title">Menu</li>
 
-                    <li class="sidebar-item active ">
-                        <a href="{{ route('home') }}" class='sidebar-link'>
-                            <i class="bi bi-grid-fill"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
+                <li class="sidebar-item">
+                    <a href="{{ route('home') }}" class='sidebar-link'>
+                        <i class="bi bi-grid-fill"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
 
-                    <li class="sidebar-item  ">
-                        <a href="{{ route('student.index') }}" class='sidebar-link'>
-                            <i class="bi bi-stack"></i>
-                            <span>Data Mahasiswa</span>
-                        </a>
-                    </li>
+                <li class="sidebar-item  has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-person-workspace"></i>
+                        <span>Kelola Pengguna</span>
+                    </a>
+                    <ul class="submenu ">
+                        <li class="submenu-item ">
+                            <a href="{{ route('user.index') }}">Pengguna</a>
+                        </li>
+                    </ul>
+                </li>
 
-                    <li class="sidebar-item  ">
-                        <a href="{{ route('student.index') }}" class='sidebar-link'>
-                            <i class="bi bi-stack"></i>
-                            <span>Kelola Password</span>
-                        </a>
-                    </li>
+                <li class="sidebar-item  ">
+                    <a href="{{ route('student.index') }}" class='sidebar-link'>
+                        <i class="bi bi-stack"></i>
+                        <span>Data Mahasiswa</span>
+                    </a>
+                </li>
 
-                    <li class="sidebar-item  ">
-                        <a href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                 document.getElementById('logout-form').submit();"
-                            class='sidebar-link'>
-                            <i class="bi bi-box-arrow-right"></i>
-                            <span>Log Out</span>
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </li>
+                <li class="sidebar-item  has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-collection-fill"></i>
+                        <span>Data Pembayaran</span>
+                    </a>
+                    <ul class="submenu ">
+                        <li class="submenu-item ">
+                            <a href="{{ route('payment.index_full_payment') }}">Pembayaran Lunas</a>
+                        </li>
+                        <li class="submenu-item ">
+                            <a href="{{ route('payment.index_credit') }}">Pembayaran Cicilan</a>
+                        </li>
+                        <li class="submenu-item ">
+                            <a href="{{ route('payment.index') }}">Pembayaran Belum Lunas</a>
+                        </li>
+                    </ul>
+                </li>
 
-                </ul>
+                {{-- <li class="sidebar-item has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-collection-fill"></i>
+                        <span>Laporan Pembayaran</span>
+                    </a>
+                    <ul class="submenu ">
+                        <li class="submenu-item ">
+                            <a href="{{ route('payment.report_full_payment') }}">Laporan Pembayaran Lunas</a>
+                        </li>
+                        <li class="submenu-item ">
+                            <a href="{{ route('payment.report_credit') }}">Laporan Pembayaran Cicilan</a>
+                        </li>
+                        <li class="submenu-item ">
+                            <a href="{{ route('payment.report') }}">Laporan Pembayaran Belum Lunas</a>
+                        </li>
+                    </ul>
+                </li> --}}
 
-            </div>
+                <li class="sidebar-item  ">
+                    <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();"
+                        class='sidebar-link'>
+                        <i class="bi bi-box-arrow-right"></i>
+                        <span>Log Out</span>
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </li>
+
+            </ul>
+
+        </div>
         @endrole
         {{-- End Admin KPA --}}
 
@@ -271,12 +313,24 @@
                 <ul class="menu">
                     <li class="sidebar-title">Menu</li>
 
-                    <li class="sidebar-item active ">
+                    <li class="sidebar-item">
                         <a href="{{ route('home') }}" class='sidebar-link'>
                             <i class="bi bi-grid-fill"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>
+
+                    {{-- <li class="sidebar-item  has-sub">
+                        <a href="#" class='sidebar-link'>
+                            <i class="bi bi-person-workspace"></i>
+                            <span>Kelola Pengguna</span>
+                        </a>
+                        <ul class="submenu ">
+                            <li class="submenu-item ">
+                                <a href="{{ route('user.index') }}">Pengguna</a>
+                            </li>
+                        </ul>
+                    </li> --}}
 
                     <li class="sidebar-item  ">
                         <a href="{{ route('student.index') }}" class='sidebar-link'>
@@ -292,46 +346,45 @@
                         </a>
                         <ul class="submenu ">
                             <li class="submenu-item ">
-                                <a href="">Pembayaran Lunas</a>
+                                <a href="{{ route('payment.index_full_payment') }}">Pembayaran Lunas</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="">Pembayaran Cicilan</a>
+                                <a href="{{ route('payment.index_credit') }}">Pembayaran Cicilan</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="extra-component-toastify.html">Pembayaran Belum Lunas</a>
+                                <a href="{{ route('payment.index') }}">Pembayaran Belum Lunas</a>
                             </li>
                         </ul>
                     </li>
-
-                    <li class="sidebar-item  has-sub">
+                    <li class="sidebar-item has-sub">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-collection-fill"></i>
                             <span>Laporan Pembayaran</span>
                         </a>
                         <ul class="submenu ">
                             <li class="submenu-item ">
-                                <a href="">Laporan Pembayaran Lunas</a>
+                                <a href="{{ route('payment.report_full_payment') }}">Laporan Pembayaran Lunas</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="">Laporan Pembayaran Cicilan</a>
+                                <a href="{{ route('payment.report_credit') }}">Laporan Pembayaran Cicilan</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="extra-component-toastify.html">Laporan Pembayaran Belum Lunas</a>
+                                <a href="{{ route('payment.report') }}">Laporan Pembayaran Belum Lunas</a>
                             </li>
                         </ul>
                     </li>
 
-                    <li class="sidebar-item  ">
-                        <a href="{{ route('student.index') }}" class='sidebar-link'>
+                    {{-- <li class="sidebar-item ">
+                        <a href="{{ route('payment.history') }}" class='sidebar-link'>
                             <i class="bi bi-stack"></i>
-                            <span>Kelola Password</span>
+                            <span>Riwayat Pembayaran</span>
                         </a>
-                    </li>
+                    </li> --}}
 
                     <li class="sidebar-item  ">
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault();
-                 document.getElementById('logout-form').submit();"
+                    document.getElementById('logout-form').submit();"
                             class='sidebar-link'>
                             <i class="bi bi-box-arrow-right"></i>
                             <span>Log Out</span>

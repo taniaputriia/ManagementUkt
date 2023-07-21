@@ -71,6 +71,7 @@
 
 @section('js_after')
     {{-- Select 2 --}}
+@role('Bagian Keuangan')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script>
@@ -80,4 +81,5 @@
             $(".select_major").select2();
         });
     </script>
+@endrole
 @endsection

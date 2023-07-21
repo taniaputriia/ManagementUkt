@@ -51,6 +51,7 @@
 @endsection
 
 @section('js_after')
+    @role('Bagian Keuangan')
     <script>
         $(document).ready(function() {
             getDatatable();
@@ -114,4 +115,5 @@
             });
         }
     </script>
+    @endrole
 @endsection

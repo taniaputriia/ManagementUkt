@@ -37,15 +37,24 @@
                             value="@currency($data['tuition_fee'])" disabled>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12">
+
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="va_number">Nomor Rekening</label>
                     <input type="number" name="va_number" class="form-control" id="va_number"
                         value="{{ $data['va_number'] }}" placeholder="masukkan nomor rekening" disabled>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="created_at">Tanggal</label>
+                    <input type="text" name="created_at" class="form-control" id="created_at"
+                        value="{{ $data['created_at'] }}" disabled>
+                </div>
+            </div>
+        </div>
             <a href="{{ route('payment.index_full_payment') }}" class="btn btn-warning">Kembali</a>
+
         </div>
     </div>
 @endsection

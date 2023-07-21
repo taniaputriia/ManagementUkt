@@ -331,6 +331,10 @@ class PaymentController extends Controller
         $model = Payment::where('status', Payment::STATUS_PAID)
             ->orderBy('id', 'desc');;
         return DataTables::of($model)
+            ->editColumn('created_at', function ($data) {
+                $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->translatedFormat('d F Y - H:i');
+                return $formatedDate;
+            })
             ->editColumn('tuition_fee', function ($data) {
                 $formatCurrency = RupiahFormat::currency($data['tuition_fee']);
                 return $formatCurrency;
@@ -367,6 +371,10 @@ class PaymentController extends Controller
             ->orderBy('id', 'desc');
 
         return DataTables::of($model)
+            ->editColumn('created_at', function ($data) {
+                $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->translatedFormat('d F Y - H:i');
+                return $formatedDate;
+            })
             ->editColumn('tuition_fee', function ($data) {
                 $formatCurrency = RupiahFormat::currency($data['tuition_fee']);
                 return $formatCurrency;
@@ -399,6 +407,10 @@ class PaymentController extends Controller
             ->orderBy('id', 'desc');
 
         return DataTables::of($model)
+            ->editColumn('created_at', function ($data) {
+                $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->translatedFormat('d F Y - H:i');
+                return $formatedDate;
+            })
             ->editColumn('tuition_fee', function ($data) {
                 $formatCurrency = RupiahFormat::currency($data['tuition_fee']);
                 return $formatCurrency;
@@ -423,32 +435,31 @@ class PaymentController extends Controller
             ->toJson();
     }
 
-    // public function datatable_report_full_payment()
-    // {
-    //     $model = Payment::where('status', Payment::STATUS_PAID);
-    //     return DataTables::of($model)
-    //         ->editColumn('created_at', function ($data) {
-    //             $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->translatedFormat('d F Y - H:i');
-    //             return $formatedDate;
-    //         })
-    //         ->editColumn('tuition_fee', function ($data) {
-    //             $formatCurrency = RupiahFormat::currency($data['tuition_fee']);
-    //             return $formatCurrency;
-    //         })
-    //         ->addColumn('action', function ($data) {
-    //             $url_show = route('payment.full-payment.show', Crypt::encrypt($data->id));
-    //             $url_edit = route('payment.full-payment.edit', Crypt::encrypt($data->id));
-    //             $url_delete = route('payment.full-payment.destroy', Crypt::encrypt($data->id));
+    public function datatable_report_full_payment()
+    {
+        $model = Payment::where('status', Payment::STATUS_PAID);
+        return DataTables::of($model)
+            ->editColumn('created_at', function ($data) {
+                $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->translatedFormat('d F Y - H:i');
+                return $formatedDate;
+            })
+            ->editColumn('tuition_fee', function ($data) {
+                $formatCurrency = RupiahFormat::currency($data['tuition_fee']);
+                return $formatCurrency;
+            })
+            ->addColumn('nim', function ($data) {
+                if (!empty($data->student->nim)) {
+                    return $data->student->nim;
+                }
+            })
+            ->addColumn('name', function ($data) {
+                if (!empty($data->student->name)) {
+                    return $data->student->name;
+                }
+            })
 
-    //             $btn = "<div class='btn-group'>";
-    //             $btn .= "<a href='$url_show' class = 'btn btn-outline-primary btn-sm text-nowrap'><i class='fas fa-info mr-2'></i> Lihat</a>";
-    //             $btn .= "<a href='$url_edit' class = 'btn btn-outline-info btn-sm text-nowrap'><i class='fas fa-edit mr-2'></i> Edit</a>";
-    //             $btn .= "<a href='$url_delete' class = 'btn btn-outline-danger btn-sm text-nowrap' data-confirm-delete='true'><i class='fas fa-trash mr-2'></i> Hapus</a>";
-    //             $btn .= "</div>";
-    //             return $btn;
-    //         })
-    //         ->toJson();
-    // }
+            ->toJson();
+    }
 
     public function show_full_payment($id)
     {
@@ -467,15 +478,16 @@ class PaymentController extends Controller
 
     public function report_full_payment()
     {
-        $data = Payment::where('status', Payment::STATUS_PAID)
+        // $data = Payment::where('status', Payment::STATUS_PAID)
 
-            ->orderBy('id', 'desc')
-            ->get();
+        //     ->orderBy('id', 'desc')
+        //     ->get();
 
-             $pdf = PDF::loadView('payments.full-payment.report', compact('data'));
+        //      $pdf = PDF::loadView('payments.full-payment.report', compact('data'));
 
-        $fileName = "Laporan Pembayaran Lunas.pdf";
-        return $pdf->stream($fileName);
+        // $fileName = "Laporan Pembayaran Lunas.pdf";
+        // return $pdf->stream($fileName);
+        return view('payments.full-payment.report');
     }
 
     public function verification_full_payment($id)
@@ -655,6 +667,10 @@ class PaymentController extends Controller
             ->orderBy('id', 'desc');
 
         return DataTables::of($model)
+        ->editColumn('created_at', function ($data) {
+            $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->translatedFormat('d F Y - H:i');
+            return $formatedDate;
+        })
             ->editColumn('tuition_fee', function ($data) {
                 $formatCurrency = RupiahFormat::currency($data['tuition_fee']);
                 return $formatCurrency;

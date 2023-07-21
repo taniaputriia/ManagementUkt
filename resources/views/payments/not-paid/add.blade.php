@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+    @role('Bagian Keuangan')
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <div class="header-title">
@@ -93,9 +94,11 @@
             </form>
         </div>
     </div>
+    @endrole
 @endsection
 
 @section('js_after')
+@role('Bagian Keuangan')
     <script>
         $(document).ready(function() {
             paymentSelect();
@@ -154,4 +157,5 @@
             })
         }
     </script>
+@endrole
 @endsection

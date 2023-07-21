@@ -49,27 +49,28 @@
                                 value="@currency($data['tuition_fee'])" disabled>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="va_number">Nomor Rekening</label>
-                        <input type="number" name="va_number" class="form-control" id="va_number"
-                            value="{{ $data['va_number'] }}" disabled>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="va_number">Nomor Rekening</label>
+                            <input type="number" name="va_number" class="form-control" id="va_number"
+                                value="{{ $data['va_number'] }}" disabled>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="created_at">Tanggal</label>
-                        <input type="number" name="created_at" class="form-control" id="created_at"
-                            value="{{ $data['created_at'] }}" disabled>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="created_at">Tanggal</label>
+                            <input type="text" name="created_at" class="form-control" id="created_at"
+                                value="{{ $data['created_at'] }}" disabled>
+                        </div>
                     </div>
-                </div>
                 <div class="col-md-12 mb-5 mt-4">
                     <div class="text-center">
                         <h5>Bukti Pembayaran</h5>
                         <img src="{{ asset('assets/bukti_bayar/' . $data['file']) }}" alt="{{ $data['file'] }}"
                             class="img-thumbnail" width="80%">
                     </div>
+                </div>
                 </div>
                 <a href="{{ route('payment.index_verification_full_payment') }}" class="btn btn-warning">Kembali</a>
                 <button type="submit" onclick="return confirm('Konfirmasi Pembayaran?')"

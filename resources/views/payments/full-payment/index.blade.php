@@ -18,7 +18,7 @@
                                     <h4 class="card-title">Manajemen Data Pembayaran Lunas</h4>
                                 </div>
                             </div>
-                            <a class="text-end btn btn-sm btn-danger" target = "_blank" href="{{ route('payment.report_full_payment') }}"><i class="fa fa-plus"></i> Cetak PDF</a>
+                            {{-- <a class="text-end btn btn-sm btn-danger" target = "_blank" href="{{ route('payment.report_full_payment') }}"><i class="fa fa-plus"></i> Cetak PDF</a> --}}
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="data-table" class="table table-striped table-bordered text-nowrap"
@@ -30,10 +30,9 @@
                                                 <th>Nim</th>
                                                 <th>Nama Lengkap</th>
                                                 <th>Semester</th>
-                                                <th>Nomor Rekening</th>
                                                 <th>UKT</th>
                                                 <th>Status</th>
-                                                <th>Diinput Pada</th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -95,7 +94,7 @@
 @endsection
 
 @section('js_after')
-    @role('Bagian Keuangan')
+@hasanyrole('Bagian Keuangan|Admin KPA|Wakil Direktur II')
         <script>
             $(document).ready(function() {
                 getDatatable();
@@ -136,10 +135,7 @@
                             name: 'semester',
                             data: 'semester'
                         },
-                        {
-                            name: 'va_number',
-                            data: 'va_number'
-                        },
+
                         {
                             name: 'tuition_fee',
                             data: 'tuition_fee'
@@ -148,15 +144,12 @@
                             name: 'status',
                             data: 'status'
                         },
-                        {
-                            name: 'created_at',
-                            data: 'created_at'
-                        },
+                       
                     ],
                 });
             }
         </script>
-    @endrole
+@endhasanyrole
 
     @role('Mahasiswa')
         <script>

@@ -9,7 +9,7 @@
 
 @section('content')
     <section class="row">
-        @role('Bagian Keuangan')
+        @hasanyrole('Bagian Keuangan|Admin KPA|Wakil Direktur II')
             <div class="col-12 col-lg-12">
                 <div class="row">
                     <div class="col-6 col-lg-3 col-md-6">
@@ -326,7 +326,7 @@
                 </div>
 
             </div>
-        @endrole
+        @endhasanyrole
     </section>
 
     <section class="row">

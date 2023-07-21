@@ -30,29 +30,18 @@
                     <label>Uang Kuliah Tunggal (UKT)</label>
                     <input type="text" class="form-control" value="@currency($data['tuition_fee'])" disabled>
                 </div>
+                <div class="col-lg-12">
+                    <label>No rekening</label>
+                    <input type="text" class="form-control" value="{{ $data['va_number'] }}" disabled>
+                </div>
+
                 <div class="col-lg-6">
-                    <label>No. Handphone</label>
-                    <input type="text" class="form-control" value="{{ $data['student']['phone_number'] }}" disabled>
+                    <label>Tanggal Pembayaran</label>
+                    <input type="text" class="form-control" value="{{ $data['created_at'] }}" disabled>
                 </div>
                 <div class="col-lg-6">
-                    <label>Alamat</label>
-                    <input type="text" class="form-control" value="{{ $data['student']['address'] }}" disabled>
-                </div>
-                <div class="col-lg-6">
-                    <label>Program Studi</label>
-                    <input type="text" class="form-control" value="{{ $data['student']['study_program'] }}" disabled>
-                </div>
-                <div class="col-lg-6">
-                    <label>Jurusan</label>
-                    <input type="text" class="form-control" value="{{ $data['student']['major'] }}" disabled>
-                </div>
-                <div class="col-lg-6">
-                    <label>Semester</label>
-                    <input type="text" class="form-control" value="{{ $data['student']['semester'] }}" disabled>
-                </div>
-                <div class="col-lg-6">
-                    <label>Tahun Akademik</label>
-                    <input type="text" class="form-control" value="{{ $data['student']['academic_year'] }}" disabled>
+                    <label>Status</label>
+                    <input type="text" class="form-control" value="{{ $data['status'] }}" disabled>
                 </div>
 
             </div>
